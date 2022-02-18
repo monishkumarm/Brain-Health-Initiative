@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+    <span>
+        <a routerLink="/" mat-icon-button>Brain Heath App</a>
+    </span>
+    <span class="spacer"></span>
+    <a *ngIf="!isLoggedIn"  routerLink="/login" mat-icon-button>Login</a>
+    <a *ngIf="isLoggedIn" (click)="logout()" mat-icon-button>Logout</a>
+</mat-toolbar>
+
