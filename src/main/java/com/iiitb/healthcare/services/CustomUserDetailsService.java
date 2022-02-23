@@ -1,7 +1,7 @@
 package com.iiitb.healthcare.services;
 
 import com.iiitb.healthcare.model.CustomUserDetails;
-import com.iiitb.healthcare.model.User;
+import com.iiitb.healthcare.model.entities.UserEntity;
 import com.iiitb.healthcare.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        final User user = this.userRepository.findByUsername(username);
+        final UserEntity user = this.userRepository.findByUsername(username);
 
         if(user == null){
             throw new UsernameNotFoundException("Not found");
