@@ -4,6 +4,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/auth.guard';
+import { AddPatientComponent } from './components/add-patient/add-patient.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,12 @@ const routes: Routes = [
   {
     path:'dashboard',
     component:DashboardComponent,
+    pathMatch:'full',
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'addPatient',
+    component:AddPatientComponent,
     pathMatch:'full',
     canActivate:[AuthGuard]
   }

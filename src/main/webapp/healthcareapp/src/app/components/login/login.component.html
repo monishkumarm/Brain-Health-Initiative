@@ -1,22 +1,22 @@
-<div class="bootstrap-wrapper">
-    <div class="container">
+<div class="bootstrap-wrapper mt-5">
+    <div class="container login" >
         <div class="row">
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-12   ">
 
                 <h1 class="text-center">Login!!</h1>
 
                 <form (ngSubmit)="onSubmit()">
                     <mat-form-field style="width: 100%;">
-                        <mat-label>Username</mat-label>
+                        <mat-label style="color: black;">Username</mat-label>
                         <input name="username" [(ngModel)]="credentials.username" required type="text" matInput>
                     </mat-form-field>
 
                     <mat-form-field style="width: 100%;">
-                        <mat-label>Password</mat-label>
+                        <mat-label style="color: black;">Password</mat-label>
                         <input name="password" [(ngModel)]="credentials.password" required type="password" matInput>
                     </mat-form-field>
 
-                    <div class="container text-center">
+                    <div class="text-center">
                         <button type="submit" mat-raised-button color="primary">
                             Login
                         </button>
@@ -26,7 +26,7 @@
                         </button>
                     </div>
                 </form>
-                
+
             </div>
         </div>
     </div>

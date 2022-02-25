@@ -6,6 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
 
+  credentials =  {
+    "username":'',
+    "password":''
+  }
+
   url = "http://localhost:5050";
 
   constructor(private http:HttpClient) { }

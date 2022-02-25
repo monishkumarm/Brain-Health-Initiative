@@ -1,7 +1,29 @@
-<div class="bootstrap-wrapper">
-    <div class="container text-center">
-        <h1>Welcome to dashboard</h1>
-        <!-- <h1 *ngIf="user">user is {{user.name}}</h1>
-        <button mat-raised-button (click)="getUsers() ">Get Details</button> -->
+<app-search></app-search>
+
+<div class="bootstrap-wrapper ">
+  <div class="container text-center mt-2 dash-cont">
+    <div class="mt-2">
+    <h1 >Patients Records</h1>
     </div>
+    <div class="mt-2">
+      <table>
+        <tr color="primary">
+          <th>ABHA ID</th>
+          <th>FIRST NAME</th>
+          <th>Last NAME</th>
+          <th>Phone Number</th>
+        </tr>
+        <ng-container *ngFor="let record of Record">
+          <tr>
+            <td><p>{{record.abhaId}}</p></td>
+            <td><p>{{record.firstName}}</p></td>
+            <td><p>{{record.lastName}}</p></td>
+            <td><p>{{record.phoneNumber}}</p></td>
+
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </div>
+
 </div>
