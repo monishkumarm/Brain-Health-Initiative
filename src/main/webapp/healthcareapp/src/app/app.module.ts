@@ -18,6 +18,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginService } from './services/login.service';
 import { AuthGuard } from './services/auth.guard';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { SearchComponent } from './components/search/search.component';
+import { MatSelectModule } from '@angular/material/select';
+import { PatientService } from './services/patient.service';
+import { AddPatientComponent } from './components/add-patient/add-patient.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,9 @@ import { AuthInterceptor } from './services/auth.interceptor';
     NavBarComponent,
     HomeComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    SearchComponent,
+    AddPatientComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +42,10 @@ import { AuthInterceptor } from './services/auth.interceptor';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule,
   ],
-  providers: [LoginService, AuthGuard, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
+  providers: [LoginService, PatientService ,AuthGuard, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
