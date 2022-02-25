@@ -1,5 +1,6 @@
 package com.iiitb.healthcare.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.sun.istack.NotNull;
 
@@ -10,23 +11,32 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Patient", schema = "BrainHealthInitiative", catalog = "")
-public class PatientEntity {
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","userByCreatedBy","userByLastChangeBy"})
+    public class PatientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "Id")
     private long id;
     @Basic
     @NotNull
-    @Column(name = "FullName")
-    private String fullName;
+    @Column(name = "ABHAID")
+    private String  abhaId;
+    @Basic
+    @NotNull
+    @Column(name = "FirstName")
+    private String firstName;
+    @Basic
+    @NotNull
+    @Column(name = "LastName")
+    private String lastName;
     @Basic
     @NotNull
     @Column(name = "Gender")
-    private int gender;
+    private Integer gender;
     @Basic
     @NotNull
     @Column(name = "Age")
-    private int age;
+    private Integer age;
     @Basic
     @NotNull
     @Column(name = "Email", unique=true)
@@ -54,7 +64,7 @@ public class PatientEntity {
     private String informantCaregiverName;
     @Basic
     @Column(name = "RelationshipWithPatient")
-    private Integer relationshipWithPatient;
+    private String relationshipWithPatient;
     @Basic
     @NotNull
     @Column(name = "CreatedOn")
@@ -90,27 +100,31 @@ public class PatientEntity {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
+    public String getAbhaId() { return abhaId;  }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    public void setAbhaId(String abhaId) { this.abhaId = abhaId;  }
 
-    public int getGender() {
+    public String getFirstName() { return firstName; }
+
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -170,11 +184,11 @@ public class PatientEntity {
         this.informantCaregiverName = informantCaregiverName;
     }
 
-    public Integer getRelationshipWithPatient() {
+    public String getRelationshipWithPatient() {
         return relationshipWithPatient;
     }
 
-    public void setRelationshipWithPatient(Integer relationshipWithPatient) {
+    public void setRelationshipWithPatient(String relationshipWithPatient) {
         this.relationshipWithPatient = relationshipWithPatient;
     }
 
@@ -215,12 +229,12 @@ public class PatientEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PatientEntity that = (PatientEntity) o;
-        return id == that.id && gender == that.gender && age == that.age && createdBy == that.createdBy && lastChangeBy == that.lastChangeBy && Objects.equals(fullName, that.fullName) && Objects.equals(email, that.email) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(addressDetail, that.addressDetail) && Objects.equals(languages, that.languages) && Objects.equals(education, that.education) && Objects.equals(occupation, that.occupation) && Objects.equals(informantCaregiverName, that.informantCaregiverName) && Objects.equals(relationshipWithPatient, that.relationshipWithPatient) && Objects.equals(createdOn, that.createdOn) && Objects.equals(lastChangeOn, that.lastChangeOn);
+        return id == that.id && abhaId == that.abhaId  && gender == that.gender && age == that.age && createdBy == that.createdBy && lastChangeBy == that.lastChangeBy && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(addressDetail, that.addressDetail) && Objects.equals(languages, that.languages) && Objects.equals(education, that.education) && Objects.equals(occupation, that.occupation) && Objects.equals(informantCaregiverName, that.informantCaregiverName) && Objects.equals(relationshipWithPatient, that.relationshipWithPatient) && Objects.equals(createdOn, that.createdOn) && Objects.equals(lastChangeOn, that.lastChangeOn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fullName, gender, age, email, phoneNumber, addressDetail, languages, education, occupation, informantCaregiverName, relationshipWithPatient, createdOn, createdBy, lastChangeOn, lastChangeBy);
+        return Objects.hash(id, abhaId, firstName,lastName, gender, age, email, phoneNumber, addressDetail, languages, education, occupation, informantCaregiverName, relationshipWithPatient, createdOn, createdBy, lastChangeOn, lastChangeBy);
     }
 
     public UserEntity getUserByCreatedBy() {

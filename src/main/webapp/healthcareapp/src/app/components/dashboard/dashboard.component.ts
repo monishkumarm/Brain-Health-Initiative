@@ -1,25 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { PatientService } from 'src/app/services/patient.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
+
 export class DashboardComponent implements OnInit {
 
-  user:any;
+  Record:any;
 
-  constructor(private userService:UserService) { }
+  constructor(private patientService:PatientService) { }
 
   ngOnInit(): void {
+      this.getAllPatients();
   }
 
-  getUsers(){
-    this.userService.getUsers().subscribe(
-      user => {
-        console.log(user);
-        this.user = user;
+  getAllPatients(){
+    this.patientService.getAllPatients().subscribe(
+      (response:any) => {
+        console.log(response);
+        this.Record = response;
       },
       error => {
         console.log(error);

@@ -1,5 +1,6 @@
 package com.iiitb.healthcare.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.sun.istack.NotNull;
 
@@ -21,8 +22,12 @@ public class UserEntity {
     private String username;
     @Basic
     @NotNull
-    @Column(name = "FullName")
-    private String fullName;
+    @Column(name = "FirstName")
+    private String firstName;
+    @Basic
+    @NotNull
+    @Column(name = "LastName")
+    private String lastName;
     @Basic
     @NotNull
     @Column(name = "RoleTypeId")
@@ -110,13 +115,13 @@ public class UserEntity {
         this.username = username;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
+    public String getFirstName() { return firstName; }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
     public int getRoleTypeId() {
         return roleTypeId;
@@ -211,12 +216,12 @@ public class UserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
-        return id == that.id && roleTypeId == that.roleTypeId && timeZoneId == that.timeZoneId && isActive == that.isActive && createdBy == that.createdBy && lastChangeBy == that.lastChangeBy && Objects.equals(username, that.username) && Objects.equals(fullName, that.fullName) && Objects.equals(email, that.email) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(addressDetail, that.addressDetail) && Objects.equals(password, that.password) && Objects.equals(createdOn, that.createdOn) && Objects.equals(lastChangeOn, that.lastChangeOn);
+        return id == that.id && roleTypeId == that.roleTypeId && timeZoneId == that.timeZoneId && isActive == that.isActive && createdBy == that.createdBy && lastChangeBy == that.lastChangeBy && Objects.equals(username, that.username) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(addressDetail, that.addressDetail) && Objects.equals(password, that.password) && Objects.equals(createdOn, that.createdOn) && Objects.equals(lastChangeOn, that.lastChangeOn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, fullName, roleTypeId, email, phoneNumber, timeZoneId, addressDetail, password, isActive, createdOn, createdBy, lastChangeOn, lastChangeBy);
+        return Objects.hash(id, username, firstName,lastName, roleTypeId, email, phoneNumber, timeZoneId, addressDetail, password, isActive, createdOn, createdBy, lastChangeOn, lastChangeBy);
     }
 
     public Collection<PatientEntity> getPatientsById() {
