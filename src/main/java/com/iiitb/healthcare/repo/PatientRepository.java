@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface PatientRepository extends JpaRepository<PatientEntity,Integer> {
 
+    @Query(value="SELECT * FROM patient P INNER JOIN userpermissionpatient UPP ON P.Id = UPP.PatientId WHERE UPP.UserId = ?1 AND UPP.CanView=1",nativeQuery = true)
+    public List<PatientEntity> findAllPatientByUser(long id);
 
 }

@@ -3,7 +3,9 @@ package com.iiitb.healthcare.services;
 import com.iiitb.healthcare.helper.JwtUtil;
 import com.iiitb.healthcare.model.entities.PatientEntity;
 import com.iiitb.healthcare.model.entities.UserEntity;
+import com.iiitb.healthcare.model.entities.UserPermissionPatientEntity;
 import com.iiitb.healthcare.repo.PatientRepository;
+import com.iiitb.healthcare.repo.UserPermissionPatientEntityRepository;
 import com.iiitb.healthcare.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class PatientEntityService {
     private UserRepository userRepository;
 
     @Autowired
+    private UserPermissionPatientEntityRepository userPermissionPatientEntityRepository;
+    @Autowired
     private JwtUtil jwtUtil;
 
     public List<PatientEntity> getAllPatients(){
@@ -32,6 +36,15 @@ public class PatientEntityService {
         patientRepository.findAll().forEach(patient ->patients.add(patient));
         return patients;
     }
+
+    public List<PatientEntity> getAllPatientByUser(String token){
+        List<PatientEntity> patients = new ArrayList<PatientEntity>();
+        UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
+        patientRepository.findAllPatientByUser((long) user.getId()).forEach(patient -> patients.add(patient));
+        return patients;
+    }
+
+
 
     public String addPatient(Map<String,Object> payload,String token){
         try {
@@ -59,7 +72,15 @@ public class PatientEntityService {
             patient.setPhoneNumber((String) payload.get("phone"));
             patient.setRelationshipWithPatient((String) payload.get("carer_rel"));
             PatientEntity patient1 = patientRepository.save(patient);
-            System.out.println(patient1);
+            System.out.println(patient1.getId());
+
+            UserPermissionPatientEntity userPermissionPatientEntity = new UserPermissionPatientEntity();
+            userPermissionPatientEntity.setPatientId((long)patient1.getId());
+            userPermissionPatientEntity.setUserId((long)user.getId());
+            userPermissionPatientEntity.setCanDelete(true);
+            userPermissionPatientEntity.setCanModify(true);
+            userPermissionPatientEntity.setCanView(true);
+            UserPermissionPatientEntity permission = userPermissionPatientEntityRepository.save(userPermissionPatientEntity);
             return "Pateint Added";
         }catch (Exception e){
             e.printStackTrace();
