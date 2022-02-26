@@ -20,7 +20,7 @@ export class PatientService {
         Authorization  : "Bearer " + token
       }
     )
-    return this.httpCLient.get(`${this.url}/getAllPatients`,{'headers':header});
+    return this.httpCLient.get(`${this.url}/getAllPatientByUser`,{'headers':header});
   }
 
   addPatient(patientDetails:any){
@@ -34,3 +34,4 @@ export class PatientService {
     return this.httpCLient.post(`${this.url}/addPatient`,patientDetails,{'headers':header});
   }
 }
+  
