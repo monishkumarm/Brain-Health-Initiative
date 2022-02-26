@@ -17,9 +17,16 @@ public class PatientController {
     private PatientEntityService patientEntityService;
 
     @RequestMapping("/getAllPatients")
-    public ResponseEntity<?> getAllPateints(){
+    public ResponseEntity<?> getAllPatients(){
         System.out.println("In get all patients api");
         List<PatientEntity> patients = patientEntityService.getAllPatients();
+        return ResponseEntity.ok(patients);
+    }
+
+    @RequestMapping("/getAllPatientByUser")
+    public  ResponseEntity<?> getAllPatientByUser(@RequestHeader Map<String,String> headers){
+        System.out.println("In get all patient by user api");
+        List<PatientEntity> patients = patientEntityService.getAllPatientByUser(headers.get("authorization"));
         return ResponseEntity.ok(patients);
     }
 

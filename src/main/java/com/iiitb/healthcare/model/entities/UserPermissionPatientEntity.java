@@ -39,6 +39,7 @@ public class UserPermissionPatientEntity {
     @JoinColumn(name = "UserId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private UserEntity userByUserId;
 
+
     public long getId() {
         return id;
     }
