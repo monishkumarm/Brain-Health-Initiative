@@ -44,6 +44,25 @@ public class PatientEntityService {
         return patients;
     }
 
+    public List<PatientEntity> getSearchPatients(Map<String,Object> payload){
+        List<PatientEntity> patients = new ArrayList<PatientEntity>();
+        System.out.println((String) payload.get("value"));
+        Integer option = Integer.parseInt((String) payload.get("option"));
+        if(option.compareTo(1)==0)
+        {
+            patientRepository.findByAbhaId((String) payload.get("value")).forEach(patient -> patients.add(patient));
+        }
+        else if(option.compareTo(2)==0)
+        {
+            patientRepository.findByFirstName((String) payload.get("value")).forEach(patient -> patients.add(patient));
+        }
+        else
+        {
+            patientRepository.findByPhoneNumber((String) payload.get("value")).forEach(patient -> patients.add(patient));
+        }
+        System.out.println(patients.toString());
+        return patients;
+    }
 
 
     public String addPatient(Map<String,Object> payload,String token){

@@ -11,6 +11,10 @@ import { PatientService } from 'src/app/services/patient.service';
 export class DashboardComponent implements OnInit {
 
   Record:any;
+  search = {
+    option : '',
+    value : '',
+  };
 
   constructor(private patientService:PatientService) { }
 
@@ -24,7 +28,22 @@ export class DashboardComponent implements OnInit {
         console.log(response);
         this.Record = response;
       },
-      error => {
+      (error:any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  onSubmit(){
+    console.log("In serch function");
+    console.log(this.search.option);
+    console.log(this.search.value);
+    this.patientService.getSearchPatients(this.search).subscribe(
+      (response:any) => {
+        console.log(response);
+        this.Record = response;
+      },
+      (error:any) =>  {
         console.log(error);
       }
     );
