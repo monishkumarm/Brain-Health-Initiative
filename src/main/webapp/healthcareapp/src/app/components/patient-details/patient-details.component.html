@@ -1,0 +1,180 @@
+<div class="bootstrap-wrapper ">
+    <div class="container mt-5  add-patient-cont">
+      <div class="row mt-3" >
+        <div class="col-2"></div>
+        
+        <div class="col-4 pt-2 text-center header mt-2">
+            <h1 >Patients Records</h1>
+        </div>
+        <div class="col-sm-6 pt-2 mt-2 text-center" >
+            <button (click)="change()" [disabled]="!disable"  style="align-content: center;width: 30%" mat-raised-button color="primary" >
+                Edit Details
+            </button>
+        </div>
+      </div>
+        
+      <div>
+        <form #patientForm="ngForm" (ngSubmit)="onSubmit()" class="patient-details" novalidate>
+          <span><strong><h1>Identity information</h1></strong></span>
+          <hr>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+                <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label for="abhaID">ABHA ID</mat-label>
+                    <input [(ngModel)] = "patientDetails.ABHAID" name="abhaID"   id="abhaID" type="text" class="form-control" #abhaId="ngModel" required  disabled minlength="12" maxlength="12" matInput>
+                </mat-form-field>
+                <div class="mt-1 alert alert-danger" *ngIf=" abhaId.touched && !abhaId.valid  ">
+                    <div *ngIf="abhaId.errors">ABHA id Invalid</div>
+                </div>
+            </div>
+
+
+          </div>
+
+          <br>
+          <span><strong><h1>Basic information</h1></strong></span>
+          <hr>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+                <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label for="fname">First Name</mat-label>
+                    <input [(ngModel)]="patientDetails.fname" name="fname" id="fname" type="text" class="form-control" [disabled]="disable" required matInput>
+                </mat-form-field>
+
+            </div>
+
+            <div class="col-sm-6 form-group">   
+                <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label for="lname">Last Name</mat-label>
+                    <input [(ngModel)]="patientDetails.lname" name="lname" id="lname" type="text" class="form-control"  [disabled]="disable" required matInput>
+                </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 form-group">
+                <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label style="color: black;">Gender</mat-label>
+                    <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="patientDetails.gender" name="gender" id="gender"  [disabled]="disable" required>
+                    <mat-option value="1">Male</mat-option>
+                    <mat-option value="2">Female</mat-option>
+                    <mat-option value="3">Other</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 form-group">   
+                <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label for="age">Age</mat-label>
+                    <input [(ngModel)]="patientDetails.age" name="age" id="age" type="text" class="form-control"   [disabled]="disable"  required  matInput>
+                </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 form-group">
+                <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label for="language">Language</mat-label>
+                    <mat-select [(ngModel)]="patientDetails.lan" name="language" id="language" type="text" class="form-control"  [disabled]="disable" required>
+                        <mat-option value="English">English</mat-option>
+                        <mat-option value="Hindi">Hindi</mat-option>
+                        <mat-option value="Other">Other</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <mat-form-field  appearance="outline">
+                <mat-label for="education">Education</mat-label>
+                <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="patientDetails.edu" name="education" id="education"  [disabled]="disable" required >
+                  <mat-option value="None">None</mat-option>
+                  <mat-option value="10th">10th</mat-option>
+                  <mat-option value="12th">12th</mat-option>
+                  <mat-option value="Graduate">Graduate</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <mat-form-field  appearance="outline">
+                <mat-label for="occupation">occupation</mat-label>
+                <input [(ngModel)]="patientDetails.occ" name="occupation" id="occupation" type="text" class="form-control"  [disabled]="disable"  required matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6" ></div>
+          </div>
+          <br>
+          <span><strong><h1>Contect information</h1></strong></span>
+          <hr>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <mat-form-field appearance="outline">
+                <mat-label for="email">Email</mat-label>
+                <input [(ngModel)]="patientDetails.email" name="email" id="email" type="text" class="form-control" required  [disabled]="disable"  matInput>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <mat-form-field appearance="outline">
+                <mat-label for="phone">Phone number</mat-label>
+                <input [(ngModel)]="patientDetails.phone" name="phone" id="phone" type="text" class="form-control" required [disabled]="disable"  matInput>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <mat-form-field appearance="outline">
+                <mat-label for="addLine1">Address Line 1</mat-label>
+                <input [(ngModel)]="patientDetails.addLine1" name="addLine1" id="addLine1" type="text" class="form-control"  [disabled]="disable"  required matInput>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <mat-form-field appearance="outline">
+                <mat-label for="addLine2">Address Line 2</mat-label>
+                <input [(ngModel)]="patientDetails.addLine2" name="addLine2" id="addLine2" type="text" class="form-control"  [disabled]="disable" required matInput>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <span><strong><h1>Carer information</h1></strong></span>
+          <hr>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <mat-form-field appearance="outline">
+                <mat-label for="ciname">Carer informants Name</mat-label>
+                <input [(ngModel)]="patientDetails.carer_name" name="ciname" id="ciname" type="text" class="form-control" [disabled]="disable" required matInput>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <mat-form-field appearance="outline">
+                <mat-label for="relationship">Relationship</mat-label>
+                <mat-select [(ngModel)]="patientDetails.carer_rel" name="relationship" id="relationship" type="text" class="form-control" [disabled]="disable" required>
+                  <mat-option value="Father">Father</mat-option>
+                  <mat-option value="Mother">Mother</mat-option>
+                  <mat-option value="Brother">Brother</mat-option>
+                  <mat-option value="Sister">Sister</mat-option>
+                  <mat-option value="Husband">Husband</mat-option>
+                  <mat-option value="Wife">Wife</mat-option>
+                  <mat-option value="Other">Other</mat-option>
+                </mat-select>
+            </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div *ngIf="!disable" class="col-sm-12 text-center" >
+              <button type="submit"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
+                Save Changes
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
