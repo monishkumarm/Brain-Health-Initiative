@@ -1,4 +1,5 @@
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
+import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -32,6 +33,16 @@ export class PatientService {
       }
     )
     return this.httpCLient.post(`${this.url}/addPatient`,patientDetails,{'headers':header});
+  }
+
+  getSearchPatients(option:any){
+    let token = localStorage.getItem("token");
+    let header = new HttpHeaders(
+      {
+        Authorization  : "Bearer " + token
+      }
+    )
+    return this.httpCLient.post(`${this.url}/getSearchPatients`,option,{'headers':header});
   }
 }
   

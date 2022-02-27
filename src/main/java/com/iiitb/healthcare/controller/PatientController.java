@@ -35,6 +35,12 @@ public class PatientController {
         System.out.println("in add patient api");
         String res = patientEntityService.addPatient(payload,headers.get("authorization"));
         return  ResponseEntity.ok(res);
+    }
 
+    @RequestMapping(value = "/getSearchPatients",method = RequestMethod.POST)
+    public ResponseEntity<?> getSearchPatients(@RequestBody Map<String,Object> payload) throws Exception{
+        System.out.println("in get search patient api");
+        List<PatientEntity> patients = patientEntityService.getSearchPatients(payload);
+        return ResponseEntity.ok(patients);
     }
 }
