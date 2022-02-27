@@ -18,10 +18,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginService } from './services/login.service';
 import { AuthGuard } from './services/auth.guard';
 import { AuthInterceptor } from './services/auth.interceptor';
-import { SearchComponent } from './components/search/search.component';
 import { MatSelectModule } from '@angular/material/select';
 import { PatientService } from './services/patient.service';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
+import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
+import { ConsultationDetailsComponent } from './components/consultation-details/consultation-details.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,9 @@ import { AddPatientComponent } from './components/add-patient/add-patient.compon
     HomeComponent,
     LoginComponent,
     DashboardComponent,
-    SearchComponent,
-    AddPatientComponent
+    AddPatientComponent,
+    PatientDetailsComponent,
+    ConsultationDetailsComponent
   ],
   imports: [
     BrowserModule,
