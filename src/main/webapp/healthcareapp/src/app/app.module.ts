@@ -11,7 +11,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -23,6 +23,7 @@ import { PatientService } from './services/patient.service';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { ConsultationDetailsComponent } from './components/consultation-details/consultation-details.component';
+import { MatOption } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { ConsultationDetailsComponent } from './components/consultation-details/
     MatInputModule,
     FormsModule,
     HttpClientModule,
-    MatSelectModule,
+    MatSelectModule
+
+
   ],
   providers: [LoginService, PatientService ,AuthGuard, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
   bootstrap: [AppComponent]
