@@ -1,0 +1,14 @@
+.header{
+    background-color:   rgb(125, 248, 248);
+    border-radius: 5px;
+    color: white;
+  }
+
+  .dash-cont {
+    width: 90%;
+    margin-top: 20px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 5px;
+    background-color: cornflowerblue;
+  }
