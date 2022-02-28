@@ -36,6 +36,7 @@ export class AddPatientComponent implements OnInit {
     this.patientService.addPatient(this.patientDetails).subscribe(
       (response:any) => {
         console.log(response);
+        window.location.href="/dashboard";
 
       },
       error => {

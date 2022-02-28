@@ -44,5 +44,15 @@ export class PatientService {
     )
     return this.httpCLient.post(`${this.url}/getSearchPatients`,option,{'headers':header});
   }
+
+  updatePatient(patientDetails:any){
+    let token = localStorage.getItem("token");
+    let header = new HttpHeaders(
+      {
+        Authorization  : "Bearer " + token
+      }
+    )
+    return this.httpCLient.post(`${this.url}/updatePatient`,patientDetails,{'headers':header})
+  }
 }
   

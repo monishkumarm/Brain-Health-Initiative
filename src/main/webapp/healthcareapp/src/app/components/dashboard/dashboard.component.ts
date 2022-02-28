@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
     value : '',
   };
 
+  isPatientsFound = true;
   constructor(private patientService:PatientService) { }
 
   ngOnInit(): void {
@@ -27,6 +28,15 @@ export class DashboardComponent implements OnInit {
       (response:any) => {
         console.log(response);
         this.Record = response;
+        if(this.Record.length == 0)
+        {
+          this.isPatientsFound = false;
+        }
+        else
+        {
+          this.isPatientsFound = true;
+        }
+
       },
       (error:any) => {
         console.log(error);
@@ -42,6 +52,14 @@ export class DashboardComponent implements OnInit {
       (response:any) => {
         console.log(response);
         this.Record = response;
+        if(this.Record.length == 0)
+        {
+          this.isPatientsFound = false;
+        }
+        else
+        {
+          this.isPatientsFound = true;
+        }
       },
       (error:any) =>  {
         console.log(error);
