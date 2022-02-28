@@ -43,4 +43,17 @@ public class PatientController {
         List<PatientEntity> patients = patientEntityService.getSearchPatients(payload);
         return ResponseEntity.ok(patients);
     }
+
+    @RequestMapping(value = "/updatePatient",method = RequestMethod.POST)
+    public ResponseEntity<?> updatePatien(@RequestBody Map<String,Object> payload, @RequestHeader Map<String,String> headers) throws Exception{
+        System.out.println("in update Patient api");
+        boolean hasPermisson = patientEntityService.checkPermission(payload,headers.get("authorization"));
+        if(!hasPermisson)
+        {
+            throw new Exception("User dont have update permission");
+        }
+        PatientEntity patient = patientEntityService.updatePatients(payload,headers.get("authorization"));
+        return ResponseEntity.ok(patient);
+    }
+
 }

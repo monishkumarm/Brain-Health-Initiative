@@ -38,6 +38,10 @@
       </div>
       <div class="col-3"></div>
     </div>
+    <div *ngIf="!isPatientsFound" class="alert alert-danger mt-2">
+      <div>Not Found Patient Record</div>
+    </div>
+
     <div class="mt-2">
       <div class="p-3 record" *ngFor="let record of Record">
         <div class=" row pt-2 recordHead">
