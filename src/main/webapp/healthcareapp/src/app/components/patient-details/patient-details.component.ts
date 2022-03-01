@@ -35,6 +35,9 @@ export class PatientDetailsComponent implements OnInit {
 
   disable = true;
 
+  isPatientUpdate = true;
+  errorMsg = '';
+
   constructor(private activatedroute: ActivatedRoute, private patientService:PatientService) {   }
   ngOnInit() {
     
@@ -77,6 +80,59 @@ export class PatientDetailsComponent implements OnInit {
 
   onSubmit(){
     this.disable = !this.disable;
+    this.patientService.updatePatient(this.patientDetails).subscribe(
+      (response:any) => {
+        // console.log(response);
+        
+        this.isPatientUpdate = true;
+        this.errorMsg = '';
+        this.patientDetails.Id = response.id;
+        this.patientDetails.ABHAID = response.abhaId;
+        this.patientDetails.fname = response.firstName;
+        this.patientDetails.lname = response.lastName;
+        this.patientDetails.gender = response.gender.toLocaleString();
+        this.patientDetails.age = response.age;
+        this.patientDetails.lan = response.languages;
+        this.patientDetails.edu = response.education;
+        this.patientDetails.occ = response.occupation;
+        this.patientDetails.email = response.email;
+        this.patientDetails.phone = response.phoneNumber;
+        this.patientDetails.addLine1 = response.addressDetail.add1;
+        this.patientDetails.addLine2 = response.addressDetail.add2;
+        this.patientDetails.carer_name = response.informantCaregiverName;
+        this.patientDetails.carer_rel = response.relationshipWithPatient
+        console.log(this.patientDetails);
+      },
+      (error:any) =>  {
+        console.log(error);
+        this.isPatientUpdate = false;
+        this.errorMsg = error.error.message;
+        this.patientService.getSearchPatients(this.search).subscribe(
+          (response:any) => {
+            // console.log(response);
+            this.patientDetails.Id = response[0].id;
+            this.patientDetails.ABHAID = response[0].abhaId;
+            this.patientDetails.fname = response[0].firstName;
+            this.patientDetails.lname = response[0].lastName;
+            this.patientDetails.gender = response[0].gender.toLocaleString();
+            this.patientDetails.age = response[0].age;
+            this.patientDetails.lan = response[0].languages;
+            this.patientDetails.edu = response[0].education;
+            this.patientDetails.occ = response[0].occupation;
+            this.patientDetails.email = response[0].email;
+            this.patientDetails.phone = response[0].phoneNumber;
+            this.patientDetails.addLine1 = response[0].addressDetail.add1;
+            this.patientDetails.addLine2 = response[0].addressDetail.add2;
+            this.patientDetails.carer_name = response[0].informantCaregiverName;
+            this.patientDetails.carer_rel = response[0].relationshipWithPatient
+            console.log(this.patientDetails);
+          },
+          (error:any) =>  {
+            console.log(error);
+          }
+        );
+      }
+    );
   }
 
 }

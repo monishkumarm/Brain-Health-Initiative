@@ -33,11 +33,11 @@ public class JwtController {
         }
         catch (UsernameNotFoundException e){
             e.printStackTrace();
-            throw new Exception("Invalid credentials");
+            throw new Exception("User Name not found");
         }
         catch (BadCredentialsException e){
             e.printStackTrace();
-            throw new Exception("Invalid credentials");
+            throw new Exception("Usernem or Password are wrong  ");
         }
 
         UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(jwtRequest.getUsername());

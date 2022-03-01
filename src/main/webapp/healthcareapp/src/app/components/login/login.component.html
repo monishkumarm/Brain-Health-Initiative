@@ -7,11 +7,15 @@
             <h1 >Login!!</h1>
             </div>
             <div class="col-2"></div>
-          </div>
+        </div>
+
+        <div *ngIf="isError" class="alert alert-danger text-center">
+            <div>{{errorMsg}}</div>
+        </div>
 
         <div class="row m-4">
             <div class="col-md-12   ">
-
+                
 
                 <form (ngSubmit)="onSubmit()">
                     <mat-form-field style="width: 100%;" appearance="outline">
@@ -29,7 +33,7 @@
                             Login
                         </button>
 
-                        <button type="reset" mat-raised-button color="accent" style="margin-left: 15px;">
+                        <button type="reset"  mat-raised-button color="accent" style="margin-left: 15px;">
                             Reset
                         </button>
                     </div>

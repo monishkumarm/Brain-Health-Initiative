@@ -29,3 +29,7 @@
     background-color: white;
     border-radius: 5px;
   }
+
+  .alert {
+    border: solid red;
+  }

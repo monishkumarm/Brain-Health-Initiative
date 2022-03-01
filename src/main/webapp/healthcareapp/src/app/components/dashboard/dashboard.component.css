@@ -23,7 +23,7 @@
 }
 .record{
   /* border: 1px solid black; */
-  
+
 }
 
 .recordHead{
@@ -55,5 +55,7 @@
     border-radius: 5px;
     background-color:   rgb(125, 248, 248);
   }
-  
-  
+
+  .alert {
+    border: solid red;
+  }
