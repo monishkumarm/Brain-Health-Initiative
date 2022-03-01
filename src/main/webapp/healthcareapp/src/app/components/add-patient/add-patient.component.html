@@ -7,7 +7,7 @@
         </div>
         <div class="col-3"></div>
       </div>
-      
+
       <div>
         <form #patientForm="ngForm" (ngSubmit)="onSubmit()"  class="patient-details" novalidate>
           <span><strong><h1>Identity information</h1></strong></span>
@@ -23,7 +23,6 @@
                 </div>
             </div>
 
-
           </div>
 
           <br>
@@ -38,7 +37,7 @@
 
             </div>
 
-            <div class="col-sm-6 form-group">   
+            <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
                     <mat-label for="lname">Last Name</mat-label>
                     <input [(ngModel)]="patientDetails.lname" name="lname" id="lname" type="text" class="form-control" required matInput>

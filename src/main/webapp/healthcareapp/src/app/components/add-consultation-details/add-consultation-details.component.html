@@ -1,0 +1,260 @@
+<div class="bootstrap-wrapper ">
+  <div class="container mt-5  add-patient-cont">
+    <div class="mt-3 text-center">
+      <h1 >Add new Consultation Details</h1>
+    </div>
+    <div>
+      <form #consultationForm ="ngForm" (ngSubmit)="onSubmit()"  class="consultation-details" novalidate>
+<!--                {{consultationForm.value| json}}-->
+<!--        <span><strong>Appointment Details</strong></span>-->
+<!--        <hr>-->
+<!--        <div class="row">-->
+<!--          <div class="col-sm-6 form-group">-->
+<!--            <mat-form-field style="width: 100%;">-->
+<!--              <mat-label for="consultationID">CONSULTATION ID</mat-label>-->
+<!--              <input [(ngModel)] = "patientDetails.ABHAID" name="abhaID"   id="abhaID" type="text" class="form-control" #abhaId="ngModel" required required minlength="12" maxlength="12" matInput>-->
+<!--            </mat-form-field>-->
+<!--            <div class="mt-1 alert alert-danger" *ngIf=" abhaId.touched && !abhaId.valid  ">-->
+<!--              <div *ngIf="abhaId.errors">ABHA id Invalid</div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+
+<!--        </div>-->
+
+        <br>
+        <span><strong>Appointment details</strong></span>
+        <hr>
+<!--        <mbsc-datepicker-->
+<!--          [controls]="['calendar', 'time']"-->
+<!--          [touchUi]="true">-->
+<!--        </mbsc-datepicker>-->
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="date">Date</mat-label>
+              <input [(ngModel)]="consultationDetails.date" name="date" id="date" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="time">Time</mat-label>
+              <input [(ngModel)]="consultationDetails.time" name="time" id="time" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <span><strong>Chief Complaints</strong></span>
+        <div class="row">
+          <div class="col-sm-6 form-group purple-border">
+            <label for="form7">Complaint: </label>
+            <textarea [(ngModel)]="consultationDetails.complaint" id="complaint" class="md-textarea form-control" rows="2"></textarea>
+          </div>
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="durationOfIllness">duration of illness</mat-label>
+              <input [(ngModel)]="consultationDetails.durationOfIllness" name="durationOfIllness" id="durationOfIllness" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group purple-border">
+            <label for="history">History of illness: </label>
+            <textarea [(ngModel)]="consultationDetails.history" id="history" class="md-textarea form-control" rows="2"></textarea>
+          </div>
+<!--        <div class="col-sm-6 form-group">-->
+<!--          <mat-form-field style="width: 100%;">-->
+<!--            <mat-label for="history">History of illness</mat-label>-->
+<!--            <input [(ngModel)]="consultationDetails.history" name="history" id="history" type="text" class="form-control" required matInput>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+          <div class="col-sm-6 form-group purple-border">
+            <label for="illnessSummary">Illness Summary: </label>
+            <textarea [(ngModel)]="consultationDetails.illnessSummary" id="illnessSummary" class="md-textarea form-control" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="col-sm-6 form-group">
+          <mat-form-field style="width: 100%;">
+            <mat-label for="examination">Examination</mat-label>
+            <input [(ngModel)]="consultationDetails.examination" name="examination" id="examination" type="text" class="form-control" required matInput>
+          </mat-form-field>
+        </div>
+
+
+        <span><strong>Diagnosis</strong></span>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label style="color: black;">Type</mat-label>
+              <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.type" name="type" id="type">
+                <mat-option value="1">Differential</mat-option>
+                <mat-option value="2">Provisional</mat-option>
+                <mat-option value="3">Tentative</mat-option>
+                <mat-option value="3">Final</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="icdDescription">ICD Description</mat-label>
+              <input [(ngModel)]="consultationDetails.icdDescription" name="icdDescription" id="icdDescription" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <mat-form-field style="width: 100%;">
+                <mat-label style="color: black;">ICD10 Code</mat-label>
+                <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.icd10" name="icd10" id="icd10">
+                  <mat-option value="1">A00-B99: Certain infectious and parasitic diseases</mat-option>
+                  <mat-option value="2">C00-D49: Neoplasms</mat-option>
+                  <mat-option value="3">D50-D89: Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism</mat-option>
+                  <mat-option value="4">E00-E89: Endocrine, nutritional and metabolic diseases</mat-option>
+                  <mat-option value="5">F01-F99: Mental, Behavioral and Neurodevelopmental disorders </mat-option>
+                  <mat-option value="6">G00-G99: Diseases of the nervous system</mat-option>
+                  <mat-option value="7">H00-H59: Diseases of the eye and adnexa</mat-option>
+                  <mat-option value="8">H60-H95: Diseases of the ear and mastoid process</mat-option>
+                  <mat-option value="9">I00-I99: Diseases of the circulatory system</mat-option>
+                  <mat-option value="10">J00-J99: Diseases of the respiratory system</mat-option>
+                  <mat-option value="11">K00-K95: Diseases of the digestive system</mat-option>
+                  <mat-option value="12">L00-L99: Diseases of the skin and subcutaneous tissue</mat-option>
+
+                  <mat-option value="13">M00-M99: Diseases of the musculoskeletal system and connective tissue</mat-option>
+                  <mat-option value="14">N00-N99: Diseases of the genitourinary system</mat-option>
+                  <mat-option value="15">O00-O9A: Pregnancy, childbirth and the puerperium</mat-option>
+                  <mat-option value="16">Q00-Q99: Congenital malformations, deformations and chromosomal abnormalities </mat-option>
+                  <mat-option value="17">R00-R99: Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified</mat-option>
+                  <mat-option value="18">S00-T88: Injury, poisoning and certain other consequences of external causes</mat-option>
+
+                  <mat-option value="19">U00-U85: Codes for special purposes</mat-option>
+                  <mat-option value="20">V00-Y99: External causes of morbidity</mat-option>
+                  <mat-option value="21">Z00-Z99: Factors influencing health status and contact with health services</mat-option>
+
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <span><strong> Treatment Plan </strong></span>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label style="color: black;">Improvement status</mat-label>
+              <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.improvementStatus" name="improvementStatus" id="improvementStatus">
+                <mat-option value="1">Condition Improved</mat-option>
+                <mat-option value="2">, Condition Worsened</mat-option>
+                <mat-option value="3">, Condition unchanged</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="medicineName">Medicine Name</mat-label>
+              <input [(ngModel)]="consultationDetails.medicineName" name="icdDescription" id="medicineName" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="dosage">Dosage</mat-label>
+              <input [(ngModel)]="consultationDetails.dosage" name="dosage" id="dosage" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="dosageTime">Dosage time</mat-label>
+              <input [(ngModel)]="consultationDetails.dosageTime" name="dosageTime" id="dosageTime" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="duration">Medicine duration</mat-label>
+              <input [(ngModel)]="consultationDetails.medicineDuration" name="medicineDuration" id="medicineDuration" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="remarks">Remarks</mat-label>
+              <input [(ngModel)]="consultationDetails.remarks" name="remarks" id="remarks" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <span><strong> Follow up recommendations </strong></span>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="followup">Follow up</mat-label>
+              <input [(ngModel)]="consultationDetails.followup" name="followup" id="followup" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="refer">Refer</mat-label>
+              <input [(ngModel)]="consultationDetails.refer" name="refer" id="refer" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <span><strong>Move to ip : </strong> </span>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="moveToIp">
+            <label class="form-check-label" for="flexRadioDefault1">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="moveToIp">
+            <label class="form-check-label" for="flexRadioDefault2">No</label>
+          </div>
+
+        <span><strong>Refer on SOS : </strong> </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="referOnSos">
+          <label class="form-check-label" for="flexRadioDefault1">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" value="referOnSos">
+          <label class="form-check-label" for="flexRadioDefault2">No</label>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="refferedBy">Referred By</mat-label>
+              <input [(ngModel)]="consultationDetails.refferedBy" name="refferedBy" id="refferedBy" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;">
+              <mat-label for="refferedOn">Referred On</mat-label>
+              <input [(ngModel)]="consultationDetails.refferedOn" name="refferedOn" id="refferedOn" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+        </div>
+        <span><strong>Is Consultation done? : </strong> </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" value="isConsultation">
+          <label class="form-check-label" for="flexRadioDefault1">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" value="isConsultation">
+          <label class="form-check-label" for="flexRadioDefault1">No</label>
+        </div>
+
+
+        <div class="row">
+          <div class="col-sm-12 text-center" >
+            <button type="submit"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
+              Submit
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
