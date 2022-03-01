@@ -1,3 +1,4 @@
+import { MbscModule } from '@mobiscroll/angular';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -24,6 +25,10 @@ import { AddPatientComponent } from './components/add-patient/add-patient.compon
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { ConsultationDetailsComponent } from './components/consultation-details/consultation-details.component';
 import { MatOption } from '@angular/material/core';
+import {
+  AddConsultationDetailsComponent
+} from "./components/add-consultation-details/add-consultation-details.component";
+
 
 @NgModule({
   declarations: [
@@ -34,9 +39,11 @@ import { MatOption } from '@angular/material/core';
     DashboardComponent,
     AddPatientComponent,
     PatientDetailsComponent,
-    ConsultationDetailsComponent
+    ConsultationDetailsComponent,
+    AddConsultationDetailsComponent
   ],
   imports: [
+    MbscModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
