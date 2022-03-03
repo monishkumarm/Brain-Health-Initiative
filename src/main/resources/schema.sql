@@ -1,4 +1,4 @@
-USE BrianHealthInitiative;
+USE BrainHealthInitiative;
 
 CREATE TABLE `User` (
                         `Id` BIGINT PRIMARY KEY,

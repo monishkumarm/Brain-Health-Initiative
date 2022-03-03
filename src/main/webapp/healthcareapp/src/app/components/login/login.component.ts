@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
           window.location.href="/dashboard";
         },
         error => {
+          console.log("ashish");
           console.log(error);
         }
       );
