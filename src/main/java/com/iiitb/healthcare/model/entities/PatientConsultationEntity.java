@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "PatientConsultation", schema = "BrainHealthInitiative", catalog = "")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","patientByPatientId","userByDoctorId","userByReferredBy"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","patientByPatientId","userByReferredBy"})
 public class PatientConsultationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

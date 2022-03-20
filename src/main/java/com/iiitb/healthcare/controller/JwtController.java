@@ -37,7 +37,7 @@ public class JwtController {
         }
         catch (BadCredentialsException e){
             e.printStackTrace();
-            throw new Exception("Usernem or Password are wrong  ");
+            throw new Exception("Username or Password are wrong  ");
         }
 
         UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(jwtRequest.getUsername());

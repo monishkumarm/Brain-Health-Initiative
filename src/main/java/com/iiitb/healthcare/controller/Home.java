@@ -14,11 +14,6 @@ public class Home {
         return text;
     }
 
-    @RequestMapping("/getUsers")
-    public String getUsers(){
-        String text="{\"name\":\"monish\"}";
-        return text;
-    }
 
 
 }

@@ -1,4 +1,4 @@
-.consultation-details {
+.add-consultation-cont {
   width: 90%;
   margin-top: 20px;
   border-style: solid;
@@ -6,16 +6,43 @@
   border-radius: 5px;
   background-color:rgb(125, 248, 248);
 }
-
-.purple-border textarea {
-  border: 1px solid #ba68c8;
-}
-.purple-border .form-control:focus {
-  border: 1px solid #ba68c8;
-  box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+.header{
+  background-color: blueviolet  ;
+  border-radius: 5px;
+  color: white;
 }
 
-.green-border-focus .form-control:focus {
-  border: 1px solid #8bc34a;
-  box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+.consultation-details {
+  margin: 5%;
+  margin-top: 5%;
+  margin-bottom: 8%;
+}
+
+.record{
+  /*  border: 1px solid black; */
+
+}
+
+.recordHead{
+  background-color: blueviolet ;
+  color: white;
+  border-top-left-radius: 5px ;
+  border-top-right-radius: 5px ;
+}
+
+.recordBody{
+  background-color: white;
+  border-bottom-left-radius: 5px ;
+  border-bottom-right-radius: 5px ;
+}
+
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.margin {
+ 
+  margin: 0 12px;
 }

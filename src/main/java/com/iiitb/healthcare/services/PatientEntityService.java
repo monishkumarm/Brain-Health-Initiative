@@ -8,6 +8,7 @@ import com.iiitb.healthcare.repo.PatientRepository;
 import com.iiitb.healthcare.repo.UserPermissionPatientEntityRepository;
 import com.iiitb.healthcare.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -50,19 +51,24 @@ public class PatientEntityService {
         Integer option = Integer.parseInt((String) payload.get("option"));
         if(option.compareTo(1)==0)
         {
-            patientRepository.findByAbhaId((String) payload.get("value")).forEach(patient -> patients.add(patient));
+                patientRepository.findByAbhaId((String) payload.get("value")).forEach(patient -> patients.add(patient));
         }
         else if(option.compareTo(2)==0)
         {
             patientRepository.findByFirstName((String) payload.get("value")).forEach(patient -> patients.add(patient));
         }
-        else
+        else if(option.compareTo(3)==0)
         {
             patientRepository.findByPhoneNumber((String) payload.get("value")).forEach(patient -> patients.add(patient));
+        }
+        else
+        {
+            patientRepository.findById(Long.parseLong((String) payload.get("value"))).forEach(patient -> patients.add(patient));
         }
         System.out.println(patients.toString());
         return patients;
     }
+
 
 
     public String addPatient(Map<String,Object> payload,String token){
@@ -72,7 +78,12 @@ public class PatientEntityService {
             patient.setAbhaId((String) payload.get("ABHAID"));
             String add1 = (String) payload.get("addLine1");
             String add2 = (String) payload.get("addLine2");
-            patient.setAddressDetail("{ \"add1\":\"" + add1 + "\", \"add2\":\"" + add2 + "\"}");
+            String address = "{ \"addLine1\": \"" + (String) payload.get("addLine1") + "\" ,";
+            address = address + "\"addLine2\": \"" + (String) payload.get("addLine2") + "\" ,";
+            address = address + "\"district\": \"" + (String) payload.get("district") + "\" ,";
+            address = address + "\"state\": \"" + (String) payload.get("state") + "\" ,";
+            address = address + "\"pin\": \"" + (String) payload.get("pin") + "\" }";
+            patient.setAddressDetail(address);
             patient.setAge((Integer) payload.get("age")) ;
             UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
             patient.setCreatedBy((long)user.getId());
@@ -124,9 +135,12 @@ public class PatientEntityService {
     {
         System.out.println("in Update service");
         List<PatientEntity> patients =  this.patientRepository.findByAbhaId((String) payload.get("ABHAID"));
-        String add1 = (String) payload.get("addLine1");
-        String add2 = (String) payload.get("addLine2");
-        patients.get(0).setAddressDetail("{ \"add1\":\"" + add1 + "\", \"add2\":\"" + add2 + "\"}");
+        String address = "{ \"addLine1\": \"" + (String) payload.get("addLine1") + "\" ,";
+        address = address + "\"addLine2\": \"" + (String) payload.get("addLine2") + "\" ,";
+        address = address + "\"district\": \"" + (String) payload.get("district") + "\" ,";
+        address = address + "\"state\": \"" + (String) payload.get("state") + "\" ,";
+        address = address + "\"pin\": \"" + (String) payload.get("pin") + "\" }";
+        patients.get(0).setAddressDetail(address);
         System.out.println("get user");
         patients.get(0).setAge((Integer) payload.get("age")) ;
         UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));

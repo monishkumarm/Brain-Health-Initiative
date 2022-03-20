@@ -24,12 +24,17 @@ export class PatientDetailsComponent implements OnInit {
     phone:'',
     addLine1:'',
     addLine2:'',
+    district:'',
+    state:'',
+    pin:'',
     carer_name:'',
     carer_rel:'',
   }
 
+  
+
   search = {
-    option : '1',
+    option : '4',
     value : '',
   };
 
@@ -40,14 +45,14 @@ export class PatientDetailsComponent implements OnInit {
 
   constructor(private activatedroute: ActivatedRoute, private patientService:PatientService) {   }
   ngOnInit() {
-    
+
     this.activatedroute.queryParams
       .subscribe(params => {
         console.log(params); // { orderby: "price" }
-        this.search.value = params['abhaId'];
+        this.search.value = params['id'];
         }
       );
-
+      console.log(this.search)
       this.patientService.getSearchPatients(this.search).subscribe(
         (response:any) => {
           // console.log(response);
@@ -62,8 +67,11 @@ export class PatientDetailsComponent implements OnInit {
           this.patientDetails.occ = response[0].occupation;
           this.patientDetails.email = response[0].email;
           this.patientDetails.phone = response[0].phoneNumber;
-          this.patientDetails.addLine1 = response[0].addressDetail.add1;
-          this.patientDetails.addLine2 = response[0].addressDetail.add2;
+          this.patientDetails.addLine1 = response[0].addressDetail.addLine1;
+          this.patientDetails.addLine2 = response[0].addressDetail.addLine2;
+          this.patientDetails.district = response[0].addressDetail.district;
+          this.patientDetails.state = response[0].addressDetail.state;
+          this.patientDetails.pin = response[0].addressDetail.pin;
           this.patientDetails.carer_name = response[0].informantCaregiverName;
           this.patientDetails.carer_rel = response[0].relationshipWithPatient
           console.log(this.patientDetails);
@@ -83,7 +91,7 @@ export class PatientDetailsComponent implements OnInit {
     this.patientService.updatePatient(this.patientDetails).subscribe(
       (response:any) => {
         // console.log(response);
-        
+
         this.isPatientUpdate = true;
         this.errorMsg = '';
         this.patientDetails.Id = response.id;
@@ -97,9 +105,12 @@ export class PatientDetailsComponent implements OnInit {
         this.patientDetails.occ = response.occupation;
         this.patientDetails.email = response.email;
         this.patientDetails.phone = response.phoneNumber;
-        this.patientDetails.addLine1 = response.addressDetail.add1;
-        this.patientDetails.addLine2 = response.addressDetail.add2;
-        this.patientDetails.carer_name = response.informantCaregiverName;
+        this.patientDetails.addLine1 = response.addressDetail.addLine1;
+        this.patientDetails.addLine2 = response.addressDetail.addLine2;
+        this.patientDetails.district = response.addressDetail.district;
+        this.patientDetails.state = response.addressDetail.state;
+        this.patientDetails.pin = response.addressDetail.pin;
+       this.patientDetails.carer_name = response.informantCaregiverName;
         this.patientDetails.carer_rel = response.relationshipWithPatient
         console.log(this.patientDetails);
       },
