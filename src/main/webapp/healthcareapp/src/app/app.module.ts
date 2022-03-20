@@ -24,11 +24,11 @@ import { PatientService } from './services/patient.service';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { ConsultationDetailsComponent } from './components/consultation-details/consultation-details.component';
-import { MatOption } from '@angular/material/core';
-import {
-  AddConsultationDetailsComponent
-} from "./components/add-consultation-details/add-consultation-details.component";
-
+// import { MatOption } from '@angular/material/core';
+import {  AddConsultationDetailsComponent } from "./components/add-consultation-details/add-consultation-details.component";
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import  {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -53,8 +53,10 @@ import {
     MatInputModule,
     FormsModule,
     HttpClientModule,
-    MatSelectModule
-
+    MatSelectModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    MatRadioModule
 
   ],
   providers: [LoginService, PatientService ,AuthGuard, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],

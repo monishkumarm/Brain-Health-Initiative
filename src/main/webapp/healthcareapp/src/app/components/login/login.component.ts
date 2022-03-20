@@ -19,6 +19,10 @@ export class LoginComponent implements OnInit {
   constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
+    if(this.loginService.isLoggedIn())
+    {
+      window.location.href="/dashboard";
+    }
   }
 
   onSubmit(){

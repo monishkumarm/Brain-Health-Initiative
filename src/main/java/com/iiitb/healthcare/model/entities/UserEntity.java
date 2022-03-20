@@ -11,6 +11,21 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "User", schema = "BrainHealthInitiative", catalog = "")
+@JsonIgnoreProperties({
+        "hibernateLazyInitializer",
+        "handler",
+        "patientsById",
+        "patientsById_0",
+        "patientConsultationsById",
+        "patientConsultationsById_0",
+        "userByCreatedBy",
+        "usersById",
+        "userByLastChangeBy",
+        "usersById_0",
+        "userOrganizationsById",
+        "userPermissionPatientsById",
+        "roleTypeLuByRoleTypeId"
+})
 public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -27,14 +27,14 @@
 }
 
 .recordHead{
-  background-color: blueviolet ;
+  background-color:darkgoldenrod ;
   color: white;
   border-top-left-radius: 5px ;
   border-top-right-radius: 5px ;
 }
 
 .recordBody{
-  background-color: white;
+  background-color:rgb(248, 206, 98);
   border-bottom-left-radius: 5px ;
   border-bottom-right-radius: 5px ;
 }

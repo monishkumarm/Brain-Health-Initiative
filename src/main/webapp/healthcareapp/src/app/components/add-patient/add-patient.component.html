@@ -3,7 +3,7 @@
       <div class="row mt-4">
         <div class="col-3"></div>
         <div class="col-6 pt-2 text-center header mt-2">
-        <h1 >Patients Records</h1>
+        <h1>Add Patients Records</h1>
         </div>
         <div class="col-3"></div>
       </div>
@@ -62,6 +62,7 @@
                     <mat-label for="age">Age</mat-label>
                     <input [(ngModel)]="patientDetails.age" name="age" id="age" type="number" class="form-control"    matInput>
                 </mat-form-field>
+
             </div>
           </div>
 
@@ -133,6 +134,30 @@
               </mat-form-field>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-sm-4 form-group">
+              <mat-form-field style="width: 100%;"  appearance="outline">
+                <mat-label for="district">District</mat-label>
+                <input [(ngModel)]="patientDetails.district" name="district" id="district" type="text" class="form-control" matInput>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-4 form-group">
+              <mat-form-field  style="width: 100%;" appearance="outline">
+                <mat-label for="state">State</mat-label>
+                <input [(ngModel)]="patientDetails.state" name="state" id="state" type="text" class="form-control" matInput>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-4 form-group">
+              <mat-form-field  style="width: 100%;" appearance="outline">
+                <mat-label for="pin">Pin Code</mat-label>
+                <input [(ngModel)]="patientDetails.pin" name="pin" id="pin" type="text" class="form-control" required minlength="6" maxlength="6" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+
 
           <span><strong><h1>Carer information</h1></strong></span>
           <hr>

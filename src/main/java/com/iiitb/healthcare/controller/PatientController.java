@@ -1,5 +1,6 @@
 package com.iiitb.healthcare.controller;
 
+import com.iiitb.healthcare.model.entities.PatientConsultationEntity;
 import com.iiitb.healthcare.model.entities.PatientEntity;
 import com.iiitb.healthcare.services.PatientEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class PatientController {
         List<PatientEntity> patients = patientEntityService.getSearchPatients(payload);
         return ResponseEntity.ok(patients);
     }
+
 
     @RequestMapping(value = "/updatePatient",method = RequestMethod.POST)
     public ResponseEntity<?> updatePatien(@RequestBody Map<String,Object> payload, @RequestHeader Map<String,String> headers) throws Exception{

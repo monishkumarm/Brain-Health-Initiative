@@ -8,4 +8,6 @@ public interface UserPermissionPatientEntityRepository extends JpaRepository<Use
 
     @Query(value="SELECT * FROM userpermissionpatient UPP  WHERE UPP.UserId = ?1 AND UPP.PatientId=?2",nativeQuery = true)
     public UserPermissionPatientEntity getPatientByUser(long userId,long patientId);
+
+
 }

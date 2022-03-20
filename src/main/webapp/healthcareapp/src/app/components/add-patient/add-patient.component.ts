@@ -21,6 +21,9 @@ export class AddPatientComponent implements OnInit {
     phone:'',
     addLine1:'',
     addLine2:'',
+    district:'',
+    state:'',
+    pin:'',
     carer_name:'',
     carer_rel:'',
   }
@@ -37,7 +40,6 @@ export class AddPatientComponent implements OnInit {
       (response:any) => {
         console.log(response);
         window.location.href="/dashboard";
-
       },
       error => {
         console.log(error);
