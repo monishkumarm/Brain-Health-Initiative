@@ -1,5 +1,6 @@
 package com.iiitb.healthcare.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "ImprovementStatus_lu", schema = "BrainHealthInitiative", catalog = "")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","patientConsultationsById"})
 public class ImprovementStatusLuEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

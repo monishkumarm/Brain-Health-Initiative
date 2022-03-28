@@ -5,6 +5,11 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
+import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
+import { ConsultationDetailsComponent } from './components/consultation-details/consultation-details.component';
+import {
+  AddConsultationDetailsComponent
+} from "./components/add-consultation-details/add-consultation-details.component";
 
 const routes: Routes = [
   {
@@ -28,7 +33,26 @@ const routes: Routes = [
     component:AddPatientComponent,
     pathMatch:'full',
     canActivate:[AuthGuard]
+  },
+  {
+    path:'patientDetails',
+    component:PatientDetailsComponent,
+    pathMatch:'full',
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'consultationDetails',
+    component:ConsultationDetailsComponent,
+    pathMatch:'full',
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'addConsultation',
+    component:AddConsultationDetailsComponent,
+    pathMatch:'full',
+    canActivate:[AuthGuard]
   }
+
 ];
 
 @NgModule({

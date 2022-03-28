@@ -1,28 +1,70 @@
-<app-search></app-search>
+<div class="bootstrap-wrapper ">
+  <div class="container text-center search-cont">
+    <form (ngSubmit)="onSubmit()">
+      <div class="row mt-4 text-center search-form" style="width: 100%">
+        <div class="col-4">
+          <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label style="color: black;">Select Option</mat-label>
+              <mat-select class="browser-default custom-select" [(value)]="search.option" required style="width: 100%;">
+              <mat-option value="1">ABHA Number</mat-option>
+              <mat-option value="2">First Name</mat-option>
+              <mat-option value="3">Phone Number</mat-option>
+              </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-8">
+          <mat-form-field style="width: 100%; " appearance="outline">
+            <mat-label style="color: black;">Search</mat-label>
+            <input name="search" [(ngModel)]="search.value" required type="text" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class=" mt-2 mb-2 container text-center">
+        <button type="submit" mat-raised-button color="primary">
+          Search
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
 
 <div class="bootstrap-wrapper ">
   <div class="container text-center mt-2 dash-cont">
-    <div class="mt-2">
-    <h1 >Patients Records</h1>
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6 pt-2 header mt-2">
+      <h1 >Patients Records</h1>
+      </div>
+      <div class="col-3"></div>
     </div>
-    <div class="mt-2">
-      <table>
-        <tr color="primary">
-          <th>ABHA ID</th>
-          <th>FIRST NAME</th>
-          <th>Last NAME</th>
-          <th>Phone Number</th>
-        </tr>
-        <ng-container *ngFor="let record of Record">
-          <tr>
-            <td><p>{{record.abhaId}}</p></td>
-            <td><p>{{record.firstName}}</p></td>
-            <td><p>{{record.lastName}}</p></td>
-            <td><p>{{record.phoneNumber}}</p></td>
+    <div *ngIf="!isPatientsFound" class="alert alert-danger mt-2">
+      <div>Not Found Patient Record</div>
+    </div>
 
-          </tr>
-        </ng-container>
-      </table>
+    <div class="mt-2">
+      <div class="p-3 record" *ngFor="let record of Record">
+        <div class=" row pt-2 recordHead">
+          <span class="col-6 abhaID" >
+            <p><strong>ABHA ID : {{record.abhaId}}</strong></p>
+          </span>
+          <span class="col-6 time">
+            <p><strong> Created on : {{record.createdOn.substring(0,10)}}</strong></p>
+          </span>
+        </div>
+        <div class="row recordBody" > 
+          <span class="pt-3 col-3" style="text-align: left;">
+            <p><strong>Name</strong> : {{record.firstName}} {{record.lastName}}</p>
+          </span>
+          <span class="pt-3 col-3">
+            <p><strong>Mobile</strong> : {{record.phoneNumber}}</p>
+          </span >
+          <span class="p-2 col-6" style="text-align: right;">
+            <button routerLink="/consultationDetails" [queryParams]="{id : record.id}"  mat-raised-button color="primary">Consultation Details</button>
+            <button routerLink="/patientDetails" [queryParams]="{id : record.id}"  mat-raised-button color="accent" style="margin-left: 15px;">Patient Details</button>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -126,6 +126,56 @@ ALTER TABLE `PatientConsultation` ADD CONSTRAINT FK_PatientConsultation_Diagnost
 ALTER TABLE `PatientConsultation` ADD CONSTRAINT FK_PatientConsultation_ImprovementStatus_lu FOREIGN KEY (`ImprovementStatusId`) REFERENCES `ImprovementStatus_lu` (`Id`);
 
 
+-- Questionnaire
+
+
+CREATE TABLE `Questionnaire` (
+                                 `Id` BIGINT PRIMARY KEY,
+                                 `Question` VARCHAR(100) NOT NULL UNIQUE,
+                                 `GroupId` INT NOT NULL,
+                                 `SubGroupId` INT NOT NULL
+);
+
+CREATE TABLE `QuestionnaireOption` (
+                                       `Id` BIGINT PRIMARY KEY,
+                                       `QuestionId` BIGINT,
+                                       `Option` VARCHAR(100)
+);
+
+ALTER TABLE `QuestionnaireOption` ADD FOREIGN KEY (`QuestionId`) REFERENCES `Questionnaire` (`Id`);
+
+CREATE TABLE `QuestionnaireDiagnosis` (
+                                          `Id` BIGINT PRIMARY KEY,
+                                          `DiagnosisInfo` VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE `PatientQuestionnaire` (
+                                        `Id` BIGINT PRIMARY KEY,
+                                        `PatientId` BIGINT NOT NULL,
+                                        `PerformedByUserId` BIGINT NOT NULL,
+                                        `PerformedOn` DATETIME NOT NULL,
+                                        `ReachedDiagnosisId` BIGINT NOT NULL
+);
+
+ALTER TABLE `PatientQuestionnaire` ADD FOREIGN KEY (`PatientId`) REFERENCES `Patient` (`Id`);
+
+
+ALTER TABLE `PatientQuestionnaire` ADD FOREIGN KEY (`PerformedByUserId`) REFERENCES `User` (`Id`);
+
+ALTER TABLE `PatientQuestionnaire` ADD FOREIGN KEY (`ReachedDiagnosisId`) REFERENCES `QuestionnaireDiagnosis` (`Id`);
+
+CREATE TABLE `PatientQuestionnaireAnswer` (
+                                              `Id` BIGINT PRIMARY KEY,
+                                              `PatientQuestionnaireId` BIGINT NOT NULL,
+                                              `QuestionId` BIGINT NOT NULL,
+                                              `SelectedOptionId` BIGINT NOT NULL
+);
+
+ALTER TABLE `PatientQuestionnaireAnswer` ADD FOREIGN KEY (`PatientQuestionnaireId`) REFERENCES `PatientQuestionnaire` (`Id`);
+
+ALTER TABLE `PatientQuestionnaireAnswer` ADD FOREIGN KEY (`QuestionId`) REFERENCES `Questionnaire` (`Id`);
+
+ALTER TABLE `PatientQuestionnaireAnswer` ADD FOREIGN KEY (`SelectedOptionId`) REFERENCES `QuestionnaireOption` (`Id`);
 
 
 

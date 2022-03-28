@@ -1,8 +1,25 @@
 .login {
-    padding : 50px;
     width: 30%;
     border-style: solid;
     border-color: black;
     border-radius: 1%;
+    
+    background-color: aqua;
   }
   
+  .header{
+    background-color:blueviolet;
+    border-radius: 5px;
+    color: white;
+  }
+
+  
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.alert {
+  border: solid red;
+  
+}

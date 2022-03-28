@@ -1,3 +1,4 @@
+import { MbscModule } from '@mobiscroll/angular';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -11,17 +12,23 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginService } from './services/login.service';
 import { AuthGuard } from './services/auth.guard';
 import { AuthInterceptor } from './services/auth.interceptor';
-import { SearchComponent } from './components/search/search.component';
 import { MatSelectModule } from '@angular/material/select';
 import { PatientService } from './services/patient.service';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
+import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
+import { ConsultationDetailsComponent } from './components/consultation-details/consultation-details.component';
+// import { MatOption } from '@angular/material/core';
+import {  AddConsultationDetailsComponent } from "./components/add-consultation-details/add-consultation-details.component";
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import  {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -30,10 +37,13 @@ import { AddPatientComponent } from './components/add-patient/add-patient.compon
     HomeComponent,
     LoginComponent,
     DashboardComponent,
-    SearchComponent,
-    AddPatientComponent
+    AddPatientComponent,
+    PatientDetailsComponent,
+    ConsultationDetailsComponent,
+    AddConsultationDetailsComponent
   ],
   imports: [
+    MbscModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -44,6 +54,10 @@ import { AddPatientComponent } from './components/add-patient/add-patient.compon
     FormsModule,
     HttpClientModule,
     MatSelectModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    MatRadioModule
+
   ],
   providers: [LoginService, PatientService ,AuthGuard, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
   bootstrap: [AppComponent]

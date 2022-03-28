@@ -11,7 +11,12 @@ import { PatientService } from 'src/app/services/patient.service';
 export class DashboardComponent implements OnInit {
 
   Record:any;
+  search = {
+    option : '',
+    value : '',
+  };
 
+  isPatientsFound = true;
   constructor(private patientService:PatientService) { }
 
   ngOnInit(): void {
@@ -23,8 +28,40 @@ export class DashboardComponent implements OnInit {
       (response:any) => {
         console.log(response);
         this.Record = response;
+        if(this.Record.length == 0)
+        {
+          this.isPatientsFound = false;
+        }
+        else
+        {
+          this.isPatientsFound = true;
+        }
+
       },
-      error => {
+      (error:any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  onSubmit(){
+    console.log("In serch function");
+    console.log(this.search.option);
+    console.log(this.search.value);
+    this.patientService.getSearchPatients(this.search).subscribe(
+      (response:any) => {
+        console.log(response);
+        this.Record = response;
+        if(this.Record.length == 0)
+        {
+          this.isPatientsFound = false;
+        }
+        else
+        {
+          this.isPatientsFound = true;
+        }
+      },
+      (error:any) =>  {
         console.log(error);
       }
     );

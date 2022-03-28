@@ -13,9 +13,16 @@ export class LoginComponent implements OnInit {
     password:''
   }
 
+  isError = false;
+  errorMsg = '';
+
   constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
+    if(this.loginService.isLoggedIn())
+    {
+      window.location.href="/dashboard";
+    }
   }
 
   onSubmit(){
@@ -23,14 +30,18 @@ export class LoginComponent implements OnInit {
     if(this.credentials.username != '' && this.credentials.password != ''){
       this.loginService.generateToken(this.credentials).subscribe(
         (response:any) => {
+          this.isError = false;
+          this.errorMsg = '';
           console.log(response.token);
 
           this.loginService.loginUser(response.token);
           window.location.href="/dashboard";
         },
-        error => {
-          console.log("ashish");
-          console.log(error);
+        (error:any) => {
+          this.isError = true;
+          this.errorMsg = error.error.message;
+          console.log(error.error.message);
+
         }
       );
     }

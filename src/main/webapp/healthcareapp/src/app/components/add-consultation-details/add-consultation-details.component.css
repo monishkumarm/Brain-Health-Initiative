@@ -1,0 +1,48 @@
+.add-consultation-cont {
+  width: 90%;
+  margin-top: 20px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  background-color:rgb(125, 248, 248);
+}
+.header{
+  background-color: blueviolet  ;
+  border-radius: 5px;
+  color: white;
+}
+
+.consultation-details {
+  margin: 5%;
+  margin-top: 5%;
+  margin-bottom: 8%;
+}
+
+.record{
+  /*  border: 1px solid black; */
+
+}
+
+.recordHead{
+  background-color: blueviolet ;
+  color: white;
+  border-top-left-radius: 5px ;
+  border-top-right-radius: 5px ;
+}
+
+.recordBody{
+  background-color: white;
+  border-bottom-left-radius: 5px ;
+  border-bottom-right-radius: 5px ;
+}
+
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.margin {
+ 
+  margin: 0 12px;
+}

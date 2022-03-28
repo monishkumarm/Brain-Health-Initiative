@@ -1,0 +1,221 @@
+<div class="bootstrap-wrapper ">
+  <div class="container mt-5  add-consultation-cont">
+    <div class="row mt-4">
+      <div class="col-3"></div>
+      <div class="col-6 pt-2 text-center header mt-2">
+      <h1 >Add consultation Records</h1>
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+    <div class="mt-2">
+      <div class="p-3 record" >
+        <div class=" row pt-2 recordHead">
+          <span class="col-6 abhaID" >
+            <p><strong>ABHA ID : {{patientDetails.ABHAID}}</strong></p>
+          </span>
+        </div>
+        <div class="row recordBody" >
+          <span class="pt-3 col-3" style="text-align: left;">
+            <p><strong>Name</strong> : {{patientDetails.fname}}  {{patientDetails.lname}}</p>
+          </span>
+          <span class="pt-3 col-3">
+<!--            <p><strong>Mobile</strong> : {{patientDetails.phone}}</p>-->
+          </span >
+
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <form #consultationForm ="ngForm" (ngSubmit)="onSubmit()"  class="consultation-details"  >
+
+        <span><strong><h1>Chief Complaints</h1></strong></span>
+        <hr>
+
+        <div class="row">
+          <div class="col-sm-6 form-group ">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label >Complaint</mat-label>
+              <textarea [(ngModel)]="consultationDetails.complaint" name="complaint" id="complaint" class="md-textarea form-control" rows="2" required matInput></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label >Examination</mat-label>
+              <textarea [(ngModel)]="consultationDetails.examination" name="examination" id="examination" type="text" class="form-control" required matInput></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group ">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label>History of illness </mat-label>
+              <textarea [(ngModel)]="consultationDetails.history" name="history" id="history" class="md-textarea form-control" rows="2" matInput required></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 form-group ">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label >Illness Summary </mat-label>
+              <textarea [(ngModel)]="consultationDetails.illnessSummary" name="illnessSummary" id="illnessSummary" class="md-textarea form-control" rows="2" required matInput></textarea>
+            </mat-form-field>
+            </div>
+        </div>
+        <div class="col-sm-6 form-group">
+        </div>
+
+
+        <span><strong><h1>Diagnosis</h1></strong></span>
+        <hr>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label style="color: black;">Type</mat-label>
+              <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.type" name="type" id="type" required>
+                <mat-option value="1">Differential</mat-option>
+                <mat-option value="2">Provisional</mat-option>
+                <mat-option value="3">Tentative</mat-option>
+                <mat-option value="4">Final</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label style="color: black;">ICD10 Code</mat-label>
+                <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.icd10" name="icd10" id="icd10" required>
+                  <mat-option *ngFor="let option of icdOptions" [value]="option">{{option}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label >ICD Description</mat-label>
+                <textarea [(ngModel)]="consultationDetails.icdDescription" name="icdDescription" id="icdDescription" type="text" class="form-control" required matInput></textarea>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+
+        <span><strong><h1> Treatment Plan</h1> </strong></span>
+        <hr>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label style="color: black;">Improvement status</mat-label>
+              <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.improvementStatus" name="improvementStatus" id="improvementStatus">
+                <mat-option value="1">Condition Improved</mat-option>
+                <mat-option value="2">Condition Worsened</mat-option>
+                <mat-option value="3">Condition unchanged</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+         <span class="col-sm-1"><strong><h2>Medicine</h2> </strong></span>
+         <span class="col-sm-4">  <button (click)="addMedicine()"   mat-raised-button color="primary" style="margin-left: 15px;">Add</button></span>
+        </div>
+
+        <div *ngFor="let med of medicine,let idx=index;" class="row">
+
+          <br>
+          <div class="col-sm-3 form-group">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label >Medicine Name </mat-label>
+              <input [(ngModel)]="med.medicineName"  name="med{{med.medicineName}}" #name="ngModel" id="medicineName{{idx}}" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-3 form-group">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label >Dosage</mat-label>
+              <input [(ngModel)]="med.Dosage" name="med{{med.Dosage}}" #name="ngModel" id="dosage{{idx}}" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4 mt-3 form-group">
+            <!-- <mat-form-field style="width: 100%;" appearance="outline"> -->
+              <mat-checkbox [(ngModel)]="med.isMorning" name="med{{med.isMorning}}" #name="ngModel" id="isMorning{{idx}}" class="form-control margin" class="margin" color="primary" >Morning</mat-checkbox>
+              <mat-checkbox [(ngModel)]="med.isAfternoon" name="med{{med.isAfternoon}}" #name="ngModel" id="isAfternoon{{idx}}"  class="form-control margin" class="margin" color="primary">Afternoon</mat-checkbox>
+              <mat-checkbox [(ngModel)]="med.isNight" name="med{{med.isNight}}" #name="ngModel" id="isNight{{idx}}" class="form-control margin"class="margin" color="primary">Night</mat-checkbox>
+            <!-- </mat-form-field> -->
+          </div>
+          <div class="col-sm-2 mt-2">
+            <a (click)="removeMedicine(idx)"   mat-raised-button color="accent" style="margin-left: 15px;">Remove</a>
+          </div>
+        </div>
+        <div class="row" *ngIf="medicine?.length > 0">
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;"  appearance="outline">
+              <mat-label >Medicine duration</mat-label>
+              <input [(ngModel)]="consultationDetails.medicineDuration" name="medicineDuration" id="medicineDuration" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;"  appearance="outline">
+              <mat-label >Remarks</mat-label>
+              <input [(ngModel)]="consultationDetails.remarks" name="remarks" id="remarks" type="text" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 form-group ">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label >Treatment Instructions</mat-label>
+              <textarea [(ngModel)]="consultationDetails.treatmentInstructions" name="treatmentInstructions" id="treatmentInstructions" class="md-textarea form-control" rows="2" required matInput></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <span><strong><h1>Follow up Recommendations</h1> </strong></span>
+        <hr>
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label>Follow up</mat-label>
+              <input [(ngModel)]="consultationDetails.followup" name="followup" id="followup" type="date" class="form-control" required matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 form-group">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label style="color: black;">Refer To</mat-label>
+              <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.refer" name="refer" id="refer">
+                <mat-option *ngFor="let specilist of Specilist" [value]="specilist.id">
+                  {{specilist.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <span><strong><h2>Other Recommendations</h2> </strong></span>
+        <div class="row">
+          <div class="col-sm-4  form-group">
+            <h2>
+             <mat-checkbox [(ngModel)]="consultationDetails.moveToIp" name="moveToIp" #moveToIp="ngModel" id="moveToIp" class="form-control margin" class="margin" color="primary" labelPosition="before"><strong>Move to Ip</strong></mat-checkbox>
+            </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4  form-group">
+            <h2>
+              <mat-checkbox [(ngModel)]="consultationDetails.referSos" name="referSos" #referSos="ngModel" id="referSos" class="form-control margin" class="margin" color="primary" labelPosition="before" ><strong>Refer Sos  </strong></mat-checkbox>
+            </h2>
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col-sm-12 text-center" >
+            <button type="submit"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
+              Submit
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

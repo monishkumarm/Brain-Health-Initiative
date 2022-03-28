@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .formLogin().disable()
                 .authorizeRequests()
-                .antMatchers("/token","/**").permitAll()
+                .antMatchers("/token").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint)

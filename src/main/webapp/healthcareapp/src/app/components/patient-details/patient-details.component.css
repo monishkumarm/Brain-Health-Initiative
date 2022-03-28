@@ -4,29 +4,32 @@
     border-style: solid;
     border-color: black;
     border-radius: 5px;
-    background-color:rgb(125, 248, 248);
+    
+    background-color:  rgb(125, 248, 248);
   }
-
-
-
-
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  background-color: white;
-  border-radius: 5px;
-}
-
+  
   .patient-details {
     margin: 5%;
     margin-top: 5%;
     margin-bottom: 8%;
   }
-
+  
   .form-control.ng-touched.ng-invalid {
     border: 2px solid red;
   }
-
+  
   .header{
-    background-color: blueviolet  ;
+    background-color:blueviolet ;
     border-radius: 5px;
     color: white;
+  }
+
+   
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  .alert {
+    border: solid red;
   }
