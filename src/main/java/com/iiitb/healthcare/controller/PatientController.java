@@ -19,6 +19,7 @@ public class PatientController {
 
     @RequestMapping("/getAllPatients")
     public ResponseEntity<?> getAllPatients(){
+
         System.out.println("In get all patients api");
         List<PatientEntity> patients = patientEntityService.getAllPatients();
         return ResponseEntity.ok(patients);

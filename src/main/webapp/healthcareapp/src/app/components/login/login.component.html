@@ -1,45 +1,18 @@
-<div class="bootstrap-wrapper mt-5">
-    <div class="container login" >
-        
-        <div class="row m-4">
-            <div class="col-2"></div>
-            <div class="col-8 pt-2 text-center header mt-2">
-            <h1 >Login!!</h1>
-            </div>
-            <div class="col-2"></div>
-        </div>
+<body>
+<div class="login">
+  <div class="form">
+    <form class="login-form" (ngSubmit)="onSubmit()">
+      <span class="material-icons">account_circle</span>
+      <input placeholder="email" name="username" [(ngModel)]="credentials.username" required type="text"/>
+      <input name="password" [(ngModel)]="credentials.password" required type="password" placeholder="password" />
+      <div *ngIf="isError" class = "alert">
+        <div>{{errorMsg}}</div>
+      </div>
+      <button type="submit">login</button>
+    </form>
 
-        <div *ngIf="isError" class="alert alert-danger text-center">
-            <div>{{errorMsg}}</div>
-        </div>
+  </div>
 
-        <div class="row m-4">
-            <div class="col-md-12   ">
-                
-
-                <form (ngSubmit)="onSubmit()">
-                    <mat-form-field style="width: 100%;" appearance="outline">
-                        <mat-label style="color: black;">Username</mat-label>
-                        <input name="username" [(ngModel)]="credentials.username" required type="text" matInput>
-                    </mat-form-field>
-
-                    <mat-form-field style="width: 100%;" appearance="outline">
-                        <mat-label style="color: black;">Password</mat-label>
-                        <input name="password" [(ngModel)]="credentials.password" required type="password" matInput>
-                    </mat-form-field>
-
-                    <div class="text-center">
-                        <button type="submit" mat-raised-button color="primary">
-                            Login
-                        </button>
-
-                        <button type="reset"  mat-raised-button color="accent" style="margin-left: 15px;">
-                            Reset
-                        </button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
 </div>
+
+</body>
