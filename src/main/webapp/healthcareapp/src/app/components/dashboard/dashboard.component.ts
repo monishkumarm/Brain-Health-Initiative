@@ -1,69 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { PatientService } from 'src/app/services/patient.service';
+import {MatSort, Sort} from '@angular/material/sort';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
 
-@Component({
+export interface Patient {
+  firstName: string;
+  phoneNumber: string;
+  age: number;
+  email: string;
+  createdOn: Date
+}
+
+ @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 
+export class DashboardComponent implements OnInit, AfterViewInit {
 
-export class DashboardComponent implements OnInit {
+  constructor(private service: PatientService, private _liveAnnouncer: LiveAnnouncer){}
 
-  Record:any;
-  search = {
-    option : '',
-    value : '',
-  };
-
-  isPatientsFound = true;
-  constructor(private patientService:PatientService) { }
+  @ViewChild(MatSort) sort!: MatSort;
+  
+   ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+   }
 
   ngOnInit(): void {
-      this.getAllPatients();
+    this.getAllPatients();
   }
 
-  getAllPatients(){
-    this.patientService.getAllPatients().subscribe(
-      (response:any) => {
-        console.log(response);
-        this.Record = response;
-        if(this.Record.length == 0)
-        {
-          this.isPatientsFound = false;
-        }
-        else
-        {
-          this.isPatientsFound = true;
-        }
+  ELEMENT_DATA!: Patient[];
+  displayedColumns: string[] = ['firstName', 'age', 'phoneNumber', 'email', 'createdOn', 'actions'];
+  dataSource = new MatTableDataSource<Patient>(this.ELEMENT_DATA);
 
-      },
-      (error:any) => {
-        console.log(error);
-      }
-    );
+  public getAllPatients(){
+    let response = this.service.getAllPatients();
+
+    response.subscribe(patient => this.dataSource.data = patient as Patient[]);
   }
 
-  onSubmit(){
-    console.log("In serch function");
-    console.log(this.search.option);
-    console.log(this.search.value);
-    this.patientService.getSearchPatients(this.search).subscribe(
-      (response:any) => {
-        console.log(response);
-        this.Record = response;
-        if(this.Record.length == 0)
-        {
-          this.isPatientsFound = false;
-        }
-        else
-        {
-          this.isPatientsFound = true;
-        }
-      },
-      (error:any) =>  {
-        console.log(error);
-      }
-    );
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 }
+

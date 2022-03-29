@@ -25,10 +25,14 @@ import { AddPatientComponent } from './components/add-patient/add-patient.compon
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { ConsultationDetailsComponent } from './components/consultation-details/consultation-details.component';
 // import { MatOption } from '@angular/material/core';
-import {  AddConsultationDetailsComponent } from "./components/add-consultation-details/add-consultation-details.component";
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import  {MatRadioModule} from '@angular/material/radio';
+import { AddConsultationDetailsComponent } from "./components/add-consultation-details/add-consultation-details.component";
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import  { MatRadioModule } from '@angular/material/radio';
+import { MatTableModule } from '@angular/material/table';
+import {MatSortModule } from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -56,8 +60,11 @@ import  {MatRadioModule} from '@angular/material/radio';
     MatSelectModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    MatRadioModule
-
+    MatRadioModule,
+    MatTableModule,
+    MatSortModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [LoginService, PatientService ,AuthGuard, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
   bootstrap: [AppComponent]
