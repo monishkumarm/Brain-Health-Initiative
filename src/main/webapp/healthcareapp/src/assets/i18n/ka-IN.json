@@ -1,0 +1,16 @@
+{
+    "brainhealthinitiative": "ಮೆದುಳಿನ ಆರೋಗ್ಯ ಉಪಕ್ರಮ",
+    "login": "ಲಾಗಿನ್",
+    "username": "ಬಳಕೆದಾರ ಹೆಸರು",
+    "dashboard": "ಡ್ಯಾಶ್ಬೋರ್ಡ್",
+    "password": "ಗುಪ್ತಪದ",
+    "addPatient": "ರೋಗಿಯನ್ನು ಸೇರಿಸಿ",
+    "logout": "ಲಾಗ್ ಔಟ್",
+    "welcomeMessage": "ಮೆದುಳಿನ ಆರೋಗ್ಯ ಉಪಕ್ರಮ ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಸುಸ್ವಾಗತ",
+    "name":"ಹೆಸರು",
+    "age":"ವಯಸ್ಸು",
+    "phoneNumber":"ಫೋನ್ ಸಂಖ್ಯೆ",
+    "email":"ಇಮೇಲ್",
+    "createdOn":"ರಂದು ರಚಿಸಲಾಗಿದೆ",
+    "patientRecords": "ರೋಗಿಯ ದಾಖಲೆಗಳು"
+}

@@ -1,4 +1,4 @@
-
+/* 
 nav {
     padding-left: 5%;
     height: 10%;
@@ -7,7 +7,6 @@ nav {
 
 
 li {
-  
   display: inline-block;
   color: gray;
 }
@@ -15,4 +14,8 @@ li {
 
 a:hover{
   color: black;
+} */
+
+.example-spacer {
+  flex: 1 1 auto;
 }

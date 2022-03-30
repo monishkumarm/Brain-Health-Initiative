@@ -1,12 +1,12 @@
 <div class="card">
   <div class="card-header">
-    Patient Records
+    {{'patientRecords' | translate}}
   </div>
 
   <div class="card-body pt-0">
     <mat-form-field appearance="standard">
       <mat-label>Search</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+      <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
     
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
@@ -14,7 +14,7 @@
 
       <ng-container matColumnDef="firstName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
-        Name
+        {{'name' | translate}}
        </th>
         <td class="cursor-pointer" mat-cell *matCellDef="let element" routerLink="/patientDetails" [queryParams]="{id : element.id}"> 
             {{element.firstName}}
@@ -23,7 +23,7 @@
     
       <ng-container matColumnDef="age">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by age">
-          Age
+          {{'age' | translate}}
          </th>
          <td class="cursor-pointer" mat-cell *matCellDef="let element" routerLink="/patientDetails" [queryParams]="{id : element.id}"> 
           {{element.age}}
@@ -31,7 +31,7 @@
       </ng-container>
     
       <ng-container matColumnDef="phoneNumber">
-        <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+        <th mat-header-cell *matHeaderCellDef>{{'phoneNumber' | translate}}</th>
         <td class="cursor-pointer" mat-cell *matCellDef="let element" routerLink="/patientDetails" [queryParams]="{id : element.id}"> 
           {{element.phoneNumber}}
       </td>
@@ -39,7 +39,7 @@
     
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by email">
-          Email
+          {{'email' | translate}}
          </th>
          <td class="cursor-pointer" mat-cell *matCellDef="let element" routerLink="/patientDetails" [queryParams]="{id : element.id}"> 
           {{element.email}}
@@ -48,7 +48,7 @@
     
       <ng-container matColumnDef="createdOn">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by createdOn">
-          Created On
+          {{'createdOn' | translate}}
          </th>
          <td class="cursor-pointer" mat-cell *matCellDef="let element" routerLink="/patientDetails" [queryParams]="{id : element.id}"> 
           {{element.createdOn.substring(0,10)}}

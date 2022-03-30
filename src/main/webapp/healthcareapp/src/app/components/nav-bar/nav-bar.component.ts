@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -8,9 +9,11 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class NavBarComponent implements OnInit {
 
+  public languages = ['English','हिन्दी','ಕನ್ನಡ'];
+
   public isLoggedIn = false;
 
-  constructor(private loginService:LoginService){}
+  constructor(private loginService:LoginService, private translateService:TranslateService){}
 
   ngOnInit(): void {
     this.isLoggedIn = this.loginService.isLoggedIn(); 
@@ -21,4 +24,17 @@ export class NavBarComponent implements OnInit {
     location.reload();
   }
 
+  public selectLanguage(event: any){
+    var language = event.target.value;
+    var langFile = 'en-US';
+
+    if(language == 'हिन्दी'){
+      langFile = 'hi-IN';
+    }
+    else if(language == 'ಕನ್ನಡ'){
+      langFile = 'ka-IN';
+    }
+
+    this.translateService.use(langFile);
+  }
 }

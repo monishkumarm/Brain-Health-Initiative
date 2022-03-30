@@ -1,0 +1,16 @@
+{
+    "brainhealthinitiative": "Brain Health Initiative",
+    "login": "Login",
+    "username": "username",
+    "dashboard": "Dashboard",
+    "password": "password",
+    "addPatient": "Add Patient",
+    "logout": "Logout",
+    "welcomeMessage": "Welcome to Brain Health Initiative Application",
+    "name":"Name",
+    "age":"Age",
+    "phoneNumber":"Phone Number",
+    "email":"Email",
+    "createdOn":"Created On",
+    "patientRecords": "Patient Records"
+}

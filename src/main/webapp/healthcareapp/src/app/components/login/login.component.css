@@ -43,7 +43,7 @@ body {
   font-family: 'Comfortaa', cursive;
   text-transform: uppercase;
   outline: 0;
-  background: #482d4a;
+  background: #673ab7;
   width: 100%;
   border: 0;
   border-radius: 5px;
@@ -56,12 +56,12 @@ body {
 }
 
 .form button:active {
-  background: #3a243b;
+  background: #673ab7;
 }
 
 .form span {
   font-size: 75px;
-  color: #482d4a;
+  color: #673ab7;
 }
 .alert{
   position: relative;

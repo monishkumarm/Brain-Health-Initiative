@@ -1,0 +1,16 @@
+{
+    "brainhealthinitiative": "मस्तिष्क स्वास्थ्य पहल",
+    "login": "लॉग इन करें",
+    "username": "उपयोगकर्ता नाम",
+    "dashboard": "डैशबोर्ड",
+    "password": "पासवर्ड",
+    "addPatient": "रोगी जोड़ें",
+    "logout": "लॉग आउट",
+    "welcomeMessage": "मस्तिष्क स्वास्थ्य पहल एप्लीकेशन में आपका स्वागत है",
+    "name":"नाम",
+    "age":"उम्र",
+    "phoneNumber":"फ़ोन नंबर",
+    "email":"ईमेल",
+    "createdOn":"बनाया गया",
+    "patientRecords": "रोगी रिकॉर्ड"
+}
