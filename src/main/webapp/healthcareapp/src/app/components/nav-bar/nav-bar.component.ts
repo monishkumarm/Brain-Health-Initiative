@@ -34,7 +34,7 @@ export class NavBarComponent implements OnInit {
     else if(language == 'ಕನ್ನಡ'){
       langFile = 'ka-IN';
     }
-
+    localStorage.setItem("language", langFile);
     this.translateService.use(langFile);
   }
 }

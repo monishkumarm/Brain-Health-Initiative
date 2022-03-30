@@ -24,7 +24,6 @@ import { PatientService } from './services/patient.service';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { ConsultationDetailsComponent } from './components/consultation-details/consultation-details.component';
-// import { MatOption } from '@angular/material/core';
 import { AddConsultationDetailsComponent } from "./components/add-consultation-details/add-consultation-details.component";
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -36,6 +35,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { MatOptionModule } from '@angular/material/core';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -73,8 +73,9 @@ export function HttpLoaderFactory(http: HttpClient){
     MatIconModule,
     MatTooltipModule,
     MatMenuModule,
+    MatOptionModule,
     TranslateModule.forRoot({
-      defaultLanguage:'en-US',
+      defaultLanguage:localStorage.getItem('language') ?? 'en-US',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
