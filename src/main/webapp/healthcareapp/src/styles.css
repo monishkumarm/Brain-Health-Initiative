@@ -8,3 +8,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .cursor-pointer{
     cursor: pointer;
 }
+mat-toolbar {
+    height: 56px !important;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+}
