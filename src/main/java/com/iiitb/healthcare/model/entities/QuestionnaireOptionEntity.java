@@ -20,7 +20,7 @@ public class QuestionnaireOptionEntity {
     @OneToMany(mappedBy = "questionnaireOptionBySelectedOptionId")
     private Collection<PatientQuestionnaireAnswerEntity> patientQuestionnaireAnswersById;
     @ManyToOne
-    @JoinColumn(name = "QuestionId", referencedColumnName = "Id", insertable=false, updatable=false)
+    @JoinColumn(name = "questionnaireByQuestionId", referencedColumnName = "Id")
     private QuestionnaireEntity questionnaireByQuestionId;
 
     public Long getId() {

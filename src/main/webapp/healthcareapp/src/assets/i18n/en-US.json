@@ -12,5 +12,11 @@
     "phoneNumber":"Phone Number",
     "email":"Email",
     "createdOn":"Created On",
-    "patientRecords": "Patient Records"
+    "patientRecords": "Patient Records",
+    "patientHistory": "Patient History",
+    "newConsultationRecord": "New Consultation Record",
+    "complaint": "Complaint Details",
+    "diagnosisType":"Diagnosis Type",
+    "improvementStatus": "Improvement Status"
+
 }

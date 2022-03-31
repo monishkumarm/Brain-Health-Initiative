@@ -31,11 +31,12 @@ import  { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
 import {MatSortModule } from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
-import {MatMenuModule} from '@angular/material/menu'; 
+import {MatMenuModule} from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { MatOptionModule } from '@angular/material/core';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -74,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient){
     MatTooltipModule,
     MatMenuModule,
     MatOptionModule,
+    MatTabsModule,
     TranslateModule.forRoot({
       defaultLanguage:localStorage.getItem('language') ?? 'en-US',
       loader: {

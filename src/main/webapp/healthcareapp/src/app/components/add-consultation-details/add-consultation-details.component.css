@@ -1,10 +1,7 @@
 .add-consultation-cont {
   width: 90%;
-  margin-top: 20px;
-  border-style: solid;
-  border-color: black;
   border-radius: 5px;
-  background-color:rgb(125, 248, 248);
+  box-shadow: black 0px -1px 13px -6px;
 }
 .header{
   background-color: blueviolet  ;
@@ -16,6 +13,7 @@
   margin: 5%;
   margin-top: 5%;
   margin-bottom: 8%;
+  line-height: 1.5;
 }
 
 .record{
@@ -31,7 +29,6 @@
 }
 
 .recordBody{
-  background-color: white;
   border-bottom-left-radius: 5px ;
   border-bottom-right-radius: 5px ;
 }
@@ -43,6 +40,12 @@
 }
 
 .margin {
- 
+
   margin: 0 12px;
+}
+
+.line {
+  border-bottom: solid blueviolet;
+  border-bottom-width: 3.1px;
+  width: fit-content;
 }

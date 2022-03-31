@@ -12,5 +12,10 @@
     "phoneNumber":"ಫೋನ್ ಸಂಖ್ಯೆ",
     "email":"ಇಮೇಲ್",
     "createdOn":"ರಂದು ರಚಿಸಲಾಗಿದೆ",
-    "patientRecords": "ರೋಗಿಯ ದಾಖಲೆಗಳು"
+    "patientRecords": "ರೋಗಿಯ ದಾಖಲೆಗಳು",
+    "patientHistory": "ರೋಗಿಯ ಇತಿಹಾಸ",
+    "newConsultationRecord": "ಹೊಸ ಸಮಾಲೋಚನೆ ದಾಖಲೆ",
+    "complaint": "ದೂರು ವಿವರಗಳು",
+    "diagnosisType":"ರೋಗನಿರ್ಣಯ ಪ್ರಕಾರ",
+    "improvementStatus": "ಸುಧಾರಣೆ ಸ್ಥಿತಿ"
 }

@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { setOptions  } from '@mobiscroll/angular';
-
 import { ActivatedRoute } from '@angular/router';
 import { PatientService } from 'src/app/services/patient.service';
-import th from '@mobiscroll/angular/dist/js/i18n/th';
 import { UserService } from 'src/app/services/user.service';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators'
+import {MatTabsModule} from '@angular/material/tabs';
 
 setOptions({
   theme: 'ios',
@@ -20,7 +17,7 @@ setOptions({
 })
 export class AddConsultationDetailsComponent implements OnInit {
 
-  
+
   medicine:any;
   consultationDetails ={
     complaint:'',
@@ -63,12 +60,12 @@ export class AddConsultationDetailsComponent implements OnInit {
   }
 
   search = {
-    option : '1',
+    option : '4',
     value : '',
   };
 
   Specilist:any;
- 
+
   icdOptions = [
   "A00-B99: Certain infectious and parasitic diseases",
   "C00-D49: Neoplasms",
@@ -97,16 +94,16 @@ export class AddConsultationDetailsComponent implements OnInit {
   constructor(private activatedroute: ActivatedRoute, private patientService:PatientService,private userService:UserService) { }
 
   ngOnInit(): void {
-    
+
 
     console.log("in init of add consulatation");
     this.medicine = [];
     this.consultationDetails.medicine = this.medicine;
-    
+
     this.activatedroute.queryParams.subscribe(
       (params:any) => {
       console.log(params); // { orderby: "price" }
-      this.search.value = params['abhaId'];
+      this.search.value = params['id'];
       }
     );
 
@@ -121,16 +118,16 @@ export class AddConsultationDetailsComponent implements OnInit {
           }
           this.Specilist.push(specilist);
         }
-        
+
       },
       (error:any)=>{
         console.log(error);
       }
     );
-      
-  
-  
-    
+
+
+
+
     this.patientService.getSearchPatients(this.search).subscribe(
       (response:any) => {
         // console.log(response);
@@ -163,7 +160,7 @@ export class AddConsultationDetailsComponent implements OnInit {
 
   }
 
- 
+
   onSubmit(){
     console.log(this.consultationDetails);
     this.patientService.addConsultion(this.consultationDetails,this.patientDetails.ABHAID).subscribe(
@@ -183,8 +180,8 @@ export class AddConsultationDetailsComponent implements OnInit {
       isMorning:false,
       isAfternoon:false,
       isNight:false
-    }   
-        
+    }
+
     this.medicine.push(med);
     console.log(this.medicine);
   }

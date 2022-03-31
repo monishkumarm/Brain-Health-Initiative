@@ -1,3 +1,7 @@
+table {
+  width: 100%;
+}
+/* 
 .header{
     background-color:  blueviolet ;
     border-radius: 5px;
@@ -6,17 +10,10 @@
 
   .dash-cont {
     width: 90%;
-    margin-top: 20px;
-    border-style: solid;
-    border-color: black;
     border-radius: 5px;
-    background-color:rgb(125, 248, 248);
+    box-shadow: black 0px -1px 13px -6px;
   }
 
-  .record{
-    /* border: 1px solid black; */
-
-  }
 
   .recordHead{
     background-color: blueviolet ;
@@ -37,4 +34,4 @@
 
   .time {
     text-align: right;
-  }
+  } */

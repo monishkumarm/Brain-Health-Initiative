@@ -12,5 +12,10 @@
     "phoneNumber":"फ़ोन नंबर",
     "email":"ईमेल",
     "createdOn":"बनाया गया",
-    "patientRecords": "रोगी रिकॉर्ड"
+    "patientRecords": "रोगी रिकॉर्ड",
+    "patientHistory": "रोगी इतिहास",
+    "newConsultationRecord": "नया परामर्श रिकॉर्ड",
+    "complaint": "शिकायत विवरण",
+    "diagnosisType":"निदान प्रकार",
+    "improvementStatus": "सुधार की स्थिति"
 }

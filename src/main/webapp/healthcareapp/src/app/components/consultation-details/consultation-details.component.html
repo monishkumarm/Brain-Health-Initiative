@@ -1,145 +1,203 @@
-<div class="bootstrap-wrapper ">
-    <div class="container text-center mt-2 dash-cont">
-      <div class="row mt-3" >
-        <div class="col-2"></div>
-
-        <div class="col-4 pt-2 text-center header mt-2">
-            <h1 >Patient Consultation Records</h1>
-        </div>
-        <div class="col-sm-6 pt-2 mt-2 text-center" >
-            <button routerLink="/addConsultation" [queryParams]="{abhaId : patientDetails.ABHAID}" style="align-content: center;width: 30%" mat-raised-button color="primary" >
-                Add New Consultation
-            </button>
-        </div>
-      </div>
-
-      <div class="mt-2">
-        <div class="p-3 record"*ngFor="let record of consultationRecords,let idx=index;" >
-          <div class=" row pt-2 recordHead">
-            <span class="col-6 abhaID" >
-              <p><strong> ID : {{record.id}}</strong></p>
-            </span>
-            <span class="col-6 time">
-              <p><strong> Appointment Date : {{record.appointmentTime.substring(0,10)}}</strong></p>
-            </span>
-          </div>
-          <div *ngIf="!record.isExpand" class="row recordBody text-left">
-            <div class="row">
-              <span class="pt-3 col-3" style="text-align: left;">
-                <p><strong>Complaint :&nbsp;</strong> {{record.complaintDetail.complaint}}</p>
-              </span>
-              <span class="pt-3 col-3">
-                <p><strong>Diagnosis Type :&nbsp;</strong>{{record.diagnosisTypeLuByDiagnosisTypeId.name}}</p>
-              </span >
-              <span class="pt-3 col-4">
-                <p><strong>Treatment Instruction :&nbsp;</strong>{{record.treatmentInstruction}}</p>
-              </span >
-              <span class="p-2 col-2" style="text-align: right;">
-                <button (click)="change(idx)"  mat-raised-button color="primary">Expand</button>
-              </span>
-            </div>
-          </div>
-
-          
-          <div  *ngIf="record.isExpand" class="row recordBody p-4" >
-            <span class="mt-3" style="text-align: left;"><strong>Chief Complaints</strong></span>
-            <hr>
-            <div class="row">
-              <span class="col-3" style="text-align: left;">
-                <p><strong>Complaint :&nbsp;</strong> {{record.complaintDetail.complaint}}</p>
-              </span>
-              <span class="col-3">
-                <p><strong>Examination :&nbsp;</strong>{{record.complaintDetail.examination}}</p>
-              </span >
-              <span class="col-3">
-                <p><strong>History of illness :&nbsp;</strong>{{record.complaintDetail.history}}</p>
-              </span >
-              <span class="col-3">
-                <p><strong>Illness Summary :&nbsp;</strong>{{record.complaintDetail.illnessSummary}}</p>
-              </span >
-            </div>
-            
-            <span class="mt-3" style="text-align: left;"><strong>Diagnosis</strong></span>
-            <hr>
-            <div class="row">
-              <span class="col-2" style="text-align: left;">
-                <p><strong>Type :&nbsp;</strong> {{record.diagnosisTypeLuByDiagnosisTypeId.name}}</p>
-              </span>
-              <span class="col-6">
-                <p><strong>ICD10 code :&nbsp;</strong>{{record.icdDetail.icd10}}</p>
-              </span >
-              <span class="col-4">
-                <p><strong>ICD Description :&nbsp;</strong>{{record.icdDetail.icdDescription}}</p>
-              </span >
-            </div>
-            
-            <span class="mt-3" style="text-align: left;"><strong>Treatment Plan</strong></span>
-            <hr>
-            <div class="row">
-              <span class="col-auto" style="text-align: left;">
-                <p><strong>Improvement Status :&nbsp;</strong> {{record.improvementStatusLuByImprovementStatusId.name}}</p>
-              </span>
-            </div>
-            <div class="row" *ngFor="let med of record.medicineDetail.medicines">
-              <span class="col-4" style="text-align: left;">
-                <p><strong>Medicine Name :&nbsp;</strong>{{med.medicineName}}</p>
-              </span >
-              <span class="col-2" style="text-align: left;">
-                <p><strong>Dosage :&nbsp;</strong>{{med.Dosage}}</p>
-              </span >
-              <span class="col-2" style="text-align: left;">
-                <p style="display: inline-block;"><strong>Timing : </strong></p>
-                <p *ngIf="med.isMorning" style="display: inline-block;">&nbsp;1&nbsp;</p>
-                <p *ngIf="!med.isMorning" style="display: inline-block;">&nbsp;0&nbsp;</p>
-                <p *ngIf="med.isAfternoon" style="display: inline-block;">&nbsp;- 1</p>
-                <p *ngIf="!med.isAfternoon" style="display: inline-block;">&nbsp;- 0</p>
-                <p *ngIf="med.isNight" style="display: inline-block;">&nbsp;- 1</p>
-                <p *ngIf="!med.isNight" style="display: inline-block;">&nbsp;- 0</p>
-              </span>
-            </div>
-            <div class="row">
-              <span class="col-3" style="text-align: left;">
-                <p><strong>Medicine Duration :&nbsp;</strong> {{record.medicineDetail.medicineDuration}}</p>
-              </span>
-              <span class="col-3" style="text-align: left;">
-                <p><strong>Remarks :&nbsp;</strong> {{record.medicineDetail.remarks}}</p>
-              </span>
-            
-            </div>
-            
-            <div class="row">
-              <span class="col-auto" style="text-align: left;">
-                <p><strong>Treatment Instruction:</strong> {{record.treatmentInstruction}}</p>
-              </span>
-            </div>
-
-            <span class="mt-3" style="text-align: left;"><strong>Follow up Recommendations</strong></span>
-            <hr>
-            <div class="row">
-              <span class="col-auto" style="text-align: left;">
-                <p><strong>Followup Date :</strong> {{record.followUpDetail.followUp}}</p>
-              </span>
-              <span class="col-auto">
-                <p><strong>Reffer To : </strong>Dr. {{record.userByDoctorId.firstName}} {{record.userByDoctorId.lastName}}</p>
-              </span >
-              <span class="col-auto" >
-                <p style="display: inline-block;"><strong>Other Followup :&nbsp;</strong></p>
-                <p *ngIf="record.followUpDetail.moveToIp" style="display: inline-block;">Moto to IP,&nbsp;</p>
-                <p *ngIf="record.followUpDetail.referSos" style="display: inline-block;"> Refer to SOS</p>
-                
-              </span>
-            </div>
-
-            <div class="p-2 text-center " >
-              <button (click)="change(idx)"  mat-raised-button color="primary">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-     
+<div class="card">
+  <div class="row card-header">
+    <div class="col-4 fs-4 pt-2">
+      {{'patientHistory' | translate}}
     </div>
-
-
+    <div class="col-8" style="text-align: right;">  
+    <button type="button" class="btn-sm float-right" routerLink="/addConsultation" [queryParams]="{id : patientDetails.Id}" mat-raised-button color="primary" >{{'newConsultationRecord' | translate}}</button>
+    </div>
   </div>
+  <!-- {{dataSource.data | json}} -->
+
+
+  <div class="card-body pt-">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8"> 
+   <ng-container matColumnDef="complaint">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+          {{'complaint' | translate}}
+       </th>
+        <td class="cursor-pointer" mat-cell *matCellDef="let element"> 
+          {{element.complaintDetail.complaint }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="diagnosisType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+          {{'diagnosisType' | translate}}
+       </th>
+        <td class="cursor-pointer" mat-cell *matCellDef="let element" routerLink="/patientDetails" [queryParams]="{id : element.id}"> 
+          {{element.diagnosisTypeLuByDiagnosisTypeId.name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="improvementStatus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+          {{'improvementStatus' | translate}}
+       </th>
+        <td class="cursor-pointer" mat-cell *matCellDef="let element" routerLink="/patientDetails" [queryParams]="{id : element.id}"> 
+          {{element.improvementStatusLuByImprovementStatusId.name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdOn">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+          {{'createdOn' | translate}}
+       </th>
+        <td class="cursor-pointer" mat-cell *matCellDef="let element" routerLink="/patientDetails" [queryParams]="{id : element.id}"> 
+          {{element.appointmentTime.substring(0,10) }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+
+
+    <!-- <table class="table" style="table-layout: fixed;">
+      <thead>
+        <th>Index</th>
+        <th>Date</th>
+        <th>complaint</th>
+        <th>Diagnosis Type</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of displayRecord,let idx=index;" >
+          <td *ngIf="!record.isExpand">{{record.id}}</td>
+          <td *ngIf="!record.isExpand">{{record.appointmentTime.substring(0,10)}}</td>
+          <td *ngIf="!record.isExpand">{{record.complaintDetail.complaint}}</td>
+          <td *ngIf="!record.isExpand">{{record.diagnosisTypeLuByDiagnosisTypeId.name}}</td>
+          <td *ngIf="!record.isExpand"><button type="button" (click)="change(idx)" class="btn btn-success btn-sm"  color="primary">&nbsp;&nbsp;View&nbsp;&nbsp;</button></td>
+          <td *ngIf="record.isExpand" colspan="5">
+            <div>
+              <div class=" row pt-2 recordHead">
+                <span class="col-6 abhaID" >
+                  <p><strong> ID : {{record.id}}</strong></p>
+                </span>
+                <span class="col-6 time">
+                  <p><strong> Appointment Date : {{record.appointmentTime.substring(0,10)}}</strong></p>
+                </span>
+              </div>
+              <div class="row recordBody bg-light p-4" >
+                <span class="mt-3" style="text-align: left;"><strong>Chief Complaints</strong></span>
+                <hr>
+                <div class="row">
+                  <span class="col-3" style="text-align: left;">
+                    <p><strong>Complaint :&nbsp;</strong> {{record.complaintDetail.complaint}}</p>
+                  </span>
+                  <span class="col-3">
+                    <p><strong>Examination :&nbsp;</strong>{{record.complaintDetail.examination}}</p>
+                  </span >
+                  <span class="col-3">
+                    <p><strong>History of illness :&nbsp;</strong>{{record.complaintDetail.history}}</p>
+                  </span >
+                  <span class="col-3">
+                    <p><strong>Illness Summary :&nbsp;</strong>{{record.complaintDetail.illnessSummary}}</p>
+                  </span >
+                </div>
+
+                <span class="mt-3" style="text-align: left;"><strong>Diagnosis</strong></span>
+                <hr>
+                <div class="row">
+                  <span class="col-2" style="text-align: left;">
+                    <p><strong>Type :&nbsp;</strong> {{record.diagnosisTypeLuByDiagnosisTypeId.name}}</p>
+                  </span>
+                  <span class="col-6">
+                    <p><strong>ICD10 code :&nbsp;</strong>{{record.icdDetail.icd10}}</p>
+                  </span >
+                  <span class="col-4">
+                    <p><strong>ICD Description :&nbsp;</strong>{{record.icdDetail.icdDescription}}</p>
+                  </span >
+                </div>
+
+                <span class="mt-3" style="text-align: left;"><strong>Treatment Plan</strong></span>
+                <hr>
+                <div class="row">
+                  <span class="col-auto" style="text-align: left;">
+                    <p><strong>Improvement Status :&nbsp;</strong> {{record.improvementStatusLuByImprovementStatusId.name}}</p>
+                  </span>
+                </div>
+                <div class="row" *ngFor="let med of record.medicineDetail.medicines">
+                  <span class="col-4" style="text-align: left;">
+                    <p><strong>Medicine Name :&nbsp;</strong>{{med.medicineName}}</p>
+                  </span >
+                  <span class="col-2" style="text-align: left;">
+                    <p><strong>Dosage :&nbsp;</strong>{{med.Dosage}}</p>
+                  </span >
+                  <span class="col-2" style="text-align: left;">
+                    <p style="display: inline-block;"><strong>Timing : </strong></p>
+                    <p *ngIf="med.isMorning" style="display: inline-block;">&nbsp;1&nbsp;</p>
+                    <p *ngIf="!med.isMorning" style="display: inline-block;">&nbsp;0&nbsp;</p>
+                    <p *ngIf="med.isAfternoon" style="display: inline-block;">&nbsp;- 1</p>
+                    <p *ngIf="!med.isAfternoon" style="display: inline-block;">&nbsp;- 0</p>
+                    <p *ngIf="med.isNight" style="display: inline-block;">&nbsp;- 1</p>
+                    <p *ngIf="!med.isNight" style="display: inline-block;">&nbsp;- 0</p>
+                  </span>
+                </div>
+                <div class="row">
+                  <span class="col-3" style="text-align: left;">
+                    <p><strong>Medicine Duration :&nbsp;</strong> {{record.medicineDetail.medicineDuration}}</p>
+                  </span>
+                  <span class="col-3" style="text-align: left;">
+                    <p><strong>Remarks :&nbsp;</strong> {{record.medicineDetail.remarks}}</p>
+                  </span>
+
+                </div>
+
+                <div class="row">
+                  <span class="col-auto" style="text-align: left;">
+                    <p><strong>Treatment Instruction:</strong> {{record.treatmentInstruction}}</p>
+                  </span>
+                </div>
+
+                <span class="mt-3" style="text-align: left;"><strong>Follow up Recommendations</strong></span>
+                <hr>
+                <div class="row">
+                  <span class="col-auto" style="text-align: left;">
+                    <p><strong>Followup Date :</strong> {{record.followUpDetail.followUp}}</p>
+                  </span>
+                  <span class="col-auto">
+                    <p><strong>Reffer To : </strong>Dr. {{record.userByDoctorId.firstName}} {{record.userByDoctorId.lastName}}</p>
+                  </span >
+                  <span class="col-auto" >
+                    <p style="display: inline-block;"><strong>Other Followup :&nbsp;</strong></p>
+                    <p *ngIf="record.followUpDetail.moveToIp" style="display: inline-block;">Moto to IP,&nbsp;</p>
+                    <p *ngIf="record.followUpDetail.referSos" style="display: inline-block;"> Refer to SOS</p>
+
+                  </span>
+                </div>
+                <div class="p-2 text-center " >
+                  <button (click)="change(idx)"  mat-raised-button color="primary">Close</button>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+      </tbody> -->
+    <!-- </table> -->
+  </div>
+
+  <nav *ngIf="numbers.length > 1" >
+    <ul class="pagination justify-content-center">
+      <li id="prev" class="page-item" [ngClass]="{ 'disabled': options.page === 1 }">
+        <a class="page-link"   (click)="prev()">Previous</a>
+      </li>
+      <ng-container >
+        <li class="page-item"   *ngFor="let number of numbers" [ngClass]="{ 'active': options.page === number }">
+          <a class="page-link"   (click)="to(number)">{{number}}</a>
+        </li>
+      </ng-container>
+      <li id="next" class="page-item" [ngClass]="{ 'disabled': options.page === numbers.length }">
+        <a class="page-link"  (click)="next()" disabled="true">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>
+
+
+
+
+
