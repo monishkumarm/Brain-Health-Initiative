@@ -5,7 +5,7 @@
 
   <div class="card-body pt-0">
     <mat-form-field appearance="standard">
-      <mat-label>Search</mat-label>
+      <mat-label>{{'search' | translate }}</mat-label>
       <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
     <!-- {{dataSource.data | json}} -->
