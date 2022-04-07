@@ -53,12 +53,12 @@
               <div class="row m-2" >
               <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label style="color: black;">Type</mat-label>
+                  <mat-label style="color: black;">{{'Type' | translate}}</mat-label>
                   <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.type" name="type" id="type" required>
-                    <mat-option value="1">Differential</mat-option>
-                    <mat-option value="2">Provisional</mat-option>
-                    <mat-option value="3">Tentative</mat-option>
-                    <mat-option value="4">Final</mat-option>
+                    <mat-option value="1">{{'Differential' | translate}}</mat-option>
+                    <mat-option value="2">{{'Provisional' | translate}}</mat-option>
+                    <mat-option value="3">{{'Tentative' | translate}}</mat-option>
+                    <mat-option value="4">{{'Final' | translate}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -66,7 +66,7 @@
               <div class="row m-2">
                 <div class="col-sm-6 form-group">
                   <mat-form-field style="width: 100%;" appearance="outline">
-                    <mat-label style="color: black;">ICD10 Code</mat-label>
+                    <mat-label style="color: black;">{{'ICD10 Code' | translate}}</mat-label>
                     <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.icd10" name="icd10" id="icd10" required>
                       <mat-option *ngFor="let option of icdOptions" [value]="option">{{option}}</mat-option>
                     </mat-select>
@@ -75,7 +75,7 @@
 
                 <div class="col-sm-6 form-group">
                   <mat-form-field style="width: 100%;" appearance="outline">
-                    <mat-label >ICD Description</mat-label>
+                    <mat-label >{{'ICD Description' | translate}}</mat-label>
                     <textarea [(ngModel)]="consultationDetails.icdDescription" name="icdDescription" id="icdDescription" type="text" class="form-control" required matInput></textarea>
                   </mat-form-field>
                 </div>
@@ -88,11 +88,11 @@
             <div class="row m-2" >
               <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label style="color: black;">Improvement status</mat-label>
+                  <mat-label style="color: black;">{{'Improvement status' | translate}}</mat-label>
                   <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.improvementStatus" name="improvementStatus" id="improvementStatus">
-                    <mat-option value="1">Condition Improved</mat-option>
-                    <mat-option value="2">Condition Worsened</mat-option>
-                    <mat-option value="3">Condition unchanged</mat-option>
+                    <mat-option value="1">{{'Condition Improved' | translate}</mat-option>
+                    <mat-option value="2">{{'Condition Worsened' | translate}}</mat-option>
+                    <mat-option value="3">{{'Condition unchanged' | translate}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -100,7 +100,7 @@
 
             <div class="row m-2">
              <span class="col-2"><p class="line fs-3 pb-2">{{'medicine' | translate}}</p></span>
-             <span class="col-sm-4">  <button type="button" (click)="addMedicine()"   mat-raised-button color="primary" style="margin-left: 15px;">Add</button></span>
+             <span class="col-sm-4">  <button type="button" (click)="addMedicine()"   mat-raised-button color="primary" style="margin-left: 15px;">{{'Add' | translate}}</button></span>
             </div>
 
             <div *ngFor="let med of medicine,let idx=index;" class="row m-2">
@@ -108,37 +108,37 @@
               <br>
               <div class="col-sm-3 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label >Medicine Name </mat-label>
+                  <mat-label >{{'Medicine Name' | translate}} </mat-label>
                   <input [(ngModel)]="med.medicineName"  name="med{{med.medicineName}}" #name="ngModel" id="medicineName{{idx}}" type="text" class="form-control" required matInput>
                 </mat-form-field>
               </div>
               <div class="col-sm-3 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label >Dosage</mat-label>
+                  <mat-label >{{'Dosage' | translate}}</mat-label>
                   <input [(ngModel)]="med.Dosage" name="med{{med.Dosage}}" #name="ngModel" id="dosage{{idx}}" type="text" class="form-control" required matInput>
                 </mat-form-field>
               </div>
               <div class="col-sm-4 mt-3 form-group">
                 <!-- <mat-form-field style="width: 100%;" appearance="outline"> -->
-                  <mat-checkbox [(ngModel)]="med.isMorning" name="med{{med.isMorning}}" #name="ngModel" id="isMorning{{idx}}" class="form-control margin" class="margin" color="primary" >Morning</mat-checkbox>
-                  <mat-checkbox [(ngModel)]="med.isAfternoon" name="med{{med.isAfternoon}}" #name="ngModel" id="isAfternoon{{idx}}"  class="form-control margin" class="margin" color="primary">Afternoon</mat-checkbox>
-                  <mat-checkbox [(ngModel)]="med.isNight" name="med{{med.isNight}}" #name="ngModel" id="isNight{{idx}}" class="form-control margin"class="margin" color="primary">Night</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="med.isMorning" name="med{{med.isMorning}}" #name="ngModel" id="isMorning{{idx}}" class="form-control margin" class="margin" color="primary" >{{'Morning' | translate}}</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="med.isAfternoon" name="med{{med.isAfternoon}}" #name="ngModel" id="isAfternoon{{idx}}"  class="form-control margin" class="margin" color="primary">{{'Afternoon' | translate}}</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="med.isNight" name="med{{med.isNight}}" #name="ngModel" id="isNight{{idx}}" class="form-control margin"class="margin" color="primary">{{'Night' | translate}}</mat-checkbox>
                 <!-- </mat-form-field> -->
               </div>
               <div class="col-sm-2 mt-2">
-                <button type="button"  (click)="removeMedicine(idx)"   mat-raised-button color="accent" style="margin-left: 15px;">Remove</button>
+                <button type="button"  (click)="removeMedicine(idx)"   mat-raised-button color="accent" style="margin-left: 15px;">{{'Remove' | translate}}</button>
               </div>
             </div>
             <div class="row m-2" *ngIf="medicine?.length > 0">
               <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;"  appearance="outline">
-                  <mat-label >Medicine duration</mat-label>
+                  <mat-label >{{'Medicine duration' | translate}}</mat-label>
                   <input [(ngModel)]="consultationDetails.medicineDuration" name="medicineDuration" id="medicineDuration" type="text" class="form-control" required matInput>
                 </mat-form-field>
               </div>
               <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;"  appearance="outline">
-                  <mat-label >Remarks</mat-label>
+                  <mat-label >{{'Remarks' | translate}}</mat-label>
                   <input [(ngModel)]="consultationDetails.remarks" name="remarks" id="remarks" type="text" class="form-control" required matInput>
                 </mat-form-field>
               </div>
@@ -146,7 +146,7 @@
             <div class="row m-2">
               <div class="col-sm-6 form-group ">
                 <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label >Treatment Instructions</mat-label>
+                  <mat-label >{{'Treatment Instructions' | translate}}</mat-label>
                   <textarea [(ngModel)]="consultationDetails.treatmentInstructions" name="treatmentInstructions" id="treatmentInstructions" class="md-textarea form-control" rows="2" required matInput></textarea>
                 </mat-form-field>
               </div>
@@ -158,13 +158,13 @@
             <div class="row m-2" >
               <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label>Follow up</mat-label>
+                  <mat-label>{{'Follow up' | translate}}</mat-label>
                   <input [(ngModel)]="consultationDetails.followup" name="followup" id="followup" type="date" class="form-control" required matInput>
                 </mat-form-field>
               </div>
               <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label style="color: black;">Refer To</mat-label>
+                  <mat-label style="color: black;">{{'Refer To' | translate}}</mat-label>
                   <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.refer" name="refer" id="refer">
                     <mat-option *ngFor="let specilist of Specilist" [value]="specilist.id">
                       {{specilist.name}}
@@ -176,19 +176,19 @@
             </div>
 
             <div class="row m-2">
-              <span><p class="line fs-3 pb-2">Other Recommendations</p></span>
+              <span><p class="line fs-3 pb-2">{{'Other Recommendations' | translate}}</p></span>
 
              </div>
             <div class="row m-2">
               <div class="col-sm-3  form-group">
                 <h2>
-                 <mat-checkbox [(ngModel)]="consultationDetails.moveToIp" name="moveToIp" #moveToIp="ngModel" id="moveToIp" class="form-control margin" class="margin" color="primary" labelPosition="before"><strong>Move to Ip</strong></mat-checkbox>
+                 <mat-checkbox [(ngModel)]="consultationDetails.moveToIp" name="moveToIp" #moveToIp="ngModel" id="moveToIp" class="form-control margin" class="margin" color="primary" labelPosition="before"><strong>{{'Move to Ip' | translate}}</strong></mat-checkbox>
                 </h2>
               </div>
 
               <div class="col-sm-3  form-group">
                 <h2>
-                  <mat-checkbox [(ngModel)]="consultationDetails.referSos" name="referSos" #referSos="ngModel" id="referSos" class="form-control margin" class="margin" color="primary" labelPosition="before" ><strong>Refer Sos  </strong></mat-checkbox>
+                  <mat-checkbox [(ngModel)]="consultationDetails.referSos" name="referSos" #referSos="ngModel" id="referSos" class="form-control margin" class="margin" color="primary" labelPosition="before" ><strong>{{'Refer Sos' | translate}}</strong></mat-checkbox>
                 </h2>
               </div>
             </div>
@@ -196,7 +196,7 @@
             <div class="row pb-3 m-2">
               <div class="col-sm-12 text-center" >
                 <button type="submit"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
-                  Submit
+                  {{'Submit' | translate}}
                 </button>
               </div>
             </div>
