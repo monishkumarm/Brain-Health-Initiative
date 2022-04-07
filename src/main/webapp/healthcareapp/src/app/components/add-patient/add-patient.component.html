@@ -1,18 +1,18 @@
-<div class="bootstrap-wrapper bg-light p-4" >
-    <div class="container  mt-3 p-3 bg-white add-patient-cont">
-      <div class="row mt-4">
-        <div class="col-3"></div>
-        <div class="col-6 pt-2 text-center header mt-2">
-        <h1>Add Patients Records</h1>
-        </div>
-        <div class="col-3"></div>
-      </div>
+<div class="card">
+  <div class="row card-header">
+    <div class="col-4 fs-4 p-2">
+      {{'newPatientRecord' | translate}}
+    </div>
+  </div>
 
-      <div>
-        <form #patientForm="ngForm" (ngSubmit)="onSubmit()" class="p-5"novalidate>
-          <span><strong><h1>Identity information</h1></strong></span>
-          <hr>
-          <div class="row">
+  <div class="card-body">
+    <form #patientForm="ngForm" (ngSubmit)="onSubmit()" >
+      <div class="container bg-white mt-3">
+        <div >
+          <mat-tab-group  animationDuration="1000ms">
+            <mat-tab  label="{{'identityInformation' | translate }}">
+            <div class="bg-light">
+            <div class="row m-2" >
             <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
                     <mat-label for="abhaID">ABHA ID</mat-label>
@@ -22,31 +22,32 @@
                     <div *ngIf="abhaId.errors">ABHA id Invalid</div>
                 </div>
             </div>
+            </div>
+            </div>
+            </mat-tab>  
+          
 
-          </div>
-
-          <br>
-          <span><strong><h1>Basic information</h1></strong></span>
-          <hr>
-          <div class="row">
-            <div class="col-sm-6 form-group">
+         
+            <mat-tab label="{{'basicInformation' | translate }}">
+              <div class="bg-light">
+              <div class="row m-2" >
+              <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
                     <mat-label for="fname">First Name</mat-label>
                     <input [(ngModel)]="patientDetails.fname" name="fname" id="fname" type="text" class="form-control" required matInput>
                 </mat-form-field>
+              </div>
 
-            </div>
-
-            <div class="col-sm-6 form-group">
+              <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
                     <mat-label for="lname">Last Name</mat-label>
                     <input [(ngModel)]="patientDetails.lname" name="lname" id="lname" type="text" class="form-control" required matInput>
                 </mat-form-field>
-            </div>
-          </div>
+              </div>
+              </div>
 
-          <div class="row">
-            <div class="col-sm-6 form-group">
+              <div class="row m-2">
+              <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
                     <mat-label style="color: black;">Gender</mat-label>
                     <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="patientDetails.gender" name="gender" id="gender">
@@ -55,19 +56,19 @@
                     <mat-option value="3">Other</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>
+              </div>
 
-            <div class="col-sm-6 form-group">
+              <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
                     <mat-label for="age">Age</mat-label>
                     <input [(ngModel)]="patientDetails.age" name="age" id="age" type="number" class="form-control"    matInput>
                 </mat-form-field>
 
-            </div>
-          </div>
+              </div>
+              </div>
 
-          <div class="row">
-            <div class="col-sm-6 form-group">
+              <div class="row m-2">
+              <div class="col-sm-6 form-group">
                 <mat-form-field style="width: 100%;" appearance="outline">
                     <mat-label for="language">Language</mat-label>
                     <mat-select [(ngModel)]="patientDetails.lan" name="language" id="language" type="text" class="form-control">
@@ -76,9 +77,9 @@
                         <mat-option value="Other">Other</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>
+              </div>
 
-            <div class="col-sm-6 form-group">
+              <div class="col-sm-6 form-group">
               <mat-form-field  style="width: 100%;" appearance="outline">
                 <mat-label for="education">Education</mat-label>
                 <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="patientDetails.edu" name="education" id="education">
@@ -88,112 +89,120 @@
                   <mat-option value="Graduate">Graduate</mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
+              </div>
 
-          </div>
-          <div class="row">
-            <div class="col-sm-6 form-group">
+              </div>
+              <div class="row m-2">
+              <div class="col-sm-6 form-group">
               <mat-form-field  style="width: 100%;" appearance="outline">
                 <mat-label for="occupation">Occupation</mat-label>
                 <input [(ngModel)]="patientDetails.occ" name="occupation" id="occupation" type="text" class="form-control" matInput>
               </mat-form-field>
-            </div>
-            <div class="col-sm-6" ></div>
-          </div>
-          <br>
-          <span><strong><h1>Contact information</h1></strong></span>
-          <hr>
-          <div class="row">
-            <div class="col-sm-6 form-group">
+              </div>
+              <div class="col-sm-6" ></div>
+              </div>
+              </div>
+            </mat-tab>
+              
+              
+            <mat-tab label="{{'contactInformation' | translate}}">
+              <div class="bg-light">
+              <div class="row m-2" >  
+              <div class="col-sm-6 form-group">
               <mat-form-field style="width: 100%;"  appearance="outline">
                 <mat-label for="email">Email</mat-label>
                 <input [(ngModel)]="patientDetails.email" name="email" id="email" type="text" class="form-control" matInput>
               </mat-form-field>
-            </div>
+              </div>
 
-            <div class="col-sm-6 form-group">
+              <div class="col-sm-6 form-group">
               <mat-form-field style="width: 100%;"  appearance="outline">
                 <mat-label for="phone">Phone number</mat-label>
                 <input [(ngModel)]="patientDetails.phone" name="phone" id="phone" type="text" class="form-control" matInput>
               </mat-form-field>
-            </div>
-          </div>
+              </div>
+              </div>
 
-          <div class="row">
-            <div class="col-sm-6 form-group">
+              <div class="row m-2">
+              <div class="col-sm-6 form-group">
               <mat-form-field style="width: 100%;"  appearance="outline">
                 <mat-label for="addLine1">Address line 1</mat-label>
                 <input [(ngModel)]="patientDetails.addLine1" name="addLine1" id="addLine1" type="text" class="form-control" matInput>
               </mat-form-field>
-            </div>
+              </div>
 
-            <div class="col-sm-6 form-group">
+              <div class="col-sm-6 form-group">
               <mat-form-field  style="width: 100%;" appearance="outline">
                 <mat-label for="addLine2">Address line 2</mat-label>
                 <input [(ngModel)]="patientDetails.addLine2" name="addLine2" id="addLine2" type="text" class="form-control" matInput>
               </mat-form-field>
-            </div>
-          </div>
+              </div>
+              </div>
 
-          <div class="row">
-            <div class="col-sm-4 form-group">
-              <mat-form-field style="width: 100%;"  appearance="outline">
-                <mat-label for="district">District</mat-label>
-                <input [(ngModel)]="patientDetails.district" name="district" id="district" type="text" class="form-control" matInput>
-              </mat-form-field>
-            </div>
+              <div class="row m-2">
+              <div class="col-sm-4 form-group">
+                <mat-form-field style="width: 100%;"  appearance="outline">
+                  <mat-label for="district">District</mat-label>
+                  <input [(ngModel)]="patientDetails.district" name="district" id="district" type="text" class="form-control" matInput>
+                </mat-form-field>
+              </div>
 
-            <div class="col-sm-4 form-group">
-              <mat-form-field  style="width: 100%;" appearance="outline">
-                <mat-label for="state">State</mat-label>
-                <input [(ngModel)]="patientDetails.state" name="state" id="state" type="text" class="form-control" matInput>
-              </mat-form-field>
-            </div>
+              <div class="col-sm-4 form-group">
+                <mat-form-field  style="width: 100%;" appearance="outline">
+                  <mat-label for="state">State</mat-label>
+                  <input [(ngModel)]="patientDetails.state" name="state" id="state" type="text" class="form-control" matInput>
+                </mat-form-field>
+              </div>
 
-            <div class="col-sm-4 form-group">
+              <div class="col-sm-4 form-group">
               <mat-form-field  style="width: 100%;" appearance="outline">
                 <mat-label for="pin">Pin code</mat-label>
                 <input [(ngModel)]="patientDetails.pin" name="pin" id="pin" type="text" class="form-control" required minlength="6" maxlength="6" matInput>
               </mat-form-field>
-            </div>
-          </div>
+              </div>
+              </div>
+              </div>
+            </mat-tab>
 
+            <mat-tab label="{{'caregiverInformation' | translate}}">
+              <div class="bg-light">
+              <div class="row m-2" > 
+              <div class="col-sm-6 form-group">
+                <mat-form-field style="width: 100%;"  appearance="outline">
+                  <mat-label for="ciname">Caregiver name</mat-label>
+                  <input [(ngModel)]="patientDetails.carer_name" name="ciname" id="ciname" type="text" class="form-control" matInput>
+                </mat-form-field>
+              </div>
 
-          <span><strong><h1>Caregiver information</h1></strong></span>
-          <hr>
-          <div class="row">
-            <div class="col-sm-6 form-group">
-              <mat-form-field style="width: 100%;"  appearance="outline">
-                <mat-label for="ciname">Caregiver name</mat-label>
-                <input [(ngModel)]="patientDetails.carer_name" name="ciname" id="ciname" type="text" class="form-control" matInput>
+              <div class="col-sm-6 form-group">
+                <mat-form-field style="width: 100%;"  appearance="outline">
+                  <mat-label for="relationship">Relationship</mat-label>
+                  <mat-select [(ngModel)]="patientDetails.carer_rel" name="relationship" id="relationship" type="text" class="form-control">
+                    <mat-option value="Father">Father</mat-option>
+                    <mat-option value="Mother">Mother</mat-option>
+                    <mat-option value="Brother">Brother</mat-option>
+                    <mat-option value="Sister">Sister</mat-option>
+                    <mat-option value="Husband">Husband</mat-option>
+                    <mat-option value="Wife">Wife</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
               </mat-form-field>
-            </div>
+              </div>
+              </div>
 
-            <div class="col-sm-6 form-group">
-              <mat-form-field style="width: 100%;"  appearance="outline">
-                <mat-label for="relationship">Relationship</mat-label>
-                <mat-select [(ngModel)]="patientDetails.carer_rel" name="relationship" id="relationship" type="text" class="form-control">
-                  <mat-option value="Father">Father</mat-option>
-                  <mat-option value="Mother">Mother</mat-option>
-                  <mat-option value="Brother">Brother</mat-option>
-                  <mat-option value="Sister">Sister</mat-option>
-                  <mat-option value="Husband">Husband</mat-option>
-                  <mat-option value="Wife">Wife</mat-option>
-                  <mat-option value="Other">Other</mat-option>
-                </mat-select>
-            </mat-form-field>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-12 text-center" >
+              <div class="row m-2">
+              <div class="col-sm-12 text-center" >
               <button type="submit"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
                 Submit
               </button>
-            </div>
+              </div>
+              </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
           </div>
-
-        </form>
       </div>
-    </div>
+      
+    </form>
   </div>
+</div>

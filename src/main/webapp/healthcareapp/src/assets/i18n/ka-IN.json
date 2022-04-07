@@ -14,8 +14,24 @@
     "createdOn":"ರಂದು ರಚಿಸಲಾಗಿದೆ",
     "patientRecords": "ರೋಗಿಯ ದಾಖಲೆಗಳು",
     "patientHistory": "ರೋಗಿಯ ಇತಿಹಾಸ",
+    "consultationReport": "ಸಮಾಲೋಚನೆ ವರದಿ",
     "newConsultationRecord": "ಹೊಸ ಸಮಾಲೋಚನೆ ದಾಖಲೆ",
+    "chiefComplaints": "ಮುಖ್ಯ ದೂರುಗಳು",
+    "diagnosis": "ರೋಗನಿರ್ಣಯ",
+    "treatmentPlan": "ಚಿಕಿತ್ಸೆಯ ಯೋಜನೆ",
+    "medicine": "ಔಷಧಿಗಳು",
+    "followUpRecommendations": "सಶಿಫಾರಸುಗಳನ್ನು ಅನುಸರಿಸಿ",
     "complaint": "ದೂರು ವಿವರಗಳು",
+    "examination": "ಎಳೆತ",
+    "historyOfIllness": "ಅನಾರೋಗ್ಯದ ಇತಿಹಾಸ",
+    "illnessSummary": "ರೋಗದ ಸಾರಾಂಶ",
     "diagnosisType":"ರೋಗನಿರ್ಣಯ ಪ್ರಕಾರ",
-    "improvementStatus": "ಸುಧಾರಣೆ ಸ್ಥಿತಿ"
+    "improvementStatus": "ಸುಧಾರಣೆ ಸ್ಥಿತಿ",
+    "performQuestionnary": "ಪ್ರಶ್ನಾವಳಿಯನ್ನು ನಿರ್ವಹಿಸಿ",
+    "newPatientRecord": "ಹೊಸ ರೋಗಿಯ ದಾಖಲೆ",
+    "identityInformation": "पहचान की जानकारी",
+    "basicInformation": "ಗುರುತಿನ ಮಾಹಿತಿ",
+    "contactInformation": "ಸಂಪರ್ಕ ಮಾಹಿತಿ",
+    "caregiverInformation": "ಆರೈಕೆದಾರರ ಮಾಹಿತಿ"
+
 }

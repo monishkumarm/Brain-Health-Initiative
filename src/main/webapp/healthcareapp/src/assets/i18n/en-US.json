@@ -14,9 +14,24 @@
     "createdOn":"Created On",
     "patientRecords": "Patient Records",
     "patientHistory": "Patient History",
+    "consultationReport": "Consultation Report",
     "newConsultationRecord": "New Consultation Record",
+    "chiefComplaints": "Chief Complaints",
+    "diagnosis": "Diagnosis",
+    "treatmentPlan": "Treatment Plan",
+    "medicine": "Medicine",
+    "followUpRecommendations": "Follow Up Recommendations",
     "complaint": "Complaint Details",
+    "examination": "Examination",
+    "historyOfIllness": "History Of Illness",
+    "illnessSummary": "Illness Summary",
     "diagnosisType":"Diagnosis Type",
-    "improvementStatus": "Improvement Status"
+    "improvementStatus": "Improvement Status",
+    "performQuestionnary": "Perform Questionnary",
+    "newPatientRecord": "New Patient Record",
+    "identityInformation": "Identity Information",
+    "basicInformation": "Basic Information",
+    "contactInformation": "Contact Information",
+    "caregiverInformation": "Caregiver Information"
 
 }
