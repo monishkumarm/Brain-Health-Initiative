@@ -1,11 +1,11 @@
 <div class="card">
-  <div class="card-header fs-4 p-3 fw-2">
+  <div class="card-header fs-4 p-3 ">
     {{'patientRecords' | translate}}
   </div>
 
   <div class="card-body pt-0">
     <mat-form-field appearance="standard">
-      <mat-label>Search</mat-label>
+      <mat-label>{{'search' | translate }}</mat-label>
       <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
     <!-- {{dataSource.data | json}} -->

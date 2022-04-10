@@ -4,9 +4,10 @@ import { PatientService } from 'src/app/services/patient.service';
 import { MatTableDataSource } from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
+import th from '@mobiscroll/angular/dist/js/i18n/th';
 
 
-export interface Consulatation {
+export interface Consulatation { 
   complaintDetail: JSON,
   diagnosisTypeLuByDiagnosisTypeId: JSON,
   improvementStutusLuByImprovementStutusId: JSON,
@@ -58,6 +59,8 @@ export class ConsultationDetailsComponent implements OnInit {
   ELEMENT_DATA!: Consulatation[];
   displayedColumns: string[] = ['complaint','diagnosisType','improvementStatus','createdOn'];
   dataSource = new MatTableDataSource<Consulatation>(this.ELEMENT_DATA);
+
+  isExpand=false;
 
   constructor(private activatedroute: ActivatedRoute, private patientService:PatientService, private _liveAnnouncer: LiveAnnouncer) { }
 
@@ -121,11 +124,15 @@ export class ConsultationDetailsComponent implements OnInit {
 
   }
 
-
-
-  change(idx:any)
+  display(element:any)
   {
-    this.consultationRecords[(this.options.page-1)*this.options.size + idx].isExpand = !this.consultationRecords[(this.options.page-1)*this.options.size + idx].isExpand;
+    this.isExpand=true;
+    this.displayRecord = element
+  }
+
+  change()
+  {
+    this.isExpand = !this.isExpand;
   }
 
 
