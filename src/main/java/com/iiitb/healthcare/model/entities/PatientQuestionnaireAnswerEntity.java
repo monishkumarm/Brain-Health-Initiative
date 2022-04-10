@@ -20,13 +20,13 @@ public class PatientQuestionnaireAnswerEntity {
     @Column(name = "SelectedOptionId")
     private Long selectedOptionId;
     @ManyToOne
-    @JoinColumn(name = "patientQuestionnaireByPatientQuestionnaireId", referencedColumnName = "Id", nullable = false)
+    @JoinColumn(name = "PatientQuestionnaireId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private PatientQuestionnaireEntity patientQuestionnaireByPatientQuestionnaireId;
     @ManyToOne
-    @JoinColumn(name = "questionnaireByQuestionId", referencedColumnName = "Id", nullable = false)
+    @JoinColumn(name = "QuestionId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private QuestionnaireEntity questionnaireByQuestionId;
     @ManyToOne
-    @JoinColumn(name = "questionnaireOptionBySelectedOptionId", referencedColumnName = "Id", nullable = false)
+    @JoinColumn(name = "SelectedOptionId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private QuestionnaireOptionEntity questionnaireOptionBySelectedOptionId;
 
     public Long getId() {
