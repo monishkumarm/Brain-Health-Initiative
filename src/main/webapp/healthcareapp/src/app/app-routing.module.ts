@@ -10,6 +10,7 @@ import { ConsultationDetailsComponent } from './components/consultation-details/
 import {
   AddConsultationDetailsComponent
 } from "./components/add-consultation-details/add-consultation-details.component";
+import { PerformQuestionnaryComponent } from './components/perform-questionnary/perform-questionnary.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,12 @@ const routes: Routes = [
   {
     path:'addConsultation',
     component:AddConsultationDetailsComponent,
+    pathMatch:'full',
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'performQuestionnary',
+    component:PerformQuestionnaryComponent,
     pathMatch:'full',
     canActivate:[AuthGuard]
   }

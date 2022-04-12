@@ -1,9 +1,9 @@
-<div class="card">
-  <div class="row card-header">
-    <div class="col-4 fs-4 p-2">
-      {{'newPatientRecord' | translate}}
-    </div>
+<body class="pt-5">
+<div class="card m-auto">
+  <div class="card-header fs-4 p-2 fw-bold">
+    {{'newPatientRecord' | translate}}
   </div>
+
 
   <div class="card-body">
     <form #patientForm="ngForm" (ngSubmit)="onSubmit()" >
@@ -206,3 +206,4 @@
     </form>
   </div>
 </div>
+</body>
