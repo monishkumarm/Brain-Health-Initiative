@@ -1,0 +1,72 @@
+<div class="bg pt-5 pb-5">
+    <div class="card m-auto">
+      <div class="card-header p-3">
+        <span  class="fs-4  fw-bold">
+          Perform Questionnary
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="container bg-white mt-3">
+            <div>
+              <span  class="fw-bold" style="color: #673ab7; margin-right: 10px; display: inline-block;">
+                <p>Questionnary Set</p>
+              </span>
+              <span  style="text-align: right; display: inline-block;">
+                <button type="button" class="btn-sm float-right"  routerLink="/addConsultation" [queryParams]="{id : patientDetails.Id}"   mat-raised-button color="primary" >Closed Questionnary</button>
+              </span>
+            </div>
+      
+            <div > 
+              <mat-tab-group  animationDuration="1000ms">
+                <mat-tab  *ngFor="let tab of tabs; let index = index" [label]="tab">
+                  <div class="p-4 bg-light">
+                    <div class="row text-center">
+                        <div class="fw-bold col-3">
+                            <p style="color: #673ab7;">Option </p>
+                        </div>
+                        <div class="fw-bold col-9">
+                          <p style="color: hsl(262, 52%, 47%);">Question</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row" *ngFor="let questions of Questions[index][tab],let idx=index">
+                      <div class="col-3">
+                      <mat-form-field style="width: 100%;" appearance="outline">
+                        <mat-label style="color: black;">Select Option</mat-label>
+                        <mat-select [(ngModel)]="Answers[index][tab][questions.id]" class="browser-default custom-select" style="width: 100%;" [disabled]="isSave[index]"  >
+                          <mat-option *ngFor="let option of questions.questionnaireOptionsById" [value]="option.id">{{option.option}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    
+                      </div>
+                      <div class="col-9 pt-3">
+                        <p>{{questions.question}}</p>
+                      </div>
+                     
+                    </div>
+                  </div>
+                  {{Answers|json}}
+                  <div class="row pb-3 m-2">
+                    <div class="col-3"></div>
+                    <div class="col-sm-6 text-center" >
+                      <button *ngIf="!isSave[index]" class="mx-2" type="button" (click)="optionSave(index)"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
+                        Save
+                      </button>
+                      <button *ngIf="isSave[index]" class="mx-2" type="button"  (click)="optionSave(index)"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
+                        Edit
+                      </button>
+                      
+                      <button class="mx-2" type="button"  id="saveAndNext" name="saveAndNext" (click)="optionSaveAndNext(index)"  style="align-content: center;width: 30%" mat-raised-button color="accent" >
+                        Save and Next
+                      </button>
+                    </div>
+                    <div class="col-3"></div>
+                  </div>
+                 
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>

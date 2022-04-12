@@ -25,13 +25,13 @@ public class PatientQuestionnaireEntity {
     @Column(name = "ReachedDiagnosisId")
     private Long reachedDiagnosisId;
     @ManyToOne
-    @JoinColumn(name = "patientByPatientId", referencedColumnName = "Id", nullable = false)
+    @JoinColumn(name = "PatientId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private PatientEntity patientByPatientId;
     @ManyToOne
-    @JoinColumn(name = "userByPerformedByUserId", referencedColumnName = "Id", nullable = false)
+    @JoinColumn(name = "PerformedByUserId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private UserEntity userByPerformedByUserId;
     @ManyToOne
-    @JoinColumn(name = "questionnaireDiagnosisByReachedDiagnosisId", referencedColumnName = "Id", nullable = false)
+    @JoinColumn(name = "ReachedDiagnosisId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private QuestionnaireDiagnosisEntity questionnaireDiagnosisByReachedDiagnosisId;
     @OneToMany(mappedBy = "patientQuestionnaireByPatientQuestionnaireId")
     private Collection<PatientQuestionnaireAnswerEntity> patientQuestionnaireAnswersById;

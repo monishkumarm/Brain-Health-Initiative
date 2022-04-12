@@ -1,0 +1,17 @@
+
+.card {
+    width: 90%;
+  }
+  
+  
+  .card-header {
+    color: #673ab7;
+  }
+  
+.bg {
+    background: linear-gradient(90deg, #CBC3E3 0%, #CF9FFF 100%);
+}
+
+ .mat-select-panel {
+    height: 1px !important ;
+  }

@@ -1,11 +1,15 @@
 package com.iiitb.healthcare.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "Questionnaire", schema = "BrainHealthInitiative", catalog = "")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","patientQuestionnaireAnswersById"})
+
 public class QuestionnaireEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

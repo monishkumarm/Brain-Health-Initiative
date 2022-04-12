@@ -17,7 +17,6 @@ setOptions({
 })
 export class AddConsultationDetailsComponent implements OnInit {
 
-
   medicine:any;
   consultationDetails ={
     complaint:'',
@@ -91,7 +90,10 @@ export class AddConsultationDetailsComponent implements OnInit {
   "Z00-Z99: Factors influencing health status and contact with health services"
   ]
 
-  constructor(private activatedroute: ActivatedRoute, private patientService:PatientService,private userService:UserService) { }
+  constructor(private activatedroute: ActivatedRoute,
+              private patientService:PatientService,
+              private userService:UserService,
+              ) { }
 
   ngOnInit(): void {
 
@@ -124,9 +126,6 @@ export class AddConsultationDetailsComponent implements OnInit {
         console.log(error);
       }
     );
-
-
-
 
     this.patientService.getSearchPatients(this.search).subscribe(
       (response:any) => {
@@ -191,5 +190,6 @@ export class AddConsultationDetailsComponent implements OnInit {
     this.medicine.splice(index,1);
     console.log(this.medicine)
   }
+
 
 }

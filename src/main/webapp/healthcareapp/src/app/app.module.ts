@@ -35,8 +35,12 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { MatOptionModule } from '@angular/material/core';
+import { MatOptionModule} from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
+import { UserService } from './services/user.service';
+import { QuestionnaryService } from './services/questionnary.service';
+import { PerformQuestionnaryComponent } from './components/perform-questionnary/perform-questionnary.component';
+
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -52,7 +56,8 @@ export function HttpLoaderFactory(http: HttpClient){
     AddPatientComponent,
     PatientDetailsComponent,
     ConsultationDetailsComponent,
-    AddConsultationDetailsComponent
+    AddConsultationDetailsComponent,
+    PerformQuestionnaryComponent
   ],
   imports: [
     MbscModule,
@@ -85,7 +90,14 @@ export function HttpLoaderFactory(http: HttpClient){
       }
     }),
   ],
-  providers: [LoginService, PatientService ,AuthGuard, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
+  providers: [LoginService,
+              PatientService,
+              UserService,
+              QuestionnaryService, 
+              AuthGuard, 
+              [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]
+             
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

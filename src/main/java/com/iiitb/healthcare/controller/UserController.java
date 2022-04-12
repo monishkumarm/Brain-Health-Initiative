@@ -24,4 +24,5 @@ public class UserController {
         List<UserEntity> specilists = userEntityService.getAllSpecialists();
         return ResponseEntity.ok(specilists);
     }
+
 }
