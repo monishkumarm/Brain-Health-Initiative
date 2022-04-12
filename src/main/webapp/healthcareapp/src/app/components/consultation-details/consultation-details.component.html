@@ -1,11 +1,12 @@
-<div class="card">
-  <div class="row card-header">
-    <div class="col-4 fs-4 pt-2">
+<div class="bg pt-5 pb-5">
+<div class="card m-auto">
+  <div class="card-header">
+    <span class=" fs-4 p-2 fw-bold">
       {{'patientHistory' | translate}}
-    </div>
-    <div class="col-8" style="text-align: right;">
+    </span>
+    <span  style="text-align: right;">
     <button type="button" class="btn-sm float-right" routerLink="/addConsultation" [queryParams]="{id : patientDetails.Id}" mat-raised-button color="primary" >{{'newConsultationRecord' | translate}}</button>
-    </div>
+    </span>
   </div>
   <!-- {{dataSource.data | json}} -->
 
@@ -194,12 +195,10 @@
       </li>
     </ul>
   </nav>
-
-</div>
-
-<div *ngIf="isExpand">
-  <div class="row card-header">
-    <div class="col-4 fs-4 p-2">
+  
+<div class="card m-auto" *ngIf="isExpand">
+  <div class="card-header">
+    <div class="fs-4 p-2 fw-bold">
       {{'consultationReport' | translate}}
     </div>
     
@@ -306,6 +305,10 @@
     </div>
   </div>
 </div>
+  
 
+</div>
+
+</div>
 
 

@@ -131,7 +131,7 @@ ALTER TABLE `PatientConsultation` ADD CONSTRAINT FK_PatientConsultation_Improvem
 
 CREATE TABLE `Questionnaire` (
                                  `Id` BIGINT PRIMARY KEY,
-                                 `Question` VARCHAR(100) NOT NULL UNIQUE,
+                                 `Question` VARCHAR(1000) NOT NULL UNIQUE,
                                  `GroupId` INT NOT NULL,
                                  `SubGroupId` INT NOT NULL
 );

@@ -1,17 +1,21 @@
-<div class="card">
-  <div class="row card-header">
-    <div class="col-4 fs-4 p-2">
+<body class="pt-5">
+<div class="card m-auto">
+  <div class="card-header">
+    <span class="fs-4 p-2 fw-bold">
       {{'newConsultationRecord' | translate}}
-    </div>
-    <div class="col-8" style="text-align: right;">
-      <button type="button" class="btn-sm float-right"  mat-raised-button color="primary" >{{'performQuestionnary' | translate}}</button>
-      </div>
+    </span>
+    <span  style="text-align: right;">
+      <button type="button" class="btn-sm float-right"   routerLink="/performQuestionnary" [queryParams]="{id : patientDetails.Id}"  mat-raised-button color="primary" >{{'performQuestionnary' | translate}}</button>
+    </span>
   </div>
 
   <div class="card-body ">
+
     <form #consultationForm ="ngForm" (ngSubmit)="onSubmit()"   >
 
+
       <div class="container bg-white mt-3">
+        <p class="fw-bold" style="color:  #673ab7;">Consultation Form</p>
         <div >
           <mat-tab-group  animationDuration="1000ms">
             <mat-tab  label="{{'chiefComplaints' | translate}}">
@@ -210,5 +214,4 @@
     </form>
   </div>
 </div>
-
-
+</body>
