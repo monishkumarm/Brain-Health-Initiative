@@ -75,6 +75,7 @@ public class PatientEntityService {
         try {
             System.out.println("In add patient service");
             PatientEntity patient = new PatientEntity();
+
             patient.setAbhaId((String) payload.get("ABHAID"));
             String add1 = (String) payload.get("addLine1");
             String add2 = (String) payload.get("addLine2");
@@ -85,8 +86,10 @@ public class PatientEntityService {
             address = address + "\"pin\": \"" + (String) payload.get("pin") + "\" }";
             patient.setAddressDetail(address);
             patient.setAge((Integer) payload.get("age")) ;
+
             UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
             patient.setCreatedBy((long)user.getId());
+
             Date date = new Date();
             patient.setCreatedOn(new Timestamp(date.getTime()));
             patient.setEducation((String) payload.get("edu"));
@@ -101,10 +104,12 @@ public class PatientEntityService {
             patient.setOccupation((String) payload.get("occ"));
             patient.setPhoneNumber((String) payload.get("phone"));
             patient.setRelationshipWithPatient((String) payload.get("carer_rel"));
+
             PatientEntity patient1 = patientRepository.save(patient);
             System.out.println(patient1.getId());
 
             UserPermissionPatientEntity userPermissionPatientEntity = new UserPermissionPatientEntity();
+            
             userPermissionPatientEntity.setPatientId((long)patient1.getId());
             userPermissionPatientEntity.setUserId((long)user.getId());
             userPermissionPatientEntity.setCanDelete(true);
