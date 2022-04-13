@@ -31,7 +31,7 @@ export class PatientDetailsComponent implements OnInit {
     carer_rel:'',
   }
 
-  
+
 
   search = {
     option : '4',

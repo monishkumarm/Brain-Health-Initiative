@@ -16,7 +16,7 @@ export class PerformQuestionnaryComponent implements OnInit {
   Questions:any;
   isSave:any;
   Answer:any;
-        
+
 
   patientDetails={
     Id:'',
@@ -108,7 +108,7 @@ export class PerformQuestionnaryComponent implements OnInit {
         this.Questions.push({"commanQuestionnary":response});
 
         this.tabs.push("commanQuestionnary");
-        this.Answers.push({"commanQuestionnary":this.Answer})        
+        this.Answers.push({"commanQuestionnary":this.Answer})
         console.log(this.Questions);
         console.log(this.Answers)
         this.isSave.push(false)
@@ -128,6 +128,7 @@ export class PerformQuestionnaryComponent implements OnInit {
   optionSaveAndNext(index:any)
   {
     this.isSave[index]=true;
+    console.log("Ashish");
     console.log(this.Answers[index]);
     this.questionnaryService.getNextQuestions(this.Answers[index]).subscribe(
       (response:any) => {
@@ -143,7 +144,7 @@ export class PerformQuestionnaryComponent implements OnInit {
         this.Questions.push({"commanQuestionnary":response});
 
         this.tabs.push("commanQuestionnary");
-        this.Answers.push({"commanQuestionnary":this.Answer})        
+        this.Answers.push({"commanQuestionnary":this.Answer})
         console.log(this.Questions);
         console.log(this.Answers)
         this.isSave.push(false)

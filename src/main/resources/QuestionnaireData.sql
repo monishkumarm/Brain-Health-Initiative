@@ -1,3 +1,4 @@
+START TRANSACTION;
 Use BrainHealthInitiative;
 
 -- (Common Questionnaire GroupId = 1)
@@ -247,7 +248,7 @@ INSERT INTO Questionnaire VALUES(
                                     @QuestionId,
                                     'Headache',
                                     1,
-                                    1);
+                                 1);
 SET @OptionId := @OptionId +1;
 INSERT INTO QuestionnaireOption VALUES(
                                           @OptionId,
@@ -425,7 +426,7 @@ SET @QuestionId := @QuestionId +1;
 
 INSERT INTO Questionnaire VALUES(
                                     @QuestionId,
-                                    'Was the patient completely unconscious during the episode',
+                                    'Was the patient completely unconsious during the episode',
                                     2,
                                     1);
 
@@ -500,3 +501,5 @@ INSERT INTO QuestionnaireDiagnosis VALUES(
                                          );
 
 -- Stroke Diagnostic Protocol GroupId = 3
+
+COMMIT

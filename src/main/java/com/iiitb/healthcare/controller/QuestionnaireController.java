@@ -28,11 +28,11 @@ public class QuestionnaireController {
     }
 
     @RequestMapping(value = "/getNextQuestions",method = RequestMethod.POST)
-    public ResponseEntity<?> getCommonQuestions(@RequestBody Map<String,Object> payload){
+    public ResponseEntity<?> getNextQuestions(@RequestBody Map<String,Object> payload){
 
         System.out.println("int get next question controller");
         System.out.println(payload.toString());
-        List<QuestionnaireEntity> questions = questionnaireService.getCommonQuestions();
+        List<QuestionnaireEntity> questions = questionnaireService.getNextQuestions(payload);
 
         return ResponseEntity.ok(questions);
     }
