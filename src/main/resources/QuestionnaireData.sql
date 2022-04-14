@@ -340,11 +340,79 @@ INSERT INTO QuestionnaireOption VALUES(
 SET @QuestionId := @QuestionId +1;
 
 -- Epilepsy Diagnosis Protocol GroupId = 2
+
+-- subgroup -1 -starts
+
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Did he/she have loss of consciousness',
+                                    2,
+                                    1);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Did he/she have sudden episode of loss of contact with surroundings',
+                                    2,
+                                    1);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'History of uncontrollable jerking of limbs/face',
+                                    2,
+                                    1);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+SET @QuestionId := @QuestionId +1;
+
+-- subgroup -1 - end
+
+-- subgroup - 2 - starts
 INSERT INTO Questionnaire VALUES(
                                     @QuestionId,
                                     'Did he/she pass urine or stool in his/her clothes during an episode',
                                     2,
-                                    1);
+                                    2);
 
 SET @OptionId := @OptionId +1;
 INSERT INTO QuestionnaireOption VALUES(
@@ -365,7 +433,7 @@ INSERT INTO Questionnaire VALUES(
                                     @QuestionId,
                                     'Did he/she pass injure himself/herself or have tongue bite during an episode',
                                     2,
-                                    1);
+                                    2);
 
 SET @OptionId := @OptionId +1;
 INSERT INTO QuestionnaireOption VALUES(
@@ -386,7 +454,7 @@ INSERT INTO Questionnaire VALUES(
                                     @QuestionId,
                                     'Was there frothing from mouth during an episode',
                                     2,
-                                    1);
+                                    2);
 
 SET @OptionId := @OptionId +1;
 INSERT INTO QuestionnaireOption VALUES(
@@ -407,7 +475,7 @@ INSERT INTO Questionnaire VALUES(
                                     @QuestionId,
                                     'Did he/she pass have such an episode while asleep',
                                     2,
-                                    1);
+                                    2);
 
 SET @OptionId := @OptionId +1;
 INSERT INTO QuestionnaireOption VALUES(
@@ -428,7 +496,7 @@ INSERT INTO Questionnaire VALUES(
                                     @QuestionId,
                                     'Was the patient completely unconsious during the episode',
                                     2,
-                                    1);
+                                    2);
 
 SET @OptionId := @OptionId +1;
 INSERT INTO QuestionnaireOption VALUES(
@@ -449,6 +517,58 @@ INSERT INTO Questionnaire VALUES(
                                     @QuestionId,
                                     'Has an episode ever occured WITHOUT preceeding mental/emotional stress',
                                     2,
+                                    2);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+SET @QuestionId := @QuestionId +1;
+
+-- subgroup -2 - end
+
+
+-- subgroup -3 - start
+
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Events stereotypes and associated with aura',
+                                    2,
+                                    3);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+
+-- subgroup -3 - end
+
+-- Stroke Diagnostic Protocol GroupId = 3
+
+-- SUBGROUP 1 STARTS --
+
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Abnormal speech',
+                                    3,
                                     1);
 
 SET @OptionId := @OptionId +1;
@@ -468,8 +588,184 @@ SET @QuestionId := @QuestionId +1;
 
 INSERT INTO Questionnaire VALUES(
                                     @QuestionId,
-                                    'Events stereotypes and associated with aura',
-                                    2,
+                                    'Facial paralysis with sideways deviation of the mouth',
+                                    3,
+                                    1);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Weakness or paralysis of arms and/or legs',
+                                    3,
+                                    1);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Difficulty in walking (exclude individuals with pain or swelling of
+                                    joints of lower
+                                    limbs)',
+                                    3,
+                                    1);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Any loss of sensation or any abnormal sensation in the face, arms
+                                    and legs',
+                                    3,
+                                    1);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+
+-- SUBGROUP 1 ENDS --
+
+-- SUBGROUP 2 STARTS --
+
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Weakness or loss of sensation on one side of body with deviation of
+                                    face to one side',
+                                    3,
+                                    2);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Impaired consciousness',
+                                    3,
+                                    2);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Speech difficulty',
+                                    3,
+                                    2);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Slurred speech'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Difficulty in speaking or understanding'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Loss of balance or incoordination while walking',
+                                    3,
+                                    2);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Dizziness',
+                                    3,
                                     2);
 
 SET @OptionId := @OptionId +1;
@@ -487,6 +783,69 @@ INSERT INTO QuestionnaireOption VALUES(
 
 SET @QuestionId := @QuestionId +1;
 
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Swallowing problems',
+                                    3,
+                                    2);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    ' Double vision',
+                                    3,
+                                    2);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+INSERT INTO Questionnaire VALUES(
+                                    @QuestionId,
+                                    'Vision impairment',
+                                    3,
+                                    2);
+
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'Yes'
+                                      );
+SET @OptionId := @OptionId +1;
+INSERT INTO QuestionnaireOption VALUES(
+                                          @OptionId,
+                                          @QuestionId,
+                                          'No'
+                                      );
+
+SET @QuestionId := @QuestionId +1;
+
+-- SUBGROUP 2 Ends --
+
 -- Diagnosis: Generalized and focal seizure
 INSERT INTO QuestionnaireDiagnosis VALUES(
                                              @DiagnosisId,
@@ -500,6 +859,6 @@ INSERT INTO QuestionnaireDiagnosis VALUES(
                                              'Probably focal seizure'
                                          );
 
--- Stroke Diagnostic Protocol GroupId = 3
+
 
 COMMIT

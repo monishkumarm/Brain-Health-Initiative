@@ -48,12 +48,14 @@ public class QuestionnaireService {
         }
 
         if((arr[0]&arr[1]&arr[2])){
-            System.out.println("Epilepsy questionnaire");
-            List<QuestionnaireEntity> nextQue = questionnaireRepository.findByGroupId(2);
+
+            List<QuestionnaireEntity> nextQue = questionnaireRepository.findByGroupAndSubGroupId(2,1);
             return nextQue;
         }
         else if((arr[3]&arr[4]&arr[5]&arr[6]&arr[7])){
-            System.out.println("Stroke questionnaire");
+
+            List<QuestionnaireEntity> nextQue = questionnaireRepository.findByGroupAndSubGroupId(3,1);
+            return nextQue;
         }
         return questions;
     }
