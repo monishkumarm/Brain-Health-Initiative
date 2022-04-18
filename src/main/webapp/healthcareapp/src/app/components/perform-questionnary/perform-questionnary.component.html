@@ -17,9 +17,14 @@
             </div>
       
             <div > 
-              <mat-tab-group  animationDuration="1000ms">
+              <mat-tab-group   [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" animationDuration="1000ms">
                 <mat-tab  *ngFor="let tab of tabs; let index = index" [label]="tab">
-                  <div class="p-4 bg-light">
+                  <div *ngIf="isResult[index]" class="p-4 bg-light">
+                    <div>
+                      <p> Protocol Result : {{Result}}</p>
+                    </div>
+                  </div>
+                  <div *ngIf="!isResult[index]" class="p-4 bg-light">
                     <div class="row text-center">
                         <div class="fw-bold col-3">
                             <p style="color: #673ab7;">Option </p>
@@ -45,8 +50,8 @@
                      
                     </div>
                   </div>
-                  {{Answers|json}}
-                  <div class="row pb-3 m-2">
+                  <!-- {{Answers[index][tab]|json}} -->
+                  <div *ngIf="!isResult[index]" class="row pb-3 m-2">
                     <div class="col-3"></div>
                     <div class="col-sm-6 text-center" >
                       <button *ngIf="!isSave[index]" class="mx-2" type="button" (click)="optionSave(index)"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
@@ -56,7 +61,7 @@
                         Edit
                       </button>
                       
-                      <button class="mx-2" type="button"  id="saveAndNext" name="saveAndNext" (click)="optionSaveAndNext(index)"  style="align-content: center;width: 30%" mat-raised-button color="accent" >
+                      <button [disabled]="!(tabs.length == index+1)" class="mx-2" type="button"  id="saveAndNext" name="saveAndNext" (click)="optionSaveAndNext(index)"  style="align-content: center;width: 30%" mat-raised-button color="accent" >
                         Save and Next
                       </button>
                     </div>

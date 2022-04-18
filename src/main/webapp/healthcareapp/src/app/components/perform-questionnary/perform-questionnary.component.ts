@@ -2,7 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { QuestionnaryService } from 'src/app/services/questionnary.service';
 import { ActivatedRoute } from '@angular/router';
 import { PatientService } from 'src/app/services/patient.service';
-import { ButtonBase } from '@mobiscroll/angular/dist/js/core/components/button/button';
+import {FormControl} from '@angular/forms';
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-perform-questionnary',
   templateUrl: './perform-questionnary.component.html',
@@ -14,10 +16,15 @@ export class PerformQuestionnaryComponent implements OnInit {
   tabs:any;
   Answers:any;
   Questions:any;
+  Question:any;
+  GroupId:any;
+  SubGroupId:any;
   isSave:any;
   Answer:any;
-
-
+  isResult:any;
+  Result:any;
+  selected = new FormControl(0);
+ 
   patientDetails={
     Id:'',
     ABHAID:'',
@@ -49,10 +56,12 @@ export class PerformQuestionnaryComponent implements OnInit {
   constructor(  private questionnaryService:QuestionnaryService,
                 private activatedroute:ActivatedRoute,
                 private patientService:PatientService,
+                private _snackBar: MatSnackBar,
               ) { }
 
   ngOnInit(): void {
 
+    this.isResult = false;
     this.activatedroute.queryParams.subscribe(
       (params:any) => {
       console.log(params); // { orderby: "price" }
@@ -93,25 +102,41 @@ export class PerformQuestionnaryComponent implements OnInit {
     this.Questions = [];
     this.Answers = [];
     this.isSave = [];
-
+    this.isResult = [];
     this.questionnaryService.getCommanQuestions().subscribe(
       (response:any) => {
-        this.Answer={}
-        for(let ele in response)
+        this.Answer= {};
+        this.Question = '{ "groupId":' + response["groupId"] + ', "subGroupId":' + response["subGroupId"] +',';
+        this.Question = this.Question + '"' + response["questionSetName"] + '":' + JSON.stringify(response["questionSet"]) + '}';
+        // response["isSave"]=false;
+        this.Questions.push(JSON.parse(this.Question));
+
+        for(let option in response["questionSet"])
         {
-          console.log(response[ele].id);
-          this.Answer[response[ele].id.toString()] = '';
+            this.Answer[response["questionSet"][option].id.toString()]='';
         }
-
-        response["isSave"]=false;
-        // console.log(response);
-        this.Questions.push({"commanQuestionnary":response});
-
-        this.tabs.push("commanQuestionnary");
-        this.Answers.push({"commanQuestionnary":this.Answer})
+        this.Answer = '{ "groupId":' + response["groupId"] + ', "subGroupId":' + response["subGroupId"] +',"' + response["questionSetName"] + '":' + JSON.stringify(this.Answer)+'}';
+        this.tabs.push(response["questionSetName"]);
+        this.Answers.push(JSON.parse(this.Answer));
+        this.isSave.push(false);
+        this.isResult.push(false);
+        console.log("data");
         console.log(this.Questions);
-        console.log(this.Answers)
-        this.isSave.push(false)
+        console.log(this.Answers);
+        console.log(this.tabs);
+        console.log(this.isSave);
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
+        if(response["message"].length>0){
+          this._snackBar.open(response["message"], 'Close', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+        }
       },
       (error:any) => {
         console.log(error);
@@ -130,24 +155,54 @@ export class PerformQuestionnaryComponent implements OnInit {
     this.isSave[index]=true;
     console.log("Ashish");
     console.log(this.Answers[index]);
-    this.questionnaryService.getNextQuestions(this.Answers[index]).subscribe(
+    this.questionnaryService.getNextQuestions(this.Answers[index],).subscribe(
       (response:any) => {
-        this.Answer={}
-        for(let ele in response)
+        console.log(response);
+        if(response["questionSetName"] == null)
         {
-          console.log(response[ele].id);
-          this.Answer[response[ele].id.toString()] = '';
+          this.isResult.push(true);
+          this.Result = '';
+          this.Result = response["message"];
+          this.tabs.push("protocolResult");
+          this.selected.setValue(this.tabs.length - 1);
+        }
+        else
+        {
+          this.Question = '{ "groupId":' + response["groupId"] + ', "subGroupId":' + response["subGroupId"] +',';
+          this.Question = this.Question + '"' + response["questionSetName"] + '":' + JSON.stringify(response["questionSet"]) + '}';
+          this.Questions.push(JSON.parse(this.Question));
+
+          this.Answer= {};        
+          for(let option in response["questionSet"])
+          {
+              this.Answer[response["questionSet"][option].id.toString()]='';
+          }
+          this.Answer = '{ "groupId":' + response["groupId"] + ', "subGroupId":' + response["subGroupId"] +',"' + response["questionSetName"] + '":' + JSON.stringify(this.Answer)+'}';
+          this.tabs.push(response["questionSetName"]);
+          this.Answers.push(JSON.parse(this.Answer));
+          this.isSave.push(false);
+          this.isResult.push(false);
+          console.log("data");
+          console.log(this.Questions);
+          console.log(this.Answers);
+          console.log(this.tabs);
+          console.log(this.isSave);
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
+          this.selected.setValue(this.tabs.length - 1);
+          console.log(response["message"])
+          if(response["message"].length>0){
+            this._snackBar.open(response["message"], 'Close', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+          }   
         }
 
-        response["isSave"]=false;
-        // console.log(response);
-        this.Questions.push({"commanQuestionnary":response});
-
-        this.tabs.push("commanQuestionnary");
-        this.Answers.push({"commanQuestionnary":this.Answer})
-        console.log(this.Questions);
-        console.log(this.Answers)
-        this.isSave.push(false)
       },
       (error:any) => {
         console.log(error);

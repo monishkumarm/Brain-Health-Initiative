@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,38 +24,248 @@ public class QuestionnaireService {
         this.questionnaireOptionRepository =questionnaireOptionRepository;
     }
 
-    public List<QuestionnaireEntity> getCommonQuestions(){
-        List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(1);
-
-        return questions;
+    public Map<String,Object> getCommonQuestions(){
+        List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(1,1);
+        Map<String,Object> res = new HashMap<>();
+        res.put("message","");
+        res.put("questionSetName","commonQuestions");
+        res.put("questionSet",questions);
+        res.put("groupId",1);
+        res.put("subGroupId",1);
+        return res;
     }
-    public List<QuestionnaireEntity> getNextQuestions(Map<String,Object> payload){
-        List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(1);
-        List<Long> answer = new ArrayList<>();
-        Map<String,Object> map = (Map)(payload.get("commanQuestionnary"));
+    public Map<String,Object> getNextQuestions(Map<String,Object> payload){
+        Map<String,Object> res = new HashMap<>();
+        System.out.println(payload.toString());
+        if((int)payload.get("groupId")==1)
+        {
+            Map<String,Object> answer = (Map)payload.get("commonQuestions");
+            System.out.println(answer.toString());
+            if(((int)answer.get("1")==1 || (int)answer.get("2")==3) && (int)answer.get("3")==5)
+            {
+                System.out.println("Epilepsy Protocol");
+                res = this.epilepsyProtocol(payload);
+            }
+            else if((int)answer.get("4")==1 || (int)answer.get("5")==3 || (int)answer.get("6")==3 || (int)answer.get("7")==3 || (int)answer.get("8")==3)
+            {
+                System.out.println("Stroke Protocol");
+                res = this.strokeProtocol(payload);
+            }
+        }
+        else if((int)payload.get("groupId")==2)
+        {
+            System.out.println("Epilepsy Protocol");
+            res = this.epilepsyProtocol(payload);
+        }
+        return res;
+    }
 
-        for(String s : map.keySet()){
-            answer.add((long)((int)map.get(s)));
+    Map<String,Object> epilepsyProtocol(Map<String,Object> payload)
+    {
+        Map<String,Object> res  = new HashMap<>();
+        Map<String,Object> answer = (Map)payload.get("epilepsy");
+
+        if((int)payload.get("groupId")==1)
+        {
+            List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(2,1);
+            res.put("message","There is chance of epilepsy diagnostic protocol");
+            res.put("questionSetName","epilepsy");
+            res.put("questionSet",questions);
+            res.put("groupId",2);
+            res.put("subGroupId",1);
+
+        }
+        else if((int)payload.get("subGroupId")==1)
+        {
+            System.out.println(answer.toString());
+            int yes = 0;
+            int trueAns = 34;
+            for(Object ans : answer.values())
+            {
+                if((int)ans == trueAns)
+                {
+                    yes = yes+1;
+                }
+                trueAns = trueAns + 2;
+            }
+            if(yes>=4)
+            {
+                List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(2,2);
+                res.put("message","Epilepsy check");
+                res.put("questionSetName","epilepsy");
+                res.put("questionSet",questions);
+                res.put("groupId",2);
+                res.put("subGroupId",2);
+            }
+            else if(yes<=3)
+            {
+                List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(2,3);
+                res.put("message","");
+                res.put("questionSetName","epilepsy");
+                res.put("questionSet",questions);
+                res.put("groupId",2);
+                res.put("subGroupId",3);
+            }
+            else if(yes<3)
+            {
+                res.put("message","Uncertain for Seizure");
+                res.put("questionSetName",null);
+                res.put("questionSet",null);
+                res.put("groupId",null);
+                res.put("subGroupId",null);
+            }
+        }
+        else if((int)payload.get("subGroupId")==2)
+        {
+            if((int)answer.get("22")==46)
+            {
+                List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(2, 5);
+                res.put("message", "Diagnosis in children");
+                res.put("questionSetName", "epilepsy");
+                res.put("questionSet", questions);
+                res.put("groupId", 2);
+                res.put("subGroupId", 5);
+            }
+            else
+            {
+                List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(2, 4);
+                res.put("message", "");
+                res.put("questionSetName", "epilepsy");
+                res.put("questionSet", questions);
+                res.put("groupId", 2);
+                res.put("subGroupId", 4);
+            }
+
+        }
+        else if((int)payload.get("subGroupId")==3)
+        {
+            if((int)answer.get("23")==48 || (int)answer.get("24")==50 || (int)answer.get("25")==52)
+            {
+                List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(2, 4);
+                res.put("message","Probable focal seizure, Epilepsy check");
+                res.put("questionSetName", "epilepsy");
+                res.put("questionSet", questions);
+                res.put("groupId", 2);
+                res.put("subGroupId", 4);
+            }
+            else
+            {
+                res.put("message","Uncertain for Seizure");
+                res.put("questionSetName",null);
+                res.put("questionSet",null);
+                res.put("groupId",null);
+                res.put("subGroupId",null);
+            }
+
+        }
+        else if((int)payload.get("subGroupId")==4)
+        {
+            if((int)answer.get("26")==54)
+            {
+                res.put("message","Epilepsy Diagnosis");
+                res.put("questionSetName",null);
+                res.put("questionSet",null);
+                res.put("groupId",null);
+                res.put("subGroupId",null);
+            }
+            else
+            {
+                res.put("message","Uncertain for Epilepsy");
+                res.put("questionSetName",null);
+                res.put("questionSet",null);
+                res.put("groupId",null);
+                res.put("subGroupId",null);
+            }
+        }
+        else if((int)payload.get("subGroupId")==5)
+        {
+            if((int)answer.get("27")==56)
+            {
+                List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(2, 7);
+                res.put("message", "");
+                res.put("questionSetName", "epilepsy");
+                res.put("questionSet", questions);
+                res.put("groupId", 2);
+                res.put("subGroupId", 7);
+            }
+            else
+            {
+                List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(2, 6);
+                res.put("message", "");
+                res.put("questionSetName", "epilepsy");
+                res.put("questionSet", questions);
+                res.put("groupId", 2);
+                res.put("subGroupId", 6);
+            }
+        }
+        else if((int)payload.get("subGroupId")==6)
+        {
+            if((int)answer.get("28")==58 || (int)answer.get("29")==60 || (int)answer.get("32")==66 || (int)answer.get("33")==68)
+            {
+
+                res.put("message","Typical absence seizures");
+                res.put("questionSetName",null);
+                res.put("questionSet",null);
+                res.put("groupId",null);
+                res.put("subGroupId",null);
+            }
+            else
+            {
+                if((int)answer.get("30")==62 || (int)answer.get("31")==64)
+                {
+                    res.put("message","Probablr absence seizures");
+                    res.put("questionSetName",null);
+                    res.put("questionSet",null);
+                    res.put("groupId",null);
+                    res.put("subGroupId",null);
+                }
+                else
+                {
+                    res.put("message","Generalised seizure");
+                    res.put("questionSetName",null);
+                    res.put("questionSet",null);
+                    res.put("groupId",null);
+                    res.put("subGroupId",null);
+                }
+            }
+        }
+        else if((int)payload.get("subGroupId")==7)
+        {
+            if(((int)answer.get("34")==70 || (int)answer.get("35")==72 || (int)answer.get("36")==74 || (int)answer.get("37")==76 || (int)answer.get("38")==78 || (int)answer.get("39")==80) && (int)answer.get("40")==82)
+            {
+                res.put("message","Typical febril siezure");
+                res.put("questionSetName",null);
+                res.put("questionSet",null);
+                res.put("groupId",null);
+                res.put("subGroupId",null);
+            }
+            else
+            {
+                res.put("message","Atypical febrile siezure");
+                res.put("questionSetName",null);
+                res.put("questionSet",null);
+                res.put("groupId",null);
+                res.put("subGroupId",null);
+            }
+        }
+        return  res;
+    }
+    Map<String,Object> strokeProtocol(Map<String,Object> payload)
+    {
+        Map<String,Object> res  = new HashMap<>();
+        Map<String,Object> answer = (Map)payload.get("epilepsy");
+
+        if((int)payload.get("groupId")==1)
+        {
+            List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(2,1);
+            res.put("message","There is chance of epilepsy diagnostic protocol");
+            res.put("questionSetName","epilepsy");
+            res.put("questionSet",questions);
+            res.put("groupId",2);
+            res.put("subGroupId",1);
+
         }
 
-        List<QuestionnaireOptionEntity> options = questionnaireOptionRepository.options(answer);
-
-
-        boolean arr[]= new boolean [answer.size()];
-        for(int i=0;i<arr.length;i++){
-            String a = options.get(i).getOption();
-            if(a.equals("Yes"))arr[options.get(i).getQuestionId().intValue()-1]=true;
-            else arr[options.get(i).getQuestionId().intValue()-1]=false;
-        }
-
-        if((arr[0]&arr[1]&arr[2])){
-            System.out.println("Epilepsy questionnaire");
-            List<QuestionnaireEntity> nextQue = questionnaireRepository.findByGroupId(2);
-            return nextQue;
-        }
-        else if((arr[3]&arr[4]&arr[5]&arr[6]&arr[7])){
-            System.out.println("Stroke questionnaire");
-        }
-        return questions;
+        return res;
     }
 }

@@ -22,7 +22,7 @@ public class QuestionnaireController {
     @RequestMapping("/getCommonQuestions")
     public ResponseEntity<?> getCommonQuestions(){
         System.out.println("int get common question controller");
-        List<QuestionnaireEntity> questions = questionnaireService.getCommonQuestions();
+        Map<String,Object> questions = questionnaireService.getCommonQuestions();
 
         return ResponseEntity.ok(questions);
     }
@@ -32,7 +32,7 @@ public class QuestionnaireController {
 
         System.out.println("int get next question controller");
         System.out.println(payload.toString());
-        List<QuestionnaireEntity> questions = questionnaireService.getNextQuestions(payload);
+        Map<String,Object> questions = questionnaireService.getNextQuestions(payload);
 
         return ResponseEntity.ok(questions);
     }

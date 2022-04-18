@@ -12,7 +12,8 @@ import java.util.List;
 
 public interface QuestionnaireRepository extends JpaRepository<QuestionnaireEntity, Integer> {
 
-    List<QuestionnaireEntity> findByGroupId(Integer groupId);
+    @Query(value = "SELECT * FROM Questionnaire Q WHERE Q.GroupId = ?1 and Q.SubGroupId=?2" ,nativeQuery=true)
+    List<QuestionnaireEntity> findByGroupId(Integer groupId,Integer subGroupId);
 
 
 

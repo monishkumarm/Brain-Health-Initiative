@@ -40,7 +40,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { UserService } from './services/user.service';
 import { QuestionnaryService } from './services/questionnary.service';
 import { PerformQuestionnaryComponent } from './components/perform-questionnary/perform-questionnary.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -81,6 +81,7 @@ export function HttpLoaderFactory(http: HttpClient){
     MatMenuModule,
     MatOptionModule,
     MatTabsModule,
+    MatSnackBarModule,
     TranslateModule.forRoot({
       defaultLanguage:localStorage.getItem('language') ?? 'en-US',
       loader: {
