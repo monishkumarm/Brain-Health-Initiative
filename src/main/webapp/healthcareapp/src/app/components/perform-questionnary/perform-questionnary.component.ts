@@ -153,7 +153,6 @@ export class PerformQuestionnaryComponent implements OnInit {
   optionSaveAndNext(index:any)
   {
     this.isSave[index]=true;
-    console.log("Ashish");
     console.log(this.Answers[index]);
     this.questionnaryService.getNextQuestions(this.Answers[index],).subscribe(
       (response:any) => {

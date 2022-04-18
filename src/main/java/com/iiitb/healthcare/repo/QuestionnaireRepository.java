@@ -15,7 +15,8 @@ public interface QuestionnaireRepository extends JpaRepository<QuestionnaireEnti
     @Query(value = "SELECT * FROM Questionnaire Q WHERE Q.GroupId = ?1 and Q.SubGroupId=?2" ,nativeQuery=true)
     List<QuestionnaireEntity> findByGroupId(Integer groupId,Integer subGroupId);
 
-
+    @Query(value="SELECT * FROM Questionnaire WHERE GroupId =?1 AND SubGroupId=?2",nativeQuery = true)
+    List<QuestionnaireEntity> findByGroupAndSubGroupId(Integer gid, Integer subGid);
 
 
 }
