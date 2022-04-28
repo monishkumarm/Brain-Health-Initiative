@@ -19,4 +19,8 @@ public class UserEntityService {
         userRepository.getAllSpecilists().forEach(user->specilists.add(user));
         return specilists;
     }
+    public UserEntity getUserByName(String name){
+        UserEntity user = userRepository.findByUsername(name);
+        return user;
+    }
 }

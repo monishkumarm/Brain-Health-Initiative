@@ -33,9 +33,12 @@ export class LoginComponent implements OnInit {
           this.isError = false;
           this.errorMsg = '';
           console.log(response.token);
-
-          this.loginService.loginUser(response.token);
-          window.location.href="/dashboard";
+          console.log(response.RoleTypeId);
+          this.loginService.loginUser(response.token,response.RoleTypeId);
+          if(this.loginService.isAdmin())
+          window.location.href="/adminDashboard";
+          else
+            window.location.href="/dashboard";
         },
         (error:any) => {
           this.isError = true;

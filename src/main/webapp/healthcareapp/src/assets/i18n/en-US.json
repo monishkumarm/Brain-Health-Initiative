@@ -5,6 +5,8 @@
   "dashboard": "Dashboard",
   "password": "password",
   "addPatient": "Add Patient",
+  "addUser" : "Add User",
+  "addHospital" : "Add Hospital",
   "logout": "Logout",
   "welcomeMessage": "Welcome to Brain Health Initiative Application",
   "name":"Name",

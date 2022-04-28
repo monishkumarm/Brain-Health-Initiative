@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PatientService } from 'src/app/services/patient.service';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {LoginService} from "../../services/login.service";
 
 export interface Patient {
   firstName: string;
@@ -19,11 +20,13 @@ export interface Patient {
 })
 
 export class DashboardComponent implements OnInit, AfterViewInit {
-
-  constructor(private service: PatientService, private _liveAnnouncer: LiveAnnouncer){}
+  isAdmin = false;
+  constructor(private loginService:LoginService, private service: PatientService, private _liveAnnouncer: LiveAnnouncer){
+    this.isAdmin = this.loginService.isAdmin();
+  }
 
   @ViewChild(MatSort) sort!: MatSort;
-  
+
    ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
    }

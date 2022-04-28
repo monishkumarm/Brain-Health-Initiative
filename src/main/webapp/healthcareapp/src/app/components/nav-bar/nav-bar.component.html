@@ -6,13 +6,20 @@
   <button *ngIf="isLoggedIn" routerLink="/dashboard" mat-button>
     {{ 'dashboard' | translate }}
   </button>
-  <button *ngIf="isLoggedIn" routerLink="/addPatient" mat-button>
+  <button *ngIf="isLoggedIn && !isAdmin" routerLink="/addPatient" mat-button>
     {{ 'addPatient' | translate }}
+  </button>
+
+  <button *ngIf="isLoggedIn && isAdmin" (click)="openUserDialog()" mat-button>
+    {{ 'addUser' | translate }}
+  </button>
+  <button *ngIf="isLoggedIn && isAdmin" (click)="openHospitalDialog()" mat-button>
+    {{ 'addHospital' | translate }}
   </button>
   <button *ngIf="!isLoggedIn" routerLink="/login" mat-button>
     {{ 'login' | translate }}
   </button>
-  
+
   <span class="example-spacer"></span>
 
   <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Select Language">

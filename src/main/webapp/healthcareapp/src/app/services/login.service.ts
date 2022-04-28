@@ -19,8 +19,9 @@ export class LoginService {
     return this.http.post(`${this.url}/token`, credentials);
   }
 
-  loginUser(token:any){
+  loginUser(token:any,roletypeId:any){
      localStorage.setItem("token", token);
+     localStorage.setItem("roleTypeId",roletypeId);
      return true;
   }
 
@@ -33,9 +34,16 @@ export class LoginService {
 
     return true;
   }
-
+  isAdmin(){
+    let id = localStorage.getItem("roleTypeId");
+    if(id == undefined || id === '' || id == null || id != "3"){
+      return false;
+    }
+    return true;
+  }
   logout(){
     localStorage.removeItem("token");
+    localStorage.removeItem("roleTypeId");
     return true;
   }
 

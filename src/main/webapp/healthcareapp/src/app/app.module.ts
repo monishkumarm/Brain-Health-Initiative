@@ -14,7 +14,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginService } from './services/login.service';
 import { AuthGuard } from './services/auth.guard';
@@ -41,7 +41,11 @@ import { UserService } from './services/user.service';
 import { QuestionnaryService } from './services/questionnary.service';
 import { PerformQuestionnaryComponent } from './components/perform-questionnary/perform-questionnary.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { AddHospitalComponent } from './components/add-hospital/add-hospital.component';
+import {AdminService} from "./services/admin.service";
+import { ToastrModule } from 'ngx-toastr';
+import {MatDialogModule} from "@angular/material/dialog";
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -57,47 +61,58 @@ export function HttpLoaderFactory(http: HttpClient){
     PatientDetailsComponent,
     ConsultationDetailsComponent,
     AddConsultationDetailsComponent,
-    PerformQuestionnaryComponent
+    PerformQuestionnaryComponent,
+    AddUserComponent,
+    AddHospitalComponent
   ],
-  imports: [
-    MbscModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    HttpClientModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatAutocompleteModule,
-    MatRadioModule,
-    MatTableModule,
-    MatSortModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatMenuModule,
-    MatOptionModule,
-    MatTabsModule,
-    MatSnackBarModule,
-    TranslateModule.forRoot({
-      defaultLanguage:localStorage.getItem('language') ?? 'en-US',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-  ],
+    imports: [
+        MatDialogModule,
+        ToastrModule.forRoot({
+          timeOut: 2000, // 5 seconds
+          positionClass: 'toast-top-right',
+          closeButton: true,
+          progressBar: true,
+        }),
+        MbscModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        HttpClientModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatAutocompleteModule,
+        MatRadioModule,
+        MatTableModule,
+        MatSortModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatMenuModule,
+        MatOptionModule,
+        MatTabsModule,
+        MatSnackBarModule,
+        TranslateModule.forRoot({
+            defaultLanguage: localStorage.getItem('language') ?? 'en-US',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        ReactiveFormsModule,
+    ],
   providers: [LoginService,
               PatientService,
               UserService,
-              QuestionnaryService, 
-              AuthGuard, 
+              QuestionnaryService,
+              AdminService,
+              AuthGuard,
               [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]
-             
+
             ],
   bootstrap: [AppComponent]
 })
