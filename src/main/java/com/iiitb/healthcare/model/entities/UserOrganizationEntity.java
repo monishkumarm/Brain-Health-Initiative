@@ -1,5 +1,6 @@
 package com.iiitb.healthcare.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -20,9 +21,11 @@ public class UserOrganizationEntity {
     @NotNull
     @Column(name = "OrganizationId")
     private long organizationId;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "UserId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private UserEntity userByUserId;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "OrganizationId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private OrganizationEntity organizationByOrganizationId;
