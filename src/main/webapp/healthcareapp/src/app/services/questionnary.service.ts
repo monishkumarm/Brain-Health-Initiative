@@ -29,5 +29,16 @@ export class QuestionnaryService {
     )
     return this.httpCLient.post(`${this.url}/getNextQuestions`,Answer,{'headers':header})
   }
+
+  saveAnswers(Answers:any){
+    console.log("in save answer service");
+    let token = localStorage.getItem("token");
+    let header = new HttpHeaders(
+      {
+        Authorization  : "Bearer " + token
+      }
+    )
+    return this.httpCLient.post(`${this.url}/saveAnswers`,Answers,{'headers':header})
+  }
 }
 

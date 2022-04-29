@@ -1,27 +1,32 @@
-<div class="bg pt-5 pb-5">
+<div class="bg  pb-5">
     <div class="card m-auto">
       <div class="card-header p-3">
         <span  class="fs-4  fw-bold">
-          Perform Questionnary
+          Perform Questionnaire
         </span>
       </div>
       <div class="card-body">
         <div class="container bg-white mt-3">
             <div>
               <span  class="fw-bold" style="color: #673ab7; margin-right: 10px; display: inline-block;">
-                <p>Questionnary Set</p>
+                <p>Questionnaire Set</p>
               </span>
               <span  style="text-align: right; display: inline-block;">
                 <button type="button" class="btn-sm float-right"  routerLink="/addConsultation" [queryParams]="{id : patientDetails.Id}"   mat-raised-button color="primary" >Closed Questionnary</button>
               </span>
             </div>
-      
-            <div > 
+
+            <div >
               <mat-tab-group   [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" animationDuration="1000ms">
                 <mat-tab  *ngFor="let tab of tabs; let index = index" [label]="tab">
                   <div *ngIf="isResult[index]" class="p-4 bg-light">
                     <div>
-                      <p> Protocol Result : {{Result}}</p>
+                      <p> Conclusion : {{Result}}</p>
+                    </div>
+                    <div class="text-center">
+                      <button  class="mx-2" type="button" (click)="saveAnswer()" routerLink="/addConsultation" [queryParams]="{id : patientDetails.Id}"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
+                        Save and Conform
+                      </button>
                     </div>
                   </div>
                   <div *ngIf="!isResult[index]" class="p-4 bg-light">
@@ -33,21 +38,21 @@
                           <p style="color: hsl(262, 52%, 47%);">Question</p>
                         </div>
                     </div>
-                    
+
                     <div class="row" *ngFor="let questions of Questions[index][tab],let idx=index">
                       <div class="col-3">
                       <mat-form-field style="width: 100%;" appearance="outline">
                         <mat-label style="color: black;">Select Option</mat-label>
-                        <mat-select [(ngModel)]="Answers[index][tab][questions.id]" class="browser-default custom-select" style="width: 100%;" [disabled]="isSave[index]"  >
+                        <mat-select [(ngModel)]="Answers[index]['questionsAnswers'][questions.id]" class="browser-default custom-select" style="width: 100%;" [disabled]="isSave[index]"  >
                           <mat-option *ngFor="let option of questions.questionnaireOptionsById" [value]="option.id">{{option.option}}</mat-option>
                         </mat-select>
                       </mat-form-field>
-                    
+
                       </div>
                       <div class="col-9 pt-3">
                         <p>{{questions.question}}</p>
                       </div>
-                     
+
                     </div>
                   </div>
                   <!-- {{Answers[index][tab]|json}} -->
@@ -60,14 +65,14 @@
                       <button *ngIf="isSave[index]" class="mx-2" type="button"  (click)="optionSave(index)"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
                         Edit
                       </button>
-                      
-                      <button [disabled]="!(tabs.length == index+1)" class="mx-2" type="button"  id="saveAndNext" name="saveAndNext" (click)="optionSaveAndNext(index)"  style="align-content: center;width: 30%" mat-raised-button color="accent" >
+
+                      <button [disabled]="!(tabs.length == index+1) && isSave[index]" class="mx-2" type="button"  id="saveAndNext" name="saveAndNext" (click)="optionSaveAndNext(index)"  style="align-content: center;width: 30%" mat-raised-button color="accent" >
                         Save and Next
                       </button>
                     </div>
                     <div class="col-3"></div>
                   </div>
-                 
+
                 </mat-tab>
               </mat-tab-group>
             </div>

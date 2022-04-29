@@ -3,7 +3,9 @@ import { setOptions  } from '@mobiscroll/angular';
 import { ActivatedRoute } from '@angular/router';
 import { PatientService } from 'src/app/services/patient.service';
 import { UserService } from 'src/app/services/user.service';
-import {MatTabsModule} from '@angular/material/tabs';
+// import {MatTabsModule} from '@angular/material/tabs';
+import { DataService } from 'src/app/services/data.service';
+import { Subscription } from 'rxjs';
 
 setOptions({
   theme: 'ios',
@@ -17,6 +19,9 @@ setOptions({
 })
 export class AddConsultationDetailsComponent implements OnInit {
 
+  isLinear = false;
+  conclusion:any;
+  subscription: Subscription | undefined;
   medicine:any;
   consultationDetails ={
     complaint:'',
@@ -93,11 +98,13 @@ export class AddConsultationDetailsComponent implements OnInit {
   constructor(private activatedroute: ActivatedRoute,
               private patientService:PatientService,
               private userService:UserService,
+              private dataService:DataService
               ) { }
 
   ngOnInit(): void {
 
-
+    this.conclusion = '';
+    this.subscription = this.dataService.currentData.subscribe(data => this.conclusion = data);
     console.log("in init of add consulatation");
     this.medicine = [];
     this.consultationDetails.medicine = this.medicine;
