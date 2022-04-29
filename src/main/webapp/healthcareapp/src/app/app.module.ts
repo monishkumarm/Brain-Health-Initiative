@@ -46,6 +46,8 @@ import { AddHospitalComponent } from './components/add-hospital/add-hospital.com
 import {AdminService} from "./services/admin.service";
 import { ToastrModule } from 'ngx-toastr';
 import {MatDialogModule} from "@angular/material/dialog";
+import {DataService} from "./services/data.service";
+import {MatStepperModule} from '@angular/material/stepper';
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -95,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient){
         MatOptionModule,
         MatTabsModule,
         MatSnackBarModule,
+        MatStepperModule,
         TranslateModule.forRoot({
             defaultLanguage: localStorage.getItem('language') ?? 'en-US',
             loader: {
@@ -111,6 +114,7 @@ export function HttpLoaderFactory(http: HttpClient){
               QuestionnaryService,
               AdminService,
               AuthGuard,
+              DataService,
               [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]
 
             ],

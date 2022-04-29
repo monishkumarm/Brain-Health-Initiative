@@ -35,9 +35,6 @@ export class LoginComponent implements OnInit {
           console.log(response.token);
           console.log(response.RoleTypeId);
           this.loginService.loginUser(response.token,response.RoleTypeId);
-          if(this.loginService.isAdmin())
-          window.location.href="/adminDashboard";
-          else
             window.location.href="/dashboard";
         },
         (error:any) => {
