@@ -1,4 +1,4 @@
-<body class="pt-5">
+<body >
 <div class="card m-auto">
   <div class="card-header">
     <span class="fs-4 p-2 fw-bold">
@@ -11,14 +11,18 @@
 
   <div class="card-body ">
 
+
     <form #consultationForm ="ngForm" (ngSubmit)="onSubmit()"   >
 
 
       <div class="container bg-white mt-3">
+        <p class="fw-bold" style="color:  #673ab7;">Questionnaire conclusion : {{conclusion}}</p>
+
         <p class="fw-bold" style="color:  #673ab7;">Consultation Form</p>
         <div >
-          <mat-tab-group  animationDuration="1000ms">
-            <mat-tab  label="{{'chiefComplaints' | translate}}">
+          <mat-stepper  animationDuration="1000ms"[linear]="isLinear" #stepper >
+            <mat-step>
+              <ng-template matStepLabel>{{'chiefComplaints' | translate}}</ng-template>
             <div class="bg-light">
             <div class="row m-2" >
               <div class="col-sm-6 form-group ">
@@ -51,8 +55,9 @@
             </div>
             <div class="col-sm-6 form-group">
             </div>
-            </mat-tab>
-            <mat-tab label="{{'diagnosis' | translate}}">
+            </mat-step>
+            <mat-step >
+              <ng-template matStepLabel>{{'diagnosis' | translate}}</ng-template>
               <div class="bg-light">
               <div class="row m-2" >
               <div class="col-sm-6 form-group">
@@ -86,8 +91,9 @@
 
               </div>
               </div>
-            </mat-tab>
-            <mat-tab label="{{'treatmentPlan' | translate}}">
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>{{'treatmentPlan' | translate}}</ng-template>
             <div class="bg-light">
             <div class="row m-2" >
               <div class="col-sm-6 form-group">
@@ -156,8 +162,9 @@
               </div>
             </div>
             </div>
-          </mat-tab>
-          <mat-tab label="{{'followUpRecommendations' | translate}}">
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>{{'followUpRecommendations' | translate}}</ng-template>
             <div class="bg-light">
             <div class="row m-2" >
               <div class="col-sm-6 form-group">
@@ -205,8 +212,8 @@
               </div>
             </div>
             </div>
-            </mat-tab>
-          </mat-tab-group>
+            </mat-step>
+          </mat-stepper>
 
           </div>
 

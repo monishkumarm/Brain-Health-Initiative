@@ -41,7 +41,8 @@ import { UserService } from './services/user.service';
 import { QuestionnaryService } from './services/questionnary.service';
 import { PerformQuestionnaryComponent } from './components/perform-questionnary/perform-questionnary.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { DataService } from './services/data.service';
+import {MatStepperModule} from '@angular/material/stepper';
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -82,6 +83,7 @@ export function HttpLoaderFactory(http: HttpClient){
     MatOptionModule,
     MatTabsModule,
     MatSnackBarModule,
+    MatStepperModule,
     TranslateModule.forRoot({
       defaultLanguage:localStorage.getItem('language') ?? 'en-US',
       loader: {
@@ -95,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient){
               PatientService,
               UserService,
               QuestionnaryService, 
+              DataService,
               AuthGuard, 
               [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]
              

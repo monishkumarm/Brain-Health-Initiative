@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PatientService } from 'src/app/services/patient.service';
 import {FormControl} from '@angular/forms';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-perform-questionnary',
@@ -57,6 +58,7 @@ export class PerformQuestionnaryComponent implements OnInit {
                 private activatedroute:ActivatedRoute,
                 private patientService:PatientService,
                 private _snackBar: MatSnackBar,
+                private dataService:DataService,
               ) { }
 
   ngOnInit(): void {
@@ -115,9 +117,18 @@ export class PerformQuestionnaryComponent implements OnInit {
         {
             this.Answer[response["questionSet"][option].id.toString()]='';
         }
-        this.Answer = '{ "groupId":' + response["groupId"] + ', "subGroupId":' + response["subGroupId"] +',"' + response["questionSetName"] + '":' + JSON.stringify(this.Answer)+'}';
+        this.Answer = '{ "groupId":' + response["groupId"] + ', "subGroupId":' + response["subGroupId"] +',"questionsAnswers":' + JSON.stringify(this.Answer)+'}';
         this.tabs.push(response["questionSetName"]);
         this.Answers.push(JSON.parse(this.Answer));
+        for(let question in this.Questions[0][response["questionSetName"]])
+        { 
+          let id = this.Questions[0][response["questionSetName"]][question].id;
+        
+          // console.log(this.Questions[0][response["questionSetName"]][question].questionnaireOptionsById.slice(-1)[0].id);
+          this.Answers[0]["questionsAnswers"][id]=this.Questions[0][response["questionSetName"]][question].questionnaireOptionsById.slice(-1)[0].id;
+        }
+        console.log(this.Answers);
+        // Answers[index][tab][questions.id]
         this.isSave.push(false);
         this.isResult.push(false);
         console.log("data");
@@ -152,7 +163,15 @@ export class PerformQuestionnaryComponent implements OnInit {
 
   optionSaveAndNext(index:any)
   {
+    
+    console.log(this.Answers);
+    this.tabs = this.tabs.slice(0,index+1);
+    this.Questions = this.Questions.slice(0,index+1);
+    this.Answers = this.Answers.slice(0,index+1);
+    this.isSave = this.isSave.slice(0,index+1);
+    this.isResult = this.isResult.slice(0,index+1);
     this.isSave[index]=true;
+    console.log(this.Answers);
     console.log(this.Answers[index]);
     this.questionnaryService.getNextQuestions(this.Answers[index],).subscribe(
       (response:any) => {
@@ -164,6 +183,7 @@ export class PerformQuestionnaryComponent implements OnInit {
           this.Result = response["message"];
           this.tabs.push("protocolResult");
           this.selected.setValue(this.tabs.length - 1);
+          // this.dataService.changeData(response["message"]);
         }
         else
         {
@@ -176,9 +196,14 @@ export class PerformQuestionnaryComponent implements OnInit {
           {
               this.Answer[response["questionSet"][option].id.toString()]='';
           }
-          this.Answer = '{ "groupId":' + response["groupId"] + ', "subGroupId":' + response["subGroupId"] +',"' + response["questionSetName"] + '":' + JSON.stringify(this.Answer)+'}';
+          this.Answer = '{ "groupId":' + response["groupId"] + ', "subGroupId":' + response["subGroupId"] +',"questionsAnswers":' + JSON.stringify(this.Answer)+'}';
           this.tabs.push(response["questionSetName"]);
           this.Answers.push(JSON.parse(this.Answer));
+          for(let question in this.Questions[index+1][response["questionSetName"]])
+          { 
+            let id = this.Questions[index+1][response["questionSetName"]][question].id;
+            this.Answers[index+1]["questionsAnswers"][id]=this.Questions[index+1][response["questionSetName"]][question].questionnaireOptionsById.slice(-1)[0].id;
+          }
           this.isSave.push(false);
           this.isResult.push(false);
           console.log("data");
@@ -207,6 +232,26 @@ export class PerformQuestionnaryComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  saveAnswer()
+  {
+    this.dataService.changeData(this.Result);
+    this.questionnaryService.saveAnswers(this.Answers).subscribe(
+      (response:any) => {
+        console.log(response);
+        this._snackBar.open(response, 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      },
+      (error:any) => {
+        console.log(error);
+      }
+    );
+    // window.location.href="/addConsultation?id="+this.patientDetails.Id;
+    
   }
 
 }

@@ -39,7 +39,7 @@ public class QuestionnaireService {
         System.out.println(payload.toString());
         if((int)payload.get("groupId")==1)
         {
-            Map<String,Object> answer = (Map)payload.get("commonQuestions");
+            Map<String,Object> answer = (Map)payload.get("questionsAnswers");
             System.out.println(answer.toString());
             if(((int)answer.get("1")==1 || (int)answer.get("2")==3) && (int)answer.get("3")==5)
             {
@@ -50,6 +50,14 @@ public class QuestionnaireService {
             {
                 System.out.println("Stroke Protocol");
                 res = this.strokeProtocol(payload);
+            }
+            else
+            {
+                res.put("message","Opps!! Work In progress");
+                res.put("questionSetName",null);
+                res.put("questionSet",null);
+                res.put("groupId",null);
+                res.put("subGroupId",null);
             }
         }
         else if((int)payload.get("groupId")==2)
@@ -63,7 +71,7 @@ public class QuestionnaireService {
     Map<String,Object> epilepsyProtocol(Map<String,Object> payload)
     {
         Map<String,Object> res  = new HashMap<>();
-        Map<String,Object> answer = (Map)payload.get("epilepsy");
+        Map<String,Object> answer = (Map)payload.get("questionsAnswers");
 
         if((int)payload.get("groupId")==1)
         {
@@ -253,7 +261,7 @@ public class QuestionnaireService {
     Map<String,Object> strokeProtocol(Map<String,Object> payload)
     {
         Map<String,Object> res  = new HashMap<>();
-        Map<String,Object> answer = (Map)payload.get("epilepsy");
+        Map<String,Object> answer = (Map)payload.get("questionsAnswers");
 
         if((int)payload.get("groupId")==1)
         {
