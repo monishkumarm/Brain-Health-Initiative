@@ -72,3 +72,17 @@
   </div>
 </div>
 </div>
+
+<!----Admin-->
+<div class="grid-container" *ngIf="isAdmin">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="{{ ( cards | async )?.columns }}" rowHeight="350px">
+    <mat-grid-tile *ngFor="let i of [1, 2, 3, 4]" [colspan]="( cards| async )?.miniCardCols" [rowspan]="( cards| async )?.miniCardRows">
+      <app-card title="Card {{i}}"><div>Mini Card Content Here</div></app-card>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let i of [5, 6, 7, 8]" [colspan]="( cards | async )?.chartCardCols"
+                   [rowspan]="( cards | async )?.chartCardRows">
+      <app-card title="Sales Chart {{i}}"><app-barchart></app-barchart></app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

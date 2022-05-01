@@ -4,7 +4,8 @@ import { PatientService } from 'src/app/services/patient.service';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {LoginService} from "../../services/login.service";
-
+import { map } from 'rxjs/operators';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 export interface Patient {
   firstName: string;
   phoneNumber: string;
@@ -21,7 +22,7 @@ export interface Patient {
 
 export class DashboardComponent implements OnInit, AfterViewInit {
   isAdmin = false;
-  constructor(private loginService:LoginService, private service: PatientService, private _liveAnnouncer: LiveAnnouncer){
+  constructor(private breakpointObserver: BreakpointObserver,private loginService:LoginService, private service: PatientService, private _liveAnnouncer: LiveAnnouncer){
     this.isAdmin = this.loginService.isAdmin();
   }
 
@@ -57,5 +58,31 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+
+
+
+
+  //Admin
+   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+     map(({ matches }) => {
+       if (matches) {
+         return{
+           columns: 1,
+           miniCardCols :1,
+           miniCardRows:1,
+           chartCardRows: 2,
+           chartCardCols :1
+         };
+       }
+
+       return {
+         columns: 4,
+         miniCardCols :1,
+         miniCardRows:1,
+         chartCardRows: 2,
+         chartCardCols :2
+       };
+     })
+   );
 }
 

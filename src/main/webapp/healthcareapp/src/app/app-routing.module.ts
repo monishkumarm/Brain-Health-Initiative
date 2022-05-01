@@ -11,8 +11,7 @@ import {
   AddConsultationDetailsComponent
 } from "./components/add-consultation-details/add-consultation-details.component";
 import { PerformQuestionnaryComponent } from './components/perform-questionnary/perform-questionnary.component';
-import {AddUserComponent} from "./components/add-user/add-user.component";
-import{AddHospitalComponent} from "./components/add-hospital/add-hospital.component";
+
 
 const routes: Routes = [
   {
@@ -58,18 +57,6 @@ const routes: Routes = [
   {
     path:'performQuestionnary',
     component:PerformQuestionnaryComponent,
-    pathMatch:'full',
-    canActivate:[AuthGuard]
-  },
-  {
-    path:'addUser',
-    component:AddUserComponent,
-    pathMatch:'full',
-    canActivate:[AuthGuard]
-  },
-  {
-    path:'addHospital',
-    component:AddHospitalComponent,
     pathMatch:'full',
     canActivate:[AuthGuard]
   }

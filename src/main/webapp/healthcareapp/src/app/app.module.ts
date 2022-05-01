@@ -48,6 +48,14 @@ import { ToastrModule } from 'ngx-toastr';
 import {MatDialogModule} from "@angular/material/dialog";
 import {DataService} from "./services/data.service";
 import {MatStepperModule} from '@angular/material/stepper';
+
+//chart imports
+import { NgChartsModule } from 'ng2-charts';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { LayoutModule } from '@angular/cdk/layout';
+import { CardComponent } from './components/card/card.component';
+import { BarchartComponent } from './components/barchart/barchart.component';
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -65,7 +73,9 @@ export function HttpLoaderFactory(http: HttpClient){
     AddConsultationDetailsComponent,
     PerformQuestionnaryComponent,
     AddUserComponent,
-    AddHospitalComponent
+    AddHospitalComponent,
+    CardComponent,
+    BarchartComponent
   ],
     imports: [
         MatDialogModule,
@@ -98,6 +108,7 @@ export function HttpLoaderFactory(http: HttpClient){
         MatTabsModule,
         MatSnackBarModule,
         MatStepperModule,
+        NgChartsModule,
         TranslateModule.forRoot({
             defaultLanguage: localStorage.getItem('language') ?? 'en-US',
             loader: {
@@ -107,6 +118,9 @@ export function HttpLoaderFactory(http: HttpClient){
             }
         }),
         ReactiveFormsModule,
+        MatGridListModule,
+        MatCardModule,
+        LayoutModule,
     ],
   providers: [LoginService,
               PatientService,

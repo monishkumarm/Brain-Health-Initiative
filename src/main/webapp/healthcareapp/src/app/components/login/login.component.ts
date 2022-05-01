@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
           console.log(response.token);
           console.log(response.RoleTypeId);
           this.loginService.loginUser(response.token,response.RoleTypeId);
-            window.location.href="/dashboard";
+          window.location.href="/dashboard";
+
         },
         (error:any) => {
           this.isError = true;
