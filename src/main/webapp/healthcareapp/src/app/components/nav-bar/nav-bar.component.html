@@ -3,7 +3,7 @@
     <mat-icon>local_hospital</mat-icon>
     {{'brainhealthinitiative' | translate}}
   </button>
-  <button *ngIf="isLoggedIn && !isAdmin" routerLink="/dashboard" mat-button>
+  <button *ngIf="isLoggedIn" routerLink="/dashboard" mat-button>
     {{ 'dashboard' | translate }}
   </button>
   <button *ngIf="isLoggedIn && !isAdmin" routerLink="/addPatient" mat-button>
