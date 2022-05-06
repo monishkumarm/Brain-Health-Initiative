@@ -21,6 +21,13 @@ jobs:
         with:
           java-version: '11'
 
+      - name: Set Database Password
+        uses: christian-draeger/write-properties@1.1.0
+        with:
+          path: './src/main/resources/application.properties'
+          property: 'spring.datasource.password'
+          value: ${{secrets.APPLICATIONUSERPASSWORD}}
+
       - name: Build with Maven
         run: mvn clean install
 
