@@ -4,8 +4,6 @@ import { PatientService } from 'src/app/services/patient.service';
 import { MatTableDataSource } from '@angular/material/table';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
-import th from '@mobiscroll/angular/dist/js/i18n/th';
-
 
 export interface Consulatation { 
   complaintDetail: JSON,
