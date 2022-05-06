@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
-  url = 'http://localhost:5050';
+  url = 'https://brainhealthinitiativebackend.azurewebsites.net';
 
   constructor(private httpClient:HttpClient) { }
 

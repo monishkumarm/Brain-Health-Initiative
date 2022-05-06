@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 
 export class PatientService {
 
-  url = 'http://localhost:5050';
+  url = 'https://brainhealthinitiativebackend.azurewebsites.net';
 
   constructor(private httpCLient:HttpClient) { }
 

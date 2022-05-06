@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   providedIn: 'root'
 })
 export class AdminService {
-  url = 'http://localhost:5050';
+  url = 'https://brainhealthinitiativebackend.azurewebsites.net';
 
   constructor(private httpCLient:HttpClient) { }
 

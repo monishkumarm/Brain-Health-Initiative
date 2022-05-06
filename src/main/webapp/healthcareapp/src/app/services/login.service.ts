@@ -11,7 +11,7 @@ export class LoginService {
     "password":''
   }
 
-  url = "http://localhost:5050";
+  url = "https://brainhealthinitiativebackend.azurewebsites.net";
 
   constructor(private http:HttpClient) { }
 
