@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: ./src/main/webapp/healthcareapp
+          path: ./dist/healthcareapp
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,4 +53,4 @@ jobs:
           app-name: 'brainhealthinitiative'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_047C36D8B2934D42B7A35EE228633B95 }}
-          package: .
+          package: ./dist/healthcareapp
