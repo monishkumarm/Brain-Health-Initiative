@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PatientRepository extends JpaRepository<PatientEntity,Integer> {
 
-    @Query(value="SELECT * FROM Patient P INNER JOIN UserPermissionPatient UPP ON P.Id = UPP.PatientId WHERE UPP.UserId = ?1 AND UPP.CanView=1",nativeQuery = true)
+    @Query(value="select * from (SELECT * FROM Patient P INNER JOIN UserPermissionPatient UPP ON P.Id = UPP.PatientId WHERE UPP.UserId = ?1 AND UPP.CanView=1) `PU*`",nativeQuery = true)
     List<PatientEntity> findAllPatientByUser(long id);
 
     List<PatientEntity> findById(long id);
