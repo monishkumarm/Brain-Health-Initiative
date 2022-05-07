@@ -9,5 +9,4 @@ public interface ConsultationRepository extends JpaRepository<PatientConsultatio
 
     List<PatientConsultationEntity> getAllByPatientIdOrderByReferredOnDesc(long patientId);
 
-    PatientConsultationEntity getById(long id);
 }

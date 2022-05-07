@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    public UserEntity findByUsername(String username);
+    UserEntity findByUsername(String username);
 
-    @Query(value="SELECT * FROM user U WHERE U.RoleTypeId = 2 ",nativeQuery = true)
-    public List<UserEntity> getAllSpecilists();
+    @Query(value = "SELECT * FROM user U WHERE U.RoleTypeId = 2 ", nativeQuery = true)
+    List<UserEntity> getAllSpecialists();
 
 }

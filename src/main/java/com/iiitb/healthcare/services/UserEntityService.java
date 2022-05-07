@@ -22,7 +22,7 @@ public class UserEntityService {
     }
 
     public List<UserEntity> getAllSpecialists() {
-        return new ArrayList<>(userRepository.getAllSpecilists());
+        return new ArrayList<>(userRepository.getAllSpecialists());
     }
 
     public UserEntity getUserByName(String name) {
