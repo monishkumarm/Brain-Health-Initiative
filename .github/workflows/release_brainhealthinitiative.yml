@@ -32,7 +32,7 @@ jobs:
         with:
           name: node-app
           working-directory: ./src/main/webapp/healthcareapp
-          path: .
+          path: ./src/main/webapp/healthcareapp
 
   deploy:
     runs-on: ubuntu-latest
