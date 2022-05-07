@@ -2,11 +2,9 @@ package com.iiitb.healthcare.controller;
 
 import com.iiitb.healthcare.helper.JwtUtil;
 import com.iiitb.healthcare.model.JwtRequest;
-import com.iiitb.healthcare.model.JwtResponse;
 import com.iiitb.healthcare.model.entities.UserEntity;
 import com.iiitb.healthcare.services.CustomUserDetailsService;
 import com.iiitb.healthcare.services.UserEntityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,17 +19,20 @@ import java.util.HashMap;
 @CrossOrigin(origins = "*")
 public class JwtController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
 
-    @Autowired
-    private UserEntityService userEntityService;
+    private final UserEntityService userEntityService;
+
+    public JwtController(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService, JwtUtil jwtUtil, UserEntityService userEntityService) {
+        this.authenticationManager = authenticationManager;
+        this.customUserDetailsService = customUserDetailsService;
+        this.jwtUtil = jwtUtil;
+        this.userEntityService = userEntityService;
+    }
 
     @RequestMapping(value = "/token", method = RequestMethod.POST)
     public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {

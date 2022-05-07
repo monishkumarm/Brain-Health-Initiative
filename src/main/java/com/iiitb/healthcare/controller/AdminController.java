@@ -6,7 +6,6 @@ import com.iiitb.healthcare.services.CustomUserDetailsService;
 import com.iiitb.healthcare.services.OrganizationEntityService;
 import com.iiitb.healthcare.services.UserEntityService;
 import com.iiitb.healthcare.services.UserOrganizationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,17 +17,20 @@ import java.util.Map;
 @RestController
 @CrossOrigin("*")
 public class AdminController {
-    @Autowired
-    private OrganizationEntityService organizationEntityService;
+    private final OrganizationEntityService organizationEntityService;
 
-    @Autowired
-    private UserOrganizationService userOrganizationService;
+    private final UserOrganizationService userOrganizationService;
 
-    @Autowired
-    private UserEntityService userEntityService;
+    private final UserEntityService userEntityService;
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
+
+    public AdminController(OrganizationEntityService organizationEntityService, UserOrganizationService userOrganizationService, UserEntityService userEntityService, CustomUserDetailsService customUserDetailsService) {
+        this.organizationEntityService = organizationEntityService;
+        this.userOrganizationService = userOrganizationService;
+        this.userEntityService = userEntityService;
+        this.customUserDetailsService = customUserDetailsService;
+    }
 
     @RequestMapping(value = "/addHospital", method = RequestMethod.POST)
     public ResponseEntity<?> addHospital(@RequestBody Map<String, Object> payload, @RequestHeader Map<String, String> headers) throws Exception {

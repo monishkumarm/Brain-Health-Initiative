@@ -13,8 +13,11 @@ import java.util.Map;
 @CrossOrigin("*")
 public class ConsultationController {
 
-    @Autowired
-    private ConsultationService consultationService;
+    private final ConsultationService consultationService;
+
+    public ConsultationController(ConsultationService consultationService) {
+        this.consultationService = consultationService;
+    }
 
     @RequestMapping(value = "/patients/getAllConsultations")
     public ResponseEntity<?> getPatientConsultations(@RequestParam Map<String,String> param) {

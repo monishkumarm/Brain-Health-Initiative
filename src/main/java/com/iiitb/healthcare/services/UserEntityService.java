@@ -2,7 +2,6 @@ package com.iiitb.healthcare.services;
 
 import com.iiitb.healthcare.model.entities.UserEntity;
 import com.iiitb.healthcare.repo.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -16,36 +15,42 @@ import java.util.Map;
 @Service
 public class UserEntityService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public List<UserEntity> getAllSpecialists(){
-        List<UserEntity> specilists = new ArrayList<UserEntity>();
-        userRepository.getAllSpecilists().forEach(user->specilists.add(user));
-        return specilists;
+    public UserEntityService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
-    public UserEntity getUserByName(String name){
+
+    public List<UserEntity> getAllSpecialists() {
+        List<UserEntity> specialists = new ArrayList<UserEntity>();
+        userRepository.getAllSpecilists().forEach(user -> specialists.add(user));
+        return specialists;
+    }
+
+    public UserEntity getUserByName(String name) {
         UserEntity user = userRepository.findByUsername(name);
         return user;
     }
-    public UserEntity getDetails(){
+
+    public UserEntity getDetails() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         String username = userDetails.getUsername();
         UserEntity user = userRepository.findByUsername(username);
         return user;
     }
-    public String addUser(Map<String,Object> payload, UserEntity u){
-        try{
+
+    public String addUser(Map<String, Object> payload, UserEntity u) {
+        try {
             UserEntity user = new UserEntity();
-            user.setFirstName((String)payload.get("firstname"));
-            user.setLastName((String)payload.get("lastname"));
-            user.setUsername((String)payload.get("username"));
-            user.setEmail((String)payload.get("email"));
+            user.setFirstName((String) payload.get("firstname"));
+            user.setLastName((String) payload.get("lastname"));
+            user.setUsername((String) payload.get("username"));
+            user.setEmail((String) payload.get("email"));
             user.setPhoneNumber(String.valueOf(payload.get("phone")));
-            user.setPassword((String)payload.get("password"));
-            Map<String,Object> map = (Map)payload.get("roletype");
-            user.setRoleTypeId(Integer.parseInt((String) map.get("id") ));
+            user.setPassword((String) payload.get("password"));
+            Map<String, Object> map = (Map) payload.get("roletype");
+            user.setRoleTypeId(Integer.parseInt((String) map.get("id")));
             String address = "{ \"addLine1\": \"" + (String) payload.get("addLine1") + "\" ,";
             address = address + "\"district\": \"" + (String) payload.get("district") + "\" ,";
             address = address + "\"state\": \"" + (String) payload.get("state") + "\" ,";
@@ -60,8 +65,7 @@ public class UserEntityService {
             user.setLastChangeBy(u.getId());
             UserEntity newUser = userRepository.save(user);
             return String.valueOf(user.getId());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return e.getMessage();
         }

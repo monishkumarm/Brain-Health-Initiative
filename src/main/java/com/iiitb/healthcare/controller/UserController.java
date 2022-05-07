@@ -15,8 +15,11 @@ import java.util.List;
 @CrossOrigin("*")
 public class UserController {
 
-    @Autowired
-    private UserEntityService userEntityService;
+    private final UserEntityService userEntityService;
+
+    public UserController(UserEntityService userEntityService) {
+        this.userEntityService = userEntityService;
+    }
 
     @RequestMapping("/getSpecialists")
     public ResponseEntity<?> getAllSpecilist(){

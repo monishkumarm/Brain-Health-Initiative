@@ -1,9 +1,7 @@
 package com.iiitb.healthcare.controller;
 
-import com.iiitb.healthcare.model.entities.PatientConsultationEntity;
 import com.iiitb.healthcare.model.entities.PatientEntity;
 import com.iiitb.healthcare.services.PatientEntityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +12,11 @@ import java.util.Map;
 @CrossOrigin("*")
 public class PatientController {
 
-    @Autowired
-    private PatientEntityService patientEntityService;
+    private final PatientEntityService patientEntityService;
+
+    public PatientController(PatientEntityService patientEntityService) {
+        this.patientEntityService = patientEntityService;
+    }
 
     @RequestMapping("/getAllPatients")
     public ResponseEntity<?> getAllPatients(){
