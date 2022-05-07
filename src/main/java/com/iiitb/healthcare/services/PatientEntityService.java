@@ -33,32 +33,28 @@ public class PatientEntityService {
     }
 
     public List<PatientEntity> getAllPatients() {
-        List<PatientEntity> patients = new ArrayList<PatientEntity>();
-        patientRepository.findAll().forEach(patient -> patients.add(patient));
-        return patients;
+        return new ArrayList<>(patientRepository.findAll());
     }
 
     public List<PatientEntity> getAllPatientByUser(String token) {
-        List<PatientEntity> patients = new ArrayList<PatientEntity>();
         UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
-        patientRepository.findAllPatientByUser((long) user.getId()).forEach(patient -> patients.add(patient));
-        return patients;
+        return new ArrayList<>(patientRepository.findAllPatientByUser(user.getId()));
     }
 
     public List<PatientEntity> getSearchPatients(Map<String, Object> payload) {
-        List<PatientEntity> patients = new ArrayList<PatientEntity>();
+        List<PatientEntity> patients = new ArrayList<>();
         System.out.println((String) payload.get("value"));
         Integer option = Integer.parseInt((String) payload.get("option"));
         if (option.compareTo(1) == 0) {
-            patientRepository.findByAbhaId((String) payload.get("value")).forEach(patient -> patients.add(patient));
+            patients.addAll(patientRepository.findByAbhaId((String) payload.get("value")));
         } else if (option.compareTo(2) == 0) {
-            patientRepository.findByFirstName((String) payload.get("value")).forEach(patient -> patients.add(patient));
+            patients.addAll(patientRepository.findByFirstName((String) payload.get("value")));
         } else if (option.compareTo(3) == 0) {
-            patientRepository.findByPhoneNumber((String) payload.get("value")).forEach(patient -> patients.add(patient));
+            patients.addAll(patientRepository.findByPhoneNumber((String) payload.get("value")));
         } else {
-            patientRepository.findById(Long.parseLong((String) payload.get("value"))).forEach(patient -> patients.add(patient));
+            patients.addAll(patientRepository.findById(Long.parseLong((String) payload.get("value"))));
         }
-        System.out.println(patients.toString());
+        System.out.println(patients);
         return patients;
     }
 
@@ -69,18 +65,16 @@ public class PatientEntityService {
             PatientEntity patient = new PatientEntity();
 
             patient.setAbhaId((String) payload.get("ABHAID"));
-            String add1 = (String) payload.get("addLine1");
-            String add2 = (String) payload.get("addLine2");
-            String address = "{ \"addLine1\": \"" + (String) payload.get("addLine1") + "\" ,";
-            address = address + "\"addLine2\": \"" + (String) payload.get("addLine2") + "\" ,";
-            address = address + "\"district\": \"" + (String) payload.get("district") + "\" ,";
-            address = address + "\"state\": \"" + (String) payload.get("state") + "\" ,";
-            address = address + "\"pin\": \"" + (String) payload.get("pin") + "\" }";
+            String address = "{ \"addLine1\": \"" + payload.get("addLine1") + "\" ,";
+            address = address + "\"addLine2\": \"" + payload.get("addLine2") + "\" ,";
+            address = address + "\"district\": \"" + payload.get("district") + "\" ,";
+            address = address + "\"state\": \"" + payload.get("state") + "\" ,";
+            address = address + "\"pin\": \"" + payload.get("pin") + "\" }";
             patient.setAddressDetail(address);
             patient.setAge((Integer) payload.get("age"));
 
             UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
-            patient.setCreatedBy((long) user.getId());
+            patient.setCreatedBy(user.getId());
 
             Date date = new Date();
             patient.setCreatedOn(new Timestamp(date.getTime()));
@@ -90,7 +84,7 @@ public class PatientEntityService {
             patient.setGender(Integer.parseInt((String) payload.get("gender")));
             patient.setInformantCaregiverName((String) payload.get("carer_name"));
             patient.setLanguages((String) payload.get("lan"));
-            patient.setLastChangeBy((long) user.getId());
+            patient.setLastChangeBy(user.getId());
             patient.setLastChangeOn(new Timestamp(date.getTime()));
             patient.setLastName((String) payload.get("lname"));
             patient.setOccupation((String) payload.get("occ"));
@@ -102,8 +96,8 @@ public class PatientEntityService {
 
             UserPermissionPatientEntity userPermissionPatientEntity = new UserPermissionPatientEntity();
 
-            userPermissionPatientEntity.setPatientId((long) patient1.getId());
-            userPermissionPatientEntity.setUserId((long) user.getId());
+            userPermissionPatientEntity.setPatientId(patient1.getId());
+            userPermissionPatientEntity.setUserId(user.getId());
             userPermissionPatientEntity.setCanDelete(true);
             userPermissionPatientEntity.setCanModify(true);
             userPermissionPatientEntity.setCanView(true);
@@ -130,11 +124,11 @@ public class PatientEntityService {
     public PatientEntity updatePatients(Map<String, Object> payload, String token) {
         System.out.println("in Update service");
         List<PatientEntity> patients = this.patientRepository.findByAbhaId((String) payload.get("ABHAID"));
-        String address = "{ \"addLine1\": \"" + (String) payload.get("addLine1") + "\" ,";
-        address = address + "\"addLine2\": \"" + (String) payload.get("addLine2") + "\" ,";
-        address = address + "\"district\": \"" + (String) payload.get("district") + "\" ,";
-        address = address + "\"state\": \"" + (String) payload.get("state") + "\" ,";
-        address = address + "\"pin\": \"" + (String) payload.get("pin") + "\" }";
+        String address = "{ \"addLine1\": \"" + payload.get("addLine1") + "\" ,";
+        address = address + "\"addLine2\": \"" + payload.get("addLine2") + "\" ,";
+        address = address + "\"district\": \"" + payload.get("district") + "\" ,";
+        address = address + "\"state\": \"" + payload.get("state") + "\" ,";
+        address = address + "\"pin\": \"" + payload.get("pin") + "\" }";
         patients.get(0).setAddressDetail(address);
         System.out.println("get user");
         patients.get(0).setAge((Integer) payload.get("age"));
@@ -146,15 +140,12 @@ public class PatientEntityService {
         patients.get(0).setGender(Integer.parseInt((String) payload.get("gender")));
         patients.get(0).setInformantCaregiverName((String) payload.get("carer_name"));
         patients.get(0).setLanguages((String) payload.get("lan"));
-        patients.get(0).setLastChangeBy((long) user.getId());
+        patients.get(0).setLastChangeBy(user.getId());
         patients.get(0).setLastChangeOn(new Timestamp(date.getTime()));
         patients.get(0).setLastName((String) payload.get("lname"));
         patients.get(0).setOccupation((String) payload.get("occ"));
         patients.get(0).setPhoneNumber((String) payload.get("phone"));
         patients.get(0).setRelationshipWithPatient((String) payload.get("carer_rel"));
-        PatientEntity patient1 = patientRepository.save(patients.get(0));
-        return patient1;
-
-
+        return patientRepository.save(patients.get(0));
     }
 }

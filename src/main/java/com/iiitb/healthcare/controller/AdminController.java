@@ -2,7 +2,6 @@ package com.iiitb.healthcare.controller;
 
 import com.iiitb.healthcare.model.entities.OrganizationEntity;
 import com.iiitb.healthcare.model.entities.UserEntity;
-import com.iiitb.healthcare.services.CustomUserDetailsService;
 import com.iiitb.healthcare.services.OrganizationEntityService;
 import com.iiitb.healthcare.services.UserEntityService;
 import com.iiitb.healthcare.services.UserOrganizationService;
@@ -23,25 +22,22 @@ public class AdminController {
 
     private final UserEntityService userEntityService;
 
-    private final CustomUserDetailsService customUserDetailsService;
-
-    public AdminController(OrganizationEntityService organizationEntityService, UserOrganizationService userOrganizationService, UserEntityService userEntityService, CustomUserDetailsService customUserDetailsService) {
+    public AdminController(OrganizationEntityService organizationEntityService, UserOrganizationService userOrganizationService, UserEntityService userEntityService) {
         this.organizationEntityService = organizationEntityService;
         this.userOrganizationService = userOrganizationService;
         this.userEntityService = userEntityService;
-        this.customUserDetailsService = customUserDetailsService;
     }
 
     @RequestMapping(value = "/addHospital", method = RequestMethod.POST)
-    public ResponseEntity<?> addHospital(@RequestBody Map<String, Object> payload, @RequestHeader Map<String, String> headers) throws Exception {
+    public ResponseEntity<?> addHospital(@RequestBody Map<String, Object> payload, @RequestHeader Map<String, String> headers) {
         String res = organizationEntityService.addHospital(payload, headers.get("authorization"));
         return ResponseEntity.ok(payload);
     }
 
     @RequestMapping(value = "/getAllOrganizations")
-    public ResponseEntity<?> getAllOrganizations(@RequestHeader Map<String, String> headers) {
-        List<OrganizationEntity> orgs = organizationEntityService.getAllOrganizations();
-        return ResponseEntity.ok(orgs);
+    public ResponseEntity<?> getAllOrganizations() {
+        List<OrganizationEntity> organizations = organizationEntityService.getAllOrganizations();
+        return ResponseEntity.ok(organizations);
     }
 
     @RequestMapping(value = "/getDiagnosisChartData")
@@ -51,7 +47,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public ResponseEntity<?> addUser(@RequestBody Map<String, Object> payload, @RequestHeader Map<String, String> headers) throws Exception {
+    public ResponseEntity<?> addUser(@RequestBody Map<String, Object> payload) {
         UserEntity user = userEntityService.getDetails();
         String id = userEntityService.addUser(payload, user);
         userOrganizationService.addUserOrganization((ArrayList<Integer>) payload.get("orgs"), id);

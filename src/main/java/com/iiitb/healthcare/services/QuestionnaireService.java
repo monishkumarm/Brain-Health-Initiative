@@ -1,7 +1,6 @@
 package com.iiitb.healthcare.services;
 
 import com.iiitb.healthcare.model.entities.QuestionnaireEntity;
-import com.iiitb.healthcare.repo.QuestionnaireOptionRepository;
 import com.iiitb.healthcare.repo.QuestionnaireRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +12,9 @@ import java.util.Map;
 public class QuestionnaireService {
 
     private final QuestionnaireRepository questionnaireRepository;
-    private final QuestionnaireOptionRepository questionnaireOptionRepository;
 
-    public QuestionnaireService(QuestionnaireRepository questionnaireRepository, QuestionnaireOptionRepository questionnaireOptionRepository) {
+    public QuestionnaireService(QuestionnaireRepository questionnaireRepository) {
         this.questionnaireRepository = questionnaireRepository;
-        this.questionnaireOptionRepository = questionnaireOptionRepository;
     }
 
     public Map<String, Object> getCommonQuestions() {

@@ -3,7 +3,6 @@ package com.iiitb.healthcare.services;
 import com.iiitb.healthcare.model.CustomUserDetails;
 import com.iiitb.healthcare.model.entities.UserEntity;
 import com.iiitb.healthcare.repo.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

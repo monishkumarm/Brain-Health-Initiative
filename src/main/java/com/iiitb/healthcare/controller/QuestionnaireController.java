@@ -18,17 +18,13 @@ public class QuestionnaireController {
 
     @RequestMapping("/getCommonQuestions")
     public ResponseEntity<?> getCommonQuestions(){
-        System.out.println("int get common question controller");
         Map<String,Object> questions = questionnaireService.getCommonQuestions();
-
         return ResponseEntity.ok(questions);
     }
 
     @RequestMapping(value = "/getNextQuestions",method = RequestMethod.POST)
     public ResponseEntity<?> getNextQuestions(@RequestBody Map<String,Object> payload){
 
-        System.out.println("in get next question controller");
-        System.out.println(payload.toString());
         Map<String,Object> questions = questionnaireService.getNextQuestions(payload);
 
         return ResponseEntity.ok(questions);
@@ -36,11 +32,9 @@ public class QuestionnaireController {
 
     @RequestMapping(value = "/saveAnswers",method = RequestMethod.POST)
     public  ResponseEntity<?> saveAnswers(@RequestBody Map<String,Object> payload[]){
-        System.out.println("in save answers controller");
         for (Map<String, Object> map : payload) {
             System.out.println(map.toString());
         }
-//        System.out.println(payload.toString());
         String res = "Answers save";
         return ResponseEntity.ok(res);
     }

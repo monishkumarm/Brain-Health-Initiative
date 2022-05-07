@@ -22,22 +22,18 @@ public class UserEntityService {
     }
 
     public List<UserEntity> getAllSpecialists() {
-        List<UserEntity> specialists = new ArrayList<UserEntity>();
-        userRepository.getAllSpecilists().forEach(user -> specialists.add(user));
-        return specialists;
+        return new ArrayList<>(userRepository.getAllSpecilists());
     }
 
     public UserEntity getUserByName(String name) {
-        UserEntity user = userRepository.findByUsername(name);
-        return user;
+        return userRepository.findByUsername(name);
     }
 
     public UserEntity getDetails() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         String username = userDetails.getUsername();
-        UserEntity user = userRepository.findByUsername(username);
-        return user;
+        return userRepository.findByUsername(username);
     }
 
     public String addUser(Map<String, Object> payload, UserEntity u) {
@@ -51,10 +47,10 @@ public class UserEntityService {
             user.setPassword((String) payload.get("password"));
             Map<String, Object> map = (Map) payload.get("roletype");
             user.setRoleTypeId(Integer.parseInt((String) map.get("id")));
-            String address = "{ \"addLine1\": \"" + (String) payload.get("addLine1") + "\" ,";
-            address = address + "\"district\": \"" + (String) payload.get("district") + "\" ,";
-            address = address + "\"state\": \"" + (String) payload.get("state") + "\" ,";
-            address = address + "\"pin\": \"" + String.valueOf(payload.get("pincode")) + "\" }";
+            String address = "{ \"addLine1\": \"" + payload.get("addLine1") + "\" ,";
+            address = address + "\"district\": \"" + payload.get("district") + "\" ,";
+            address = address + "\"state\": \"" + payload.get("state") + "\" ,";
+            address = address + "\"pin\": \"" + payload.get("pincode") + "\" }";
             user.setAddressDetail(address);
             Date date = new Date();
             user.setCreatedOn(new Timestamp(date.getTime()));

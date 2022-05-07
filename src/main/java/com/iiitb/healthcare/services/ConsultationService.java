@@ -44,87 +44,84 @@ public class ConsultationService {
     }
 
     public String addConsultationRecord(Map<String, Object> payload, String token, String abhaId) {
-        System.out.println("In add consultation service");
-
         List<PatientEntity> patients = this.patientRepository.findByAbhaId(abhaId);
         PatientConsultationEntity consultationEntity = new PatientConsultationEntity();
         Date date = new Date();
         UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
         UserEntity referUser = this.userRepository.findByUsername((String) payload.get("refer"));
         consultationEntity.setAppointmentTime(new Timestamp(date.getTime()));
-        String complaintDetail = "{ \"complaint\": \"" + (String) payload.get("complaint") + "\" ,";
-        complaintDetail = complaintDetail + "\"history\": \"" + (String) payload.get("history") + "\" ,";
-        complaintDetail = complaintDetail + "\"examination\": \"" + (String) payload.get("examination") + "\" ,";
-        complaintDetail = complaintDetail + "\"illnessSummary\": \"" + (String) payload.get("illnessSummary") + "\" }";
+        String complaintDetail = "{ \"complaint\": \"" + payload.get("complaint") + "\" ,";
+        complaintDetail = complaintDetail + "\"history\": \"" + payload.get("history") + "\" ,";
+        complaintDetail = complaintDetail + "\"examination\": \"" + payload.get("examination") + "\" ,";
+        complaintDetail = complaintDetail + "\"illnessSummary\": \"" + payload.get("illnessSummary") + "\" }";
         consultationEntity.setComplaintDetail(complaintDetail);
         System.out.println(complaintDetail);
         consultationEntity.setDiagnosisTypeId(Integer.parseInt((String) payload.get("type")));
-        consultationEntity.setDoctorId((long) referUser.getId());
+        consultationEntity.setDoctorId(referUser.getId());
 
-        String followUpDetails = "{ \"followUp\": \"" + (String) payload.get("followup") + "\" ,";
-        followUpDetails = followUpDetails + "\"moveToIp\": " + (Boolean) payload.get("moveToIp") + " ,";
-        followUpDetails = followUpDetails + "\"referSos\": " + (Boolean) payload.get("referSos") + " }";
+        String followUpDetails = "{ \"followUp\": \"" + payload.get("followup") + "\" ,";
+        followUpDetails = followUpDetails + "\"moveToIp\": " + payload.get("moveToIp") + " ,";
+        followUpDetails = followUpDetails + "\"referSos\": " + payload.get("referSos") + " }";
         consultationEntity.setFollowUpDetail(followUpDetails);
         System.out.println(followUpDetails);
 
-        String icdDetails = "{ \"icd10\": \"" + (String) payload.get("icd10") + "\" ,";
-        icdDetails = icdDetails + "\"icdDescription\": \"" + (String) payload.get("icdDescription") + "\" }";
+        String icdDetails = "{ \"icd10\": \"" + payload.get("icd10") + "\" ,";
+        icdDetails = icdDetails + "\"icdDescription\": \"" + payload.get("icdDescription") + "\" }";
         consultationEntity.setIcdDetail(icdDetails);
         System.out.println(icdDetails);
 
 
         String medicineDetails = "{ ";
         consultationEntity.setImprovementStatusId(Integer.parseInt((String) payload.get("improvementStatus")));
-        String medicines = " \"medicines\" : [";
+        StringBuilder medicines = new StringBuilder(" \"medicines\" : [");
 
         List<LinkedHashMap<String, Object>> medicineList = (ArrayList<LinkedHashMap<String, Object>>) payload.get("medicine");
         int n = medicineList.size();
         System.out.println(n);
         if (n > 0) {
-            medicineDetails = medicineDetails + " \"medicineDuration\" : \"" + (String) payload.get("medicineDuration") + "\" ,";
-            medicineDetails = medicineDetails + " \"remarks\" : \"" + (String) payload.get("remarks") + "\" ,";
+            medicineDetails = medicineDetails + " \"medicineDuration\" : \"" + payload.get("medicineDuration") + "\" ,";
+            medicineDetails = medicineDetails + " \"remarks\" : \"" + payload.get("remarks") + "\" ,";
             LinkedHashMap<String, Object> medicine = medicineList.get(0);
-            String med = "{ \"medicineName\": \"" + (String) medicine.get("medicineName") + "\" ,";
-            med = med + "\"Dosage\": \"" + (String) medicine.get("Dosage") + "\" ,";
-            med = med + "\"isMorning\": " + (Boolean) medicine.get("isMorning") + " ,";
-            med = med + "\"isAfternoon\": " + (Boolean) medicine.get("isAfternoon") + " ,";
-            med = med + "\"isNight\": " + (Boolean) medicine.get("isNight") + " }";
+            String med = "{ \"medicineName\": \"" + medicine.get("medicineName") + "\" ,";
+            med = med + "\"Dosage\": \"" + medicine.get("Dosage") + "\" ,";
+            med = med + "\"isMorning\": " + medicine.get("isMorning") + " ,";
+            med = med + "\"isAfternoon\": " + medicine.get("isAfternoon") + " ,";
+            med = med + "\"isNight\": " + medicine.get("isNight") + " }";
 
-            medicines = medicines + med;
+            medicines.append(med);
 
         }
 
         for (int i = 1; i < n; i++) {
             LinkedHashMap<String, Object> medicine = medicineList.get(i);
-            String med = ", { \"medicineName\": \"" + (String) medicine.get("medicineName") + "\" ,";
-            med = med + "\"Dosage\": \"" + (String) medicine.get("Dosage") + "\" ,";
-            med = med + "\"isMorning\": " + (Boolean) medicine.get("isMorning") + " ,";
-            med = med + "\"isAfternoon\": " + (Boolean) medicine.get("isAfternoon") + ",";
-            med = med + "\"isNight\": " + (Boolean) medicine.get("isNight") + " }";
-            medicines = medicines + med;
+            String med = ", { \"medicineName\": \"" + medicine.get("medicineName") + "\" ,";
+            med = med + "\"Dosage\": \"" + medicine.get("Dosage") + "\" ,";
+            med = med + "\"isMorning\": " + medicine.get("isMorning") + " ,";
+            med = med + "\"isAfternoon\": " + medicine.get("isAfternoon") + ",";
+            med = med + "\"isNight\": " + medicine.get("isNight") + " }";
+            medicines.append(med);
         }
-        medicines = medicines + " ] }";
+        medicines.append(" ] }");
         medicineDetails = medicineDetails + medicines;
         consultationEntity.setMedicineDetail(medicineDetails);
         System.out.println(medicineDetails);
 //        System.out.println(consultationEntity.getMedicineDetail());
-        consultationEntity.setPatientId((long) patients.get(0).getId());
-        consultationEntity.setReferredBy((long) user.getId());
+        consultationEntity.setPatientId(patients.get(0).getId());
+        consultationEntity.setReferredBy(user.getId());
         consultationEntity.setReferredOn(new Timestamp(date.getTime()));
         consultationEntity.setTreatmentInstruction((String) payload.get("treatmentInstructions"));
         PatientConsultationEntity patientConsultationEntity = consultationRepository.save(consultationEntity);
-        System.out.println(patientConsultationEntity.toString());
+        System.out.println(patientConsultationEntity);
 
-        if (userPermissionPatientEntityRepository.getPatientByUser((long) referUser.getId(), (long) patients.get(0).getId()) == null) {
+        if (userPermissionPatientEntityRepository.getPatientByUser(referUser.getId(), patients.get(0).getId()) == null) {
             UserPermissionPatientEntity userPermissionPatientEntity = new UserPermissionPatientEntity();
-            userPermissionPatientEntity.setPatientId((long) patients.get(0).getId());
-            userPermissionPatientEntity.setUserId((long) referUser.getId());
+            userPermissionPatientEntity.setPatientId(patients.get(0).getId());
+            userPermissionPatientEntity.setUserId(referUser.getId());
             userPermissionPatientEntity.setCanDelete(false);
             userPermissionPatientEntity.setCanModify(false);
             userPermissionPatientEntity.setCanView(true);
             UserPermissionPatientEntity permission = userPermissionPatientEntityRepository.save(userPermissionPatientEntity);
         }
-
 
         return "Consultaion Record Added";
     }

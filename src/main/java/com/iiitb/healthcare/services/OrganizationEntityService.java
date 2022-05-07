@@ -17,8 +17,7 @@ public class OrganizationEntityService {
     }
 
     public List<OrganizationEntity> getAllOrganizations() {
-        List<OrganizationEntity> orgs = organizationRepo.findAll();
-        return orgs;
+        return organizationRepo.findAll();
     }
 
     public String addHospital(Map<String, Object> payload, String token) {
@@ -26,10 +25,10 @@ public class OrganizationEntityService {
             OrganizationEntity hospital = new OrganizationEntity();
             hospital.setActive(true);
             hospital.setName((String) payload.get("name"));
-            String address = "{ \"addLine1\": \"" + (String) payload.get("addLine1") + "\" ,";
-            address = address + "\"district\": \"" + (String) payload.get("district") + "\" ,";
-            address = address + "\"state\": \"" + (String) payload.get("state") + "\" ,";
-            address = address + "\"pin\": \"" + String.valueOf(payload.get("pincode")) + "\" }";
+            String address = "{ \"addLine1\": \"" + payload.get("addLine1") + "\" ,";
+            address = address + "\"district\": \"" + payload.get("district") + "\" ,";
+            address = address + "\"state\": \"" + payload.get("state") + "\" ,";
+            address = address + "\"pin\": \"" + payload.get("pincode") + "\" }";
             hospital.setAddressDetail(address);
             organizationRepo.save(hospital);
             return "Hospital Added";
