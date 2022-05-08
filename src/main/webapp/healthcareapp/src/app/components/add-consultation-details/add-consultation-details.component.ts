@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { setOptions  } from '@mobiscroll/angular';
 import { ActivatedRoute } from '@angular/router';
 import { PatientService } from 'src/app/services/patient.service';
 import { UserService } from 'src/app/services/user.service';
 // import {MatTabsModule} from '@angular/material/tabs';
 import { DataService } from 'src/app/services/data.service';
 import { Subscription } from 'rxjs';
-
-setOptions({
-  theme: 'ios',
-  themeVariant: 'light'
-});
 
 @Component({
   selector: 'app-add-consultation-details',

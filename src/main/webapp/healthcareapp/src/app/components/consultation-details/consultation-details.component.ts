@@ -1,13 +1,12 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PatientService } from 'src/app/services/patient.service';
-import { MatTableDataSource } from '@angular/material/table';
-import {MatSort, Sort} from '@angular/material/sort';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {PatientService} from 'src/app/services/patient.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
-import th from '@mobiscroll/angular/dist/js/i18n/th';
 
 
-export interface Consulatation { 
+export interface Consulatation {
   complaintDetail: JSON,
   diagnosisTypeLuByDiagnosisTypeId: JSON,
   improvementStutusLuByImprovementStutusId: JSON,
@@ -24,48 +23,48 @@ export interface Consulatation {
 })
 export class ConsultationDetailsComponent implements OnInit {
 
-  patientDetails={
-    Id:'',
-    ABHAID:'',
-    fname:'',
-    lname:'',
-    gender:'',
-    age:'',
-    lan:'',
-    edu:'',
-    occ:'',
-    email:'',
-    phone:'',
-    addLine1:'',
-    addLine2:'',
-    district:'',
-    state:'',
-    pin:'',
-    carer_name:'',
-    carer_rel:'',
+  patientDetails = {
+    Id: '',
+    ABHAID: '',
+    fname: '',
+    lname: '',
+    gender: '',
+    age: '',
+    lan: '',
+    edu: '',
+    occ: '',
+    email: '',
+    phone: '',
+    addLine1: '',
+    addLine2: '',
+    district: '',
+    state: '',
+    pin: '',
+    carer_name: '',
+    carer_rel: '',
   }
 
   search = {
-    option : '4',
-    value : '',
+    option: '4',
+    value: '',
   };
 
-  consultationRecords:any;
-  displayRecord:any
- options = {
+  consultationRecords: any;
+  displayRecord: any
+  options = {
     page: 1,
     size: 5
   };
 
- 
 
   ELEMENT_DATA!: Consulatation[];
-  displayedColumns: string[] = ['complaint','diagnosisType','improvementStatus','questionnaireResult','createdOn'];
+  displayedColumns: string[] = ['complaint', 'diagnosisType', 'improvementStatus', 'questionnaireResult', 'createdOn'];
   dataSource = new MatTableDataSource<Consulatation>(this.ELEMENT_DATA);
 
-  isExpand=false;
+  isExpand = false;
 
-  constructor(private activatedroute: ActivatedRoute, private patientService:PatientService, private _liveAnnouncer: LiveAnnouncer) { }
+  constructor(private activatedroute: ActivatedRoute, private patientService: PatientService, private _liveAnnouncer: LiveAnnouncer) {
+  }
 
   ngOnInit(): void {
 
@@ -75,7 +74,7 @@ export class ConsultationDetailsComponent implements OnInit {
       }
     );
     this.patientService.getSearchPatients(this.search).subscribe(
-      (response:any) => {
+      (response: any) => {
         console.log("in get patient");
         this.patientDetails.Id = response[0].id;
         this.patientDetails.ABHAID = response[0].abhaId;
@@ -97,37 +96,36 @@ export class ConsultationDetailsComponent implements OnInit {
         this.patientDetails.carer_rel = response[0].relationshipWithPatient
         console.log(this.patientDetails);
       },
-      (error:any) =>  {
+      (error: any) => {
         console.log(error);
       }
     );
-      // console.log(this.patientDetails)
+    // console.log(this.patientDetails)
     this.patientService.getAllConsultationsByPatient(this.search.value).subscribe(
-      (response:any)=>{
+      (response: any) => {
         this.dataSource.data = response as Consulatation[];
         console.log("In get consultation method");
-        for(let key in response)
-        {
-          response[key].isExpand=false
+        for (let key in response) {
+          response[key].isExpand = false
         }
-        this.consultationRecords=response;
+        this.consultationRecords = response;
         console.log(this.consultationRecords)
-        
-        this.dataSource.data = this.consultationRecords.slice((this.options.page-1)*this.options.size,this.options.page*this.options.size) as Consulatation[];
+
+        this.dataSource.data = this.consultationRecords.slice((this.options.page - 1) * this.options.size, this.options.page * this.options.size) as Consulatation[];
         // this.dataSource=this.displayRecord;
       },
-      (error:any)=>{
+      (error: any) => {
         console.log(error);
       }
     );
 
 
-    this.displayRecord = this.consultationRecords.slice(0,this.options.size);
+    this.displayRecord = this.consultationRecords.slice(0, this.options.size);
     // this.dataSource=this.displayRecord;
 
   }
-  
-  
+
+
   // applyFilter(event: Event) {
   //   const filterValue = (event.target as HTMLInputElement).value;
   //   this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -141,39 +139,35 @@ export class ConsultationDetailsComponent implements OnInit {
   //   }
   // }
 
-  display(element:any)
-  {
-    this.isExpand=true;
+  display(element: any) {
+    this.isExpand = true;
     this.displayRecord = element
   }
 
-  change()
-  {
+  change() {
     this.isExpand = !this.isExpand;
   }
 
 
-
-
   get numbers(): number[] {
     const limit = Math.ceil((this.consultationRecords.length) / this.options.size);
-    return Array.from({ length: limit }, (_, i) => i + 1);
+    return Array.from({length: limit}, (_, i) => i + 1);
   }
 
 
   next() {
     this.options.page++;
-    this.dataSource.data = this.consultationRecords.slice((this.options.page-1)*this.options.size,this.options.page*this.options.size) as Consulatation[];// this.getEmployees();
+    this.dataSource.data = this.consultationRecords.slice((this.options.page - 1) * this.options.size, this.options.page * this.options.size) as Consulatation[];// this.getEmployees();
   }
 
   prev() {
     this.options.page--;
-    this.dataSource.data = this.consultationRecords.slice((this.options.page-1)*this.options.size,this.options.page*this.options.size) as Consulatation[]; // this.getEmployees();
+    this.dataSource.data = this.consultationRecords.slice((this.options.page - 1) * this.options.size, this.options.page * this.options.size) as Consulatation[]; // this.getEmployees();
   }
 
   to(page: number) {
     this.options.page = page;
-    this.dataSource.data = this.consultationRecords.slice((this.options.page-1)*this.options.size,this.options.page*this.options.size) as Consulatation[];// this.getEmployees();
+    this.dataSource.data = this.consultationRecords.slice((this.options.page - 1) * this.options.size, this.options.page * this.options.size) as Consulatation[];// this.getEmployees();
   }
 
   announceSortChange(sortState: Sort) {
@@ -183,6 +177,7 @@ export class ConsultationDetailsComponent implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

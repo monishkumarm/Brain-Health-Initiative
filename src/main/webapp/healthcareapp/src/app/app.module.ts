@@ -1,4 +1,3 @@
-import {MbscModule} from '@mobiscroll/angular';
 import {Component, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
@@ -79,7 +78,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       closeButton: true,
       progressBar: true,
     }),
-    MbscModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
