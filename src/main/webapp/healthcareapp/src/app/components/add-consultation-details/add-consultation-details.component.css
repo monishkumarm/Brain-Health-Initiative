@@ -11,7 +11,7 @@ body {
   
 
 .add-consultation-cont {
-  width: 90%;
+ 
   border-radius: 5px;
   box-shadow: black 0px -1px 13px -6px;
 }
@@ -22,9 +22,9 @@ body {
 }
 
 .consultation-details {
-  margin: 5%;
+  /* margin: 5%; */
   margin-top: 5%;
-  margin-bottom: 8%;
+
   line-height: 1.5;
 }
 

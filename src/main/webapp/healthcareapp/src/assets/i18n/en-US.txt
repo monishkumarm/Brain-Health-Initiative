@@ -29,7 +29,7 @@
   "illnessSummary": "Illness Summary",
   "diagnosisType":"Diagnosis Type",
   "improvementStatus": "Improvement Status",
-  "search": "Search",
+  "search": "Search by name, ABHA ID, Mobile Number",
   "Add consultation Records": "Add consultation Records",
   "ABHA ID": "ABHA ID",
   "Name": "Name",

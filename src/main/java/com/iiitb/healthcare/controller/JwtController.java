@@ -2,11 +2,9 @@ package com.iiitb.healthcare.controller;
 
 import com.iiitb.healthcare.helper.JwtUtil;
 import com.iiitb.healthcare.model.JwtRequest;
-import com.iiitb.healthcare.model.JwtResponse;
 import com.iiitb.healthcare.model.entities.UserEntity;
 import com.iiitb.healthcare.services.CustomUserDetailsService;
 import com.iiitb.healthcare.services.UserEntityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,34 +15,39 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
+import static com.iiitb.healthcare.services.UserEntityService.helper;
+
 @RestController
 @CrossOrigin(origins = "*")
 public class JwtController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
 
-    @Autowired
-    private UserEntityService userEntityService;
+    private final UserEntityService userEntityService;
+
+    public JwtController(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService, JwtUtil jwtUtil, UserEntityService userEntityService) {
+        this.authenticationManager = authenticationManager;
+        this.customUserDetailsService = customUserDetailsService;
+        this.jwtUtil = jwtUtil;
+        this.userEntityService = userEntityService;
+    }
 
     @RequestMapping(value = "/token", method = RequestMethod.POST)
     public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
-        try{
-            this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword()));
-        }
-        catch (UsernameNotFoundException e){
+        var hashedPassword = UserEntityService.getHashedPassword(helper(jwtRequest.getPassword()));
+
+        try {
+            this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), hashedPassword));
+        } catch (UsernameNotFoundException e) {
             e.printStackTrace();
-            throw new Exception("User Name not found");
-        }
-        catch (BadCredentialsException e){
+            throw new Exception("Username not found");
+        } catch (BadCredentialsException e) {
             e.printStackTrace();
-            throw new Exception("Username or Password are wrong  ");
+            throw new Exception("Wrong Username or Password");
         }
 
         UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(jwtRequest.getUsername());
@@ -52,11 +55,10 @@ public class JwtController {
         String token = this.jwtUtil.generateToken(userDetails);
         UserEntity user = userEntityService.getUserByName(userDetails.getUsername());
 
-
-        HashMap<String,String> map  = new HashMap<>();
-        map.put("token",token);
-        map.put("RoleTypeId",String.valueOf(user.getRoleTypeId()));
+        HashMap<String, String> map = new HashMap<>();
+        map.put("token", token);
+        map.put("RoleTypeId", String.valueOf(user.getRoleTypeId()));
 
         return ResponseEntity.ok(map);
-     }
+    }
 }

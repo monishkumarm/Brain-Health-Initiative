@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { QuestionnaryService } from 'src/app/services/questionnary.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from 'src/app/services/patient.service';
 import {FormControl} from '@angular/forms';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
@@ -59,6 +59,7 @@ export class PerformQuestionnaryComponent implements OnInit {
                 private patientService:PatientService,
                 private _snackBar: MatSnackBar,
                 private dataService:DataService,
+                private router:Router,
               ) { }
 
   ngOnInit(): void {
@@ -179,8 +180,8 @@ export class PerformQuestionnaryComponent implements OnInit {
         if(response["questionSetName"] == null)
         {
           this.isResult.push(true);
-          this.Result = '';
-          this.Result = response["message"];
+          
+          this.Result = response["result"];
           this.tabs.push("protocolResult");
           this.selected.setValue(this.tabs.length - 1);
           // this.dataService.changeData(response["message"]);
@@ -237,20 +238,21 @@ export class PerformQuestionnaryComponent implements OnInit {
   saveAnswer()
   {
     this.dataService.changeData(this.Result);
-    this.questionnaryService.saveAnswers(this.Answers).subscribe(
+    this.questionnaryService.saveAnswers(this.Answers,this.Result,this.patientDetails.Id).subscribe(
       (response:any) => {
         console.log(response);
-        this._snackBar.open(response, 'Close', {
+        this._snackBar.open("Answers Save", 'Close', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'top',
         });
+        this.router.navigateByUrl("/addConsultation?id="+this.patientDetails.Id);
       },
       (error:any) => {
         console.log(error);
       }
     );
-    // window.location.href="/addConsultation?id="+this.patientDetails.Id;
+   
     
   }
 

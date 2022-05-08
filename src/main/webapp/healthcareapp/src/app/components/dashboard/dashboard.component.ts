@@ -4,8 +4,11 @@ import { PatientService } from 'src/app/services/patient.service';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {LoginService} from "../../services/login.service";
+import {MatPaginator} from '@angular/material/paginator';
+
 
 export interface Patient {
+  abhaId : string;
   firstName: string;
   phoneNumber: string;
   age: number;
@@ -21,14 +24,19 @@ export interface Patient {
 
 export class DashboardComponent implements OnInit, AfterViewInit {
   isAdmin = false;
+  filter: any;
+  patients:any
+  patientFilter = 2;
   constructor(private loginService:LoginService, private service: PatientService, private _liveAnnouncer: LiveAnnouncer){
     this.isAdmin = this.loginService.isAdmin();
   }
 
   @ViewChild(MatSort) sort!: MatSort;
-
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
    ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
    }
 
   ngOnInit(): void {
@@ -36,14 +44,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   ELEMENT_DATA!: Patient[];
-  displayedColumns: string[] = ['firstName', 'age', 'phoneNumber', 'email', 'createdOn', 'actions'];
+  displayedColumns: string[] = ['ABHA Id','firstName', 'age', 'phoneNumber', 'email', 'createdOn', 'actions'];
   dataSource = new MatTableDataSource<Patient>(this.ELEMENT_DATA);
 
   public getAllPatients(){
     let response = this.service.getAllPatients();
-
-    response.subscribe(patient => this.dataSource.data = patient as Patient[]);
+    response.subscribe(response => {
+      console.log(response);  
+      this.patients = response
+      this.dataSource.data = this.patients[1];
+    });
+  
   }
+
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -56,6 +70,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  radioChange(event:any) {
+    if(event.value==1)
+    {
+      this.dataSource.data = this.patients[0];
+    }
+    else{
+      this.dataSource.data = this.patients[1];
+    }
+
   }
 }
 

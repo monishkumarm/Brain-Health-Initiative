@@ -1,10 +1,10 @@
 package com.iiitb.healthcare.controller;
 
-import com.iiitb.healthcare.model.entities.PatientConsultationEntity;
+import com.iiitb.healthcare.model.CustomUserDetails;
 import com.iiitb.healthcare.model.entities.PatientEntity;
 import com.iiitb.healthcare.services.PatientEntityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,49 +14,54 @@ import java.util.Map;
 @CrossOrigin("*")
 public class PatientController {
 
-    @Autowired
-    private PatientEntityService patientEntityService;
+    private final PatientEntityService patientEntityService;
+
+    public PatientController(PatientEntityService patientEntityService) {
+        this.patientEntityService = patientEntityService;
+    }
 
     @RequestMapping("/getAllPatients")
-    public ResponseEntity<?> getAllPatients(){
-
-        System.out.println("In get all patients api");
-        List<PatientEntity> patients = patientEntityService.getAllPatients();
+    public ResponseEntity<?> getAllPatients() {
+        var loggedInUserId = getLoggedInUserId();
+        List<List<PatientEntity>> patients = patientEntityService.getAllPatients(loggedInUserId);
         return ResponseEntity.ok(patients);
     }
 
-    @RequestMapping("/getAllPatientByUser")
-    public  ResponseEntity<?> getAllPatientByUser(@RequestHeader Map<String,String> headers){
-        System.out.println("In get all patient by user api");
-        List<PatientEntity> patients = patientEntityService.getAllPatientByUser(headers.get("authorization"));
-        return ResponseEntity.ok(patients);
+//    @RequestMapping("/getAllPatientByUser")
+//    public ResponseEntity<?> getAllPatientByUser() {
+//        var loggedInUserId = getLoggedInUserId();
+//        List<PatientEntity> patients = patientEntityService.getAllPatientByUser(loggedInUserId);
+//        return ResponseEntity.ok(patients);
+//    }
+
+    @RequestMapping(value = "/addPatient", method = RequestMethod.POST)
+    public ResponseEntity<?> addPatient(@RequestBody Map<String, Object> payload) {
+        var loggedInUserId = getLoggedInUserId();
+        String res = patientEntityService.addPatient(payload, loggedInUserId);
+        return ResponseEntity.ok(res);
     }
 
-    @RequestMapping(value="/addPatient", method = RequestMethod.POST)
-    public ResponseEntity<?> addPatient(@RequestBody Map<String,Object> payload, @RequestHeader Map<String,String> headers) throws Exception{
-        System.out.println("in add patient api");
-        String res = patientEntityService.addPatient(payload,headers.get("authorization"));
-        return  ResponseEntity.ok(res);
-    }
-
-    @RequestMapping(value = "/getSearchPatients",method = RequestMethod.POST)
-    public ResponseEntity<?> getSearchPatients(@RequestBody Map<String,Object> payload) throws Exception{
-        System.out.println("in get search patient api");
+    @RequestMapping(value = "/getSearchPatients", method = RequestMethod.POST)
+    public ResponseEntity<?> getSearchPatients(@RequestBody Map<String, Object> payload) {
         List<PatientEntity> patients = patientEntityService.getSearchPatients(payload);
         return ResponseEntity.ok(patients);
     }
 
 
-    @RequestMapping(value = "/updatePatient",method = RequestMethod.POST)
-    public ResponseEntity<?> updatePatien(@RequestBody Map<String,Object> payload, @RequestHeader Map<String,String> headers) throws Exception{
-        System.out.println("in update Patient api");
-        boolean hasPermisson = patientEntityService.checkPermission(payload,headers.get("authorization"));
-        if(!hasPermisson)
-        {
+    @RequestMapping(value = "/updatePatient", method = RequestMethod.POST)
+    public ResponseEntity<?> updatePatient(@RequestBody Map<String, Object> payload) throws Exception {
+        var loggedInUserId = getLoggedInUserId();
+        boolean hasPermission = patientEntityService.checkPermission(payload, loggedInUserId);
+        if (!hasPermission) {
             throw new Exception("User dont have update permission");
         }
-        PatientEntity patient = patientEntityService.updatePatients(payload,headers.get("authorization"));
+        PatientEntity patient = patientEntityService.updatePatients(payload, loggedInUserId);
         return ResponseEntity.ok(patient);
     }
 
+    private Long getLoggedInUserId() {
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        var loggedInUser = (CustomUserDetails) auth.getPrincipal();
+        return loggedInUser.getUserId();
+    }
 }

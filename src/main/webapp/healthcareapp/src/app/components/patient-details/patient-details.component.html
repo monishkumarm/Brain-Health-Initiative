@@ -1,7 +1,7 @@
-<div class="bg pt-5 pb-5">
+<div class="bg pb-5">
 <div class="card m-auto">
   <div class="card-header">
-    <span class="fs-4 p-2 fw-bold">
+    <span class="fs-4 p-2">
       {{ "Patients Records" | translate }}
     </span>
     <span style="text-align: right;" >
@@ -19,8 +19,8 @@
     <form #patientForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="container bg-white mt-3">
         <div>
-          <mat-tab-group animationDuration="1000ms">
-            <mat-tab label="{{ 'identityInformation' | translate }}">
+          <!-- <mat-tab-group animationDuration="1000ms">
+            <mat-tab label="{{ 'identityInformation' | translate }}"> -->
               <div class="bg-light">
                 <div class="row m-2">
                   <div class="col-sm-6 form-group">
@@ -51,9 +51,9 @@
                   </div>
                 </div>
               </div>
-            </mat-tab>
+            <!-- </mat-tab>
 
-            <mat-tab label="{{ 'basicInformation' | translate }}">
+            <mat-tab label="{{ 'basicInformation' | translate }}"> -->
               <div class="bg-light">
                 <div class="row m-2">
                   <div class="col-sm-6 form-group">
@@ -203,9 +203,9 @@
                   <div class="col-sm-6"></div>
                 </div>
               </div>
-            </mat-tab>
+            <!-- </mat-tab>
 
-            <mat-tab label="{{ 'contactInformation' | translate }}">
+            <mat-tab label="{{ 'contactInformation' | translate }}"> -->
               <div class="bg-light">
                 <div class="row m-2">
                   <div class="col-sm-6 form-group">
@@ -279,9 +279,9 @@
                   </div>
                 </div>
               </div>
-            </mat-tab>
+            <!-- </mat-tab>
 
-            <mat-tab label="{{ 'caregiverInformation' | translate }}">
+            <mat-tab label="{{ 'caregiverInformation' | translate }}"> -->
               <div class="bg-light">
                 <div class="row m-2">
                   <div class="col-sm-6 form-group">
@@ -349,9 +349,9 @@
                 </div>
 
               </div>
-            </mat-tab>
+            <!-- </mat-tab>
 
-          </mat-tab-group>
+          </mat-tab-group> -->
         </div>
       </div>
     </form>

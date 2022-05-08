@@ -1,11 +1,19 @@
 package com.iiitb.healthcare.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "QuestionnaireDiagnosis", schema = "BrainHealthInitiative", catalog = "")
+@JsonIgnoreProperties({
+        "hibernateLazyInitializer",
+        "handler",
+        "patientQuestionnairesById",
+        "patientConsultationById"
+})
 public class QuestionnaireDiagnosisEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -16,6 +24,16 @@ public class QuestionnaireDiagnosisEntity {
     private String diagnosisInfo;
     @OneToMany(mappedBy = "questionnaireDiagnosisByReachedDiagnosisId")
     private Collection<PatientQuestionnaireEntity> patientQuestionnairesById;
+    @OneToMany(mappedBy = "questionnaireDiagnosisByReachedDiagnosisId")
+    private Collection<PatientConsultationEntity> patientConsultationById;
+
+    public Collection<PatientConsultationEntity> getPatientConsultationById() {
+        return patientConsultationById;
+    }
+
+    public void setPatientConsultationById(Collection<PatientConsultationEntity> patientConsultationById) {
+        this.patientConsultationById = patientConsultationById;
+    }
 
     public Long getId() {
         return id;
