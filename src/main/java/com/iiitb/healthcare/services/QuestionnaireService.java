@@ -175,13 +175,15 @@ public class QuestionnaireService {
 
         } else if ((int) payload.get("subGroupId") == 4) {
             if ((int) answer.get("26") == 54) {
-                res.put("message", "Epilepsy Diagnosis");
+                QuestionnaireDiagnosisEntity result = questionnaireDiagnosisRepository.getById((long)4);
+                res.put("result", result);
                 res.put("questionSetName", null);
                 res.put("questionSet", null);
                 res.put("groupId", null);
                 res.put("subGroupId", null);
             } else {
-                res.put("message", "Uncertain for Epilepsy");
+                QuestionnaireDiagnosisEntity result = questionnaireDiagnosisRepository.getById((long)3);
+                res.put("result", result);
                 res.put("questionSetName", null);
                 res.put("questionSet", null);
                 res.put("groupId", null);
@@ -206,20 +208,23 @@ public class QuestionnaireService {
         } else if ((int) payload.get("subGroupId") == 6) {
             if ((int) answer.get("28") == 58 || (int) answer.get("29") == 60 || (int) answer.get("32") == 66 || (int) answer.get("33") == 68) {
 
-                res.put("message", "Typical absence seizures");
+                QuestionnaireDiagnosisEntity result = questionnaireDiagnosisRepository.getById((long)5);
+                res.put("result", result);
                 res.put("questionSetName", null);
                 res.put("questionSet", null);
                 res.put("groupId", null);
                 res.put("subGroupId", null);
             } else {
                 if ((int) answer.get("30") == 62 || (int) answer.get("31") == 64) {
-                    res.put("message", "Probablr absence seizures");
+                    QuestionnaireDiagnosisEntity result = questionnaireDiagnosisRepository.getById((long)6);
+                    res.put("result", result);
                     res.put("questionSetName", null);
                     res.put("questionSet", null);
                     res.put("groupId", null);
                     res.put("subGroupId", null);
                 } else {
-                    res.put("message", "Generalised seizure");
+                    QuestionnaireDiagnosisEntity result = questionnaireDiagnosisRepository.getById((long)7);
+                    res.put("result", result);
                     res.put("questionSetName", null);
                     res.put("questionSet", null);
                     res.put("groupId", null);
@@ -228,13 +233,15 @@ public class QuestionnaireService {
             }
         } else if ((int) payload.get("subGroupId") == 7) {
             if (((int) answer.get("34") == 70 || (int) answer.get("35") == 72 || (int) answer.get("36") == 74 || (int) answer.get("37") == 76 || (int) answer.get("38") == 78 || (int) answer.get("39") == 80) && (int) answer.get("40") == 82) {
-                res.put("message", "Typical febril siezure");
+                QuestionnaireDiagnosisEntity result = questionnaireDiagnosisRepository.getById((long)8);
+                res.put("result", result);
                 res.put("questionSetName", null);
                 res.put("questionSet", null);
                 res.put("groupId", null);
                 res.put("subGroupId", null);
             } else {
-                res.put("message", "Atypical febrile siezure");
+                QuestionnaireDiagnosisEntity result = questionnaireDiagnosisRepository.getById((long)9);
+                res.put("result", result);
                 res.put("questionSetName", null);
                 res.put("questionSet", null);
                 res.put("groupId", null);
