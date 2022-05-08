@@ -3,6 +3,8 @@ package com.iiitb.healthcare.controller;
 import com.iiitb.healthcare.model.entities.PatientEntity;
 import com.iiitb.healthcare.services.PatientEntityService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,15 +22,15 @@ public class PatientController {
 
     @RequestMapping("/getAllPatients")
     public ResponseEntity<?> getAllPatients(){
-        List<PatientEntity> patients = patientEntityService.getAllPatients();
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        List<List<PatientEntity>> patients = patientEntityService.getAllPatients(username);
         return ResponseEntity.ok(patients);
     }
 
-    @RequestMapping("/getAllPatientByUser")
-    public  ResponseEntity<?> getAllPatientByUser(@RequestHeader Map<String,String> headers){
-        List<PatientEntity> patients = patientEntityService.getAllPatientByUser(headers.get("authorization"));
-        return ResponseEntity.ok(patients);
-    }
+
+
+
 
     @RequestMapping(value="/addPatient", method = RequestMethod.POST)
     public ResponseEntity<?> addPatient(@RequestBody Map<String,Object> payload, @RequestHeader Map<String,String> headers) {

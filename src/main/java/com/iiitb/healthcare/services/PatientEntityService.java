@@ -24,22 +24,38 @@ public class PatientEntityService {
 
     private final UserPermissionPatientEntityRepository userPermissionPatientEntityRepository;
     private final JwtUtil jwtUtil;
+    private final  ConsultationService consultationService;
 
-    public PatientEntityService(PatientRepository patientRepository, UserRepository userRepository, UserPermissionPatientEntityRepository userPermissionPatientEntityRepository, JwtUtil jwtUtil) {
+    public PatientEntityService(PatientRepository patientRepository, UserRepository userRepository, UserPermissionPatientEntityRepository userPermissionPatientEntityRepository, JwtUtil jwtUtil, ConsultationService consultationService){
         this.patientRepository = patientRepository;
         this.userRepository = userRepository;
         this.userPermissionPatientEntityRepository = userPermissionPatientEntityRepository;
         this.jwtUtil = jwtUtil;
+        this.consultationService = consultationService;
     }
 
-    public List<PatientEntity> getAllPatients() {
-        return new ArrayList<>(patientRepository.findAll());
+    public List<List<PatientEntity>> getAllPatients(String username) {
+        UserEntity user = userRepository.findByUsername(username);
+        List<PatientEntity> consultedPatient = new ArrayList<>();
+        List<PatientEntity> unconsultedPatient = new ArrayList<>();
+        List<PatientEntity> patientsList = patientRepository.findAllPatientByUser(user.getId());
+        for(int i=0;i<patientsList.size();i++){
+            if(this.consultationService.getPatientConsultations(patientsList.get(i).getId()).size()>0)
+            {
+                consultedPatient.add(patientsList.get(i));
+            }
+            else
+            {
+                unconsultedPatient.add(patientsList.get(i));
+            }
+        }
+        List<List<PatientEntity>> patients = new ArrayList<>();
+        patients.add(consultedPatient);
+        patients.add(unconsultedPatient);
+        return patients;
     }
 
-    public List<PatientEntity> getAllPatientByUser(String token) {
-        UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
-        return new ArrayList<>(patientRepository.findAllPatientByUser(user.getId()));
-    }
+
 
     public List<PatientEntity> getSearchPatients(Map<String, Object> payload) {
         List<PatientEntity> patients = new ArrayList<>();

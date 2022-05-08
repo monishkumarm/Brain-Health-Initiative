@@ -21,8 +21,10 @@ export class PatientService {
         Authorization  : "Bearer " + token
       }
     )
-    return this.httpCLient.get(`${this.url}/getAllPatientByUser`,{'headers':header});
+    return this.httpCLient.get(`${this.url}/getAllPatients`,{'headers':header});
   }
+
+
 
   addPatient(patientDetails:any){
     let token = localStorage.getItem("token");
