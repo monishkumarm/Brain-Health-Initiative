@@ -29,8 +29,8 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/addHospital", method = RequestMethod.POST)
-    public ResponseEntity<?> addHospital(@RequestBody Map<String, Object> payload, @RequestHeader Map<String, String> headers) {
-        String res = organizationEntityService.addHospital(payload, headers.get("authorization"));
+    public ResponseEntity<?> addHospital(@RequestBody Map<String, Object> payload) {
+        String res = organizationEntityService.addHospital(payload);
         return ResponseEntity.ok(payload);
     }
 

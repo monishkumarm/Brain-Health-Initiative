@@ -1,6 +1,5 @@
 package com.iiitb.healthcare.services;
 
-import com.iiitb.healthcare.helper.JwtUtil;
 import com.iiitb.healthcare.model.entities.PatientConsultationEntity;
 import com.iiitb.healthcare.model.entities.PatientEntity;
 import com.iiitb.healthcare.model.entities.UserEntity;
@@ -24,14 +23,12 @@ public class ConsultationService {
     private final UserRepository userRepository;
 
     private final UserPermissionPatientEntityRepository userPermissionPatientEntityRepository;
-    private final JwtUtil jwtUtil;
 
-    public ConsultationService(ConsultationRepository consultationRepository, PatientRepository patientRepository, UserRepository userRepository, UserPermissionPatientEntityRepository userPermissionPatientEntityRepository, JwtUtil jwtUtil) {
+    public ConsultationService(ConsultationRepository consultationRepository, PatientRepository patientRepository, UserRepository userRepository, UserPermissionPatientEntityRepository userPermissionPatientEntityRepository) {
         this.consultationRepository = consultationRepository;
         this.patientRepository = patientRepository;
         this.userRepository = userRepository;
         this.userPermissionPatientEntityRepository = userPermissionPatientEntityRepository;
-        this.jwtUtil = jwtUtil;
     }
 
 
@@ -43,11 +40,10 @@ public class ConsultationService {
         return consultationRepository.getById(id);
     }
 
-    public String addConsultationRecord(Map<String, Object> payload, String token, String abhaId) {
+    public String addConsultationRecord(Map<String, Object> payload, Long loggedInUserId, String abhaId) {
         List<PatientEntity> patients = this.patientRepository.findByAbhaId(abhaId);
         PatientConsultationEntity consultationEntity = new PatientConsultationEntity();
         Date date = new Date();
-        UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
         UserEntity referUser = this.userRepository.findByUsername((String) payload.get("refer"));
         consultationEntity.setAppointmentTime(new Timestamp(date.getTime()));
         String complaintDetail = "{ \"complaint\": \"" + payload.get("complaint") + "\" ,";
@@ -107,7 +103,7 @@ public class ConsultationService {
         System.out.println(medicineDetails);
 //        System.out.println(consultationEntity.getMedicineDetail());
         consultationEntity.setPatientId(patients.get(0).getId());
-        consultationEntity.setReferredBy(user.getId());
+        consultationEntity.setReferredBy(loggedInUserId);
         consultationEntity.setReferredOn(new Timestamp(date.getTime()));
         consultationEntity.setTreatmentInstruction((String) payload.get("treatmentInstructions"));
         PatientConsultationEntity patientConsultationEntity = consultationRepository.save(consultationEntity);

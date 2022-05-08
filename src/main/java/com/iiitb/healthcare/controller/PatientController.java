@@ -1,10 +1,10 @@
 package com.iiitb.healthcare.controller;
 
+import com.iiitb.healthcare.model.CustomUserDetails;
 import com.iiitb.healthcare.model.entities.PatientEntity;
 import com.iiitb.healthcare.services.PatientEntityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,39 +21,46 @@ public class PatientController {
     }
 
     @RequestMapping("/getAllPatients")
-    public ResponseEntity<?> getAllPatients(){
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = userDetails.getUsername();
-        List<List<PatientEntity>> patients = patientEntityService.getAllPatients(username);
+    public ResponseEntity<?> getAllPatients() {
+        List<PatientEntity> patients = patientEntityService.getAllPatients();
         return ResponseEntity.ok(patients);
     }
 
-
-
-
-
-    @RequestMapping(value="/addPatient", method = RequestMethod.POST)
-    public ResponseEntity<?> addPatient(@RequestBody Map<String,Object> payload, @RequestHeader Map<String,String> headers) {
-        String res = patientEntityService.addPatient(payload,headers.get("authorization"));
-        return  ResponseEntity.ok(res);
+    @RequestMapping("/getAllPatientByUser")
+    public ResponseEntity<?> getAllPatientByUser() {
+        var loggedInUserId = getLoggedInUserId();
+        List<PatientEntity> patients = patientEntityService.getAllPatientByUser(loggedInUserId);
+        return ResponseEntity.ok(patients);
     }
 
-    @RequestMapping(value = "/getSearchPatients",method = RequestMethod.POST)
-    public ResponseEntity<?> getSearchPatients(@RequestBody Map<String,Object> payload) {
+    @RequestMapping(value = "/addPatient", method = RequestMethod.POST)
+    public ResponseEntity<?> addPatient(@RequestBody Map<String, Object> payload) {
+        var loggedInUserId = getLoggedInUserId();
+        String res = patientEntityService.addPatient(payload, loggedInUserId);
+        return ResponseEntity.ok(res);
+    }
+
+    @RequestMapping(value = "/getSearchPatients", method = RequestMethod.POST)
+    public ResponseEntity<?> getSearchPatients(@RequestBody Map<String, Object> payload) {
         List<PatientEntity> patients = patientEntityService.getSearchPatients(payload);
         return ResponseEntity.ok(patients);
     }
 
 
-    @RequestMapping(value = "/updatePatient",method = RequestMethod.POST)
-    public ResponseEntity<?> updatePatien(@RequestBody Map<String,Object> payload, @RequestHeader Map<String,String> headers) throws Exception{
-        boolean hasPermission = patientEntityService.checkPermission(payload,headers.get("authorization"));
-        if(!hasPermission)
-        {
+    @RequestMapping(value = "/updatePatient", method = RequestMethod.POST)
+    public ResponseEntity<?> updatePatient(@RequestBody Map<String, Object> payload) throws Exception {
+        var loggedInUserId = getLoggedInUserId();
+        boolean hasPermission = patientEntityService.checkPermission(payload, loggedInUserId);
+        if (!hasPermission) {
             throw new Exception("User dont have update permission");
         }
-        PatientEntity patient = patientEntityService.updatePatients(payload,headers.get("authorization"));
+        PatientEntity patient = patientEntityService.updatePatients(payload, loggedInUserId);
         return ResponseEntity.ok(patient);
     }
 
+    private Long getLoggedInUserId() {
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        var loggedInUser = (CustomUserDetails) auth.getPrincipal();
+        return loggedInUser.getUserId();
+    }
 }

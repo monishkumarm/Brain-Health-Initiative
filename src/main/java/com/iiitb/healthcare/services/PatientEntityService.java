@@ -1,12 +1,9 @@
 package com.iiitb.healthcare.services;
 
-import com.iiitb.healthcare.helper.JwtUtil;
 import com.iiitb.healthcare.model.entities.PatientEntity;
-import com.iiitb.healthcare.model.entities.UserEntity;
 import com.iiitb.healthcare.model.entities.UserPermissionPatientEntity;
 import com.iiitb.healthcare.repo.PatientRepository;
 import com.iiitb.healthcare.repo.UserPermissionPatientEntityRepository;
-import com.iiitb.healthcare.repo.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -20,18 +17,11 @@ public class PatientEntityService {
 
     private final PatientRepository patientRepository;
 
-    private final UserRepository userRepository;
-
     private final UserPermissionPatientEntityRepository userPermissionPatientEntityRepository;
-    private final JwtUtil jwtUtil;
-    private final  ConsultationService consultationService;
 
-    public PatientEntityService(PatientRepository patientRepository, UserRepository userRepository, UserPermissionPatientEntityRepository userPermissionPatientEntityRepository, JwtUtil jwtUtil, ConsultationService consultationService){
+    public PatientEntityService(PatientRepository patientRepository, UserPermissionPatientEntityRepository userPermissionPatientEntityRepository) {
         this.patientRepository = patientRepository;
-        this.userRepository = userRepository;
         this.userPermissionPatientEntityRepository = userPermissionPatientEntityRepository;
-        this.jwtUtil = jwtUtil;
-        this.consultationService = consultationService;
     }
 
     public List<List<PatientEntity>> getAllPatients(String username) {
@@ -55,7 +45,10 @@ public class PatientEntityService {
         return patients;
     }
 
-
+    public List<PatientEntity> getAllPatientByUser(String token) {
+        UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
+        return new ArrayList<>(patientRepository.findAllPatientByUser(user.getId()));
+    }
 
     public List<PatientEntity> getSearchPatients(Map<String, Object> payload) {
         List<PatientEntity> patients = new ArrayList<>();
@@ -70,12 +63,11 @@ public class PatientEntityService {
         } else {
             patients.addAll(patientRepository.findById(Long.parseLong((String) payload.get("value"))));
         }
-        System.out.println(patients);
         return patients;
     }
 
 
-    public String addPatient(Map<String, Object> payload, String token) {
+    public String addPatient(Map<String, Object> payload, Long loggedInUserId) {
         try {
             System.out.println("In add patient service");
             PatientEntity patient = new PatientEntity();
@@ -89,8 +81,7 @@ public class PatientEntityService {
             patient.setAddressDetail(address);
             patient.setAge((Integer) payload.get("age"));
 
-            UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
-            patient.setCreatedBy(user.getId());
+            patient.setCreatedBy(loggedInUserId);
 
             Date date = new Date();
             patient.setCreatedOn(new Timestamp(date.getTime()));
@@ -100,7 +91,7 @@ public class PatientEntityService {
             patient.setGender(Integer.parseInt((String) payload.get("gender")));
             patient.setInformantCaregiverName((String) payload.get("carer_name"));
             patient.setLanguages((String) payload.get("lan"));
-            patient.setLastChangeBy(user.getId());
+            patient.setLastChangeBy(loggedInUserId);
             patient.setLastChangeOn(new Timestamp(date.getTime()));
             patient.setLastName((String) payload.get("lname"));
             patient.setOccupation((String) payload.get("occ"));
@@ -113,7 +104,7 @@ public class PatientEntityService {
             UserPermissionPatientEntity userPermissionPatientEntity = new UserPermissionPatientEntity();
 
             userPermissionPatientEntity.setPatientId(patient1.getId());
-            userPermissionPatientEntity.setUserId(user.getId());
+            userPermissionPatientEntity.setUserId(loggedInUserId);
             userPermissionPatientEntity.setCanDelete(true);
             userPermissionPatientEntity.setCanModify(true);
             userPermissionPatientEntity.setCanView(true);
@@ -125,20 +116,16 @@ public class PatientEntityService {
         }
     }
 
-    public boolean checkPermission(Map<String, Object> payload, String token) {
-        System.out.println("in check permission service");
-        long userId = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7))).getId();
+    public boolean checkPermission(Map<String, Object> payload, Long loggedInUserId) {
         List<PatientEntity> patients = this.patientRepository.findByAbhaId((String) payload.get("ABHAID"));
-        System.out.println(patients.get(0).getId());
-        UserPermissionPatientEntity userPermissionPatientEntity = this.userPermissionPatientEntityRepository.getPatientByUser(userId, patients.get(0).getId());
+        UserPermissionPatientEntity userPermissionPatientEntity = this.userPermissionPatientEntityRepository.getPatientByUser(loggedInUserId, patients.get(0).getId());
         if (userPermissionPatientEntity == null) {
             return false;
         }
         return userPermissionPatientEntity.isCanModify();
     }
 
-    public PatientEntity updatePatients(Map<String, Object> payload, String token) {
-        System.out.println("in Update service");
+    public PatientEntity updatePatients(Map<String, Object> payload, Long loggedInUserId) {
         List<PatientEntity> patients = this.patientRepository.findByAbhaId((String) payload.get("ABHAID"));
         String address = "{ \"addLine1\": \"" + payload.get("addLine1") + "\" ,";
         address = address + "\"addLine2\": \"" + payload.get("addLine2") + "\" ,";
@@ -146,9 +133,7 @@ public class PatientEntityService {
         address = address + "\"state\": \"" + payload.get("state") + "\" ,";
         address = address + "\"pin\": \"" + payload.get("pin") + "\" }";
         patients.get(0).setAddressDetail(address);
-        System.out.println("get user");
         patients.get(0).setAge((Integer) payload.get("age"));
-        UserEntity user = this.userRepository.findByUsername(this.jwtUtil.extractUsername(token.substring(7)));
         Date date = new Date();
         patients.get(0).setEducation((String) payload.get("edu"));
         patients.get(0).setEmail((String) payload.get("email"));
@@ -156,7 +141,7 @@ public class PatientEntityService {
         patients.get(0).setGender(Integer.parseInt((String) payload.get("gender")));
         patients.get(0).setInformantCaregiverName((String) payload.get("carer_name"));
         patients.get(0).setLanguages((String) payload.get("lan"));
-        patients.get(0).setLastChangeBy(user.getId());
+        patients.get(0).setLastChangeBy(loggedInUserId);
         patients.get(0).setLastChangeOn(new Timestamp(date.getTime()));
         patients.get(0).setLastName((String) payload.get("lname"));
         patients.get(0).setOccupation((String) payload.get("occ"));
