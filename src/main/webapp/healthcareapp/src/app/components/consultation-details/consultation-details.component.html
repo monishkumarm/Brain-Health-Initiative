@@ -4,18 +4,34 @@
     <span class="fs-4 p-2">
       {{'patientHistory' | translate}}
     </span>
-    
+
   </div>
   <!-- {{dataSource.data | json}} -->
-
-
   <div class="card-body">
-  <span style="text-align: right;">
-    <button type="button" class="btn-sm float-right" routerLink="/addConsultation" [queryParams]="{id : patientDetails.Id}" mat-raised-button color="primary" > 
+
+  <div class="bg-light p-1" >
+    <span class="mt-3" style="text-align: left;"><strong>Patient Details</strong></span>
+    <hr>
+    <div class="row">
+      <span class="col-3" style="text-align: left;">
+        <p><strong>ABHA Id :&nbsp;</strong> {{patientDetails.ABHAID}}</p>
+      </span>
+      <span class="col-3">
+        <p><strong>Name :&nbsp;</strong>{{patientDetails.fname}} {{patientDetails.lname}}</p>
+      </span >
+      <span class="col-3">
+        <p><strong>Age :&nbsp;</strong>{{patientDetails.age}}</p>
+      </span >
+    </div>
+  </div>
+
+
+  <div class="mt-2">
+    <button type="button" class="btn-sm float-right" routerLink="/addConsultation" [queryParams]="{id : patientDetails.Id}" mat-raised-button color="primary" >
       <mat-icon>add</mat-icon>
       Consultation Record
     </button>
-  </span>
+  </div>
   <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8 mt-2">
    <ng-container matColumnDef="complaint">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
@@ -41,6 +57,15 @@
        </th>
         <td class="cursor-pointer" mat-cell *matCellDef="let element"  (click)="display(element)">
           {{element.improvementStatusLuByImprovementStatusId.name }}
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="questionnaireResult">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+          {{'questionnaireResult' | translate}}
+       </th>
+        <td class="cursor-pointer" mat-cell *matCellDef="let element"  (click)="display(element)">
+          {{element.questionnaireDiagnosisByReachedDiagnosisId.diagnosisInfo }}
         </td>
       </ng-container>
 

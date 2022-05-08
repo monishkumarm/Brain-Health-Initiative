@@ -103,7 +103,6 @@ export class AddConsultationDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.conclusion = '';
     this.subscription = this.dataService.currentData.subscribe(data => this.conclusion = data);
     console.log("in init of add consulatation");
     this.medicine = [];
@@ -169,7 +168,7 @@ export class AddConsultationDetailsComponent implements OnInit {
 
   onSubmit(){
     console.log(this.consultationDetails);
-    this.patientService.addConsultion(this.consultationDetails,this.patientDetails.ABHAID).subscribe(
+    this.patientService.addConsultion(this.consultationDetails,this.patientDetails.ABHAID,this.conclusion.id).subscribe(
       (response:any)=>{
         console.log(response);
       },

@@ -68,6 +68,9 @@ public class PatientConsultationEntity {
     @NotNull
     @Column(name = "IsConsultationDone")
     private boolean isConsultationDone;
+    @Basic
+    @Column(name = "ReachedDiagnosisId")
+    private Long reachedDiagnosisId;
     @ManyToOne
     @JoinColumn(name = "PatientId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private PatientEntity patientByPatientId;
@@ -83,6 +86,9 @@ public class PatientConsultationEntity {
     @ManyToOne
     @JoinColumn(name = "ImprovementStatusId", referencedColumnName = "Id", insertable=false, updatable=false)
     private ImprovementStatusLuEntity improvementStatusLuByImprovementStatusId;
+    @ManyToOne
+    @JoinColumn(name = "ReachedDiagnosisId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
+    private QuestionnaireDiagnosisEntity questionnaireDiagnosisByReachedDiagnosisId;
 
     public long getId() {
         return id;
@@ -196,6 +202,14 @@ public class PatientConsultationEntity {
         isConsultationDone = consultationDone;
     }
 
+    public Long getReachedDiagnosisId() {
+        return reachedDiagnosisId;
+    }
+
+    public void setReachedDiagnosisId(Long reachedDiagnosisId) {
+        this.reachedDiagnosisId = reachedDiagnosisId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -247,5 +261,13 @@ public class PatientConsultationEntity {
 
     public void setImprovementStatusLuByImprovementStatusId(ImprovementStatusLuEntity improvementStatusLuByImprovementStatusId) {
         this.improvementStatusLuByImprovementStatusId = improvementStatusLuByImprovementStatusId;
+    }
+
+    public QuestionnaireDiagnosisEntity getQuestionnaireDiagnosisByReachedDiagnosisId() {
+        return questionnaireDiagnosisByReachedDiagnosisId;
+    }
+
+    public void setQuestionnaireDiagnosisByReachedDiagnosisId(QuestionnaireDiagnosisEntity questionnaireDiagnosisByReachedDiagnosisId) {
+        this.questionnaireDiagnosisByReachedDiagnosisId = questionnaireDiagnosisByReachedDiagnosisId;
     }
 }

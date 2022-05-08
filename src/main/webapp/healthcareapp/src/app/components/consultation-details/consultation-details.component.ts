@@ -11,7 +11,8 @@ export interface Consulatation {
   complaintDetail: JSON,
   diagnosisTypeLuByDiagnosisTypeId: JSON,
   improvementStutusLuByImprovementStutusId: JSON,
-  appointmentTime: Date
+  appointmentTime: Date,
+  questionnaireDiagnosisByReachedDiagnosisId: JSON
 }
 
 
@@ -59,7 +60,7 @@ export class ConsultationDetailsComponent implements OnInit {
  
 
   ELEMENT_DATA!: Consulatation[];
-  displayedColumns: string[] = ['complaint','diagnosisType','improvementStatus','createdOn'];
+  displayedColumns: string[] = ['complaint','diagnosisType','improvementStatus','questionnaireResult','createdOn'];
   dataSource = new MatTableDataSource<Consulatation>(this.ELEMENT_DATA);
 
   isExpand=false;

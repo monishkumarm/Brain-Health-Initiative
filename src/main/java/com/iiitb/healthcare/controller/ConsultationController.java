@@ -34,7 +34,7 @@ public class ConsultationController {
     @RequestMapping(value = "/patients/addConsultation")
     public ResponseEntity<?> addConsultationRecord(@RequestBody Map<String, Object> payload, @RequestHeader Map<String, String> headers, @RequestParam Map<String, String> param) {
         var loggedInUserId = getLoggedInUserId();
-        String res = consultationService.addConsultationRecord(payload, loggedInUserId, param.get("abhaId"));
+        String res = consultationService.addConsultationRecord(payload, loggedInUserId, param.get("abhaId"),param.get("reachedDiagnosisId"));
         return ResponseEntity.ok(res);
     }
 

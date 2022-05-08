@@ -4,7 +4,7 @@ Use BrainHealthInitiative;
 -- (Common Questionnaire GroupId = 1)
 SET @QuestionId =1;
 SET @OptionId = 1;
-SET @DiagnosisId =1;
+
 
 INSERT INTO Questionnaire VALUES(
                                     @QuestionId,
@@ -1173,18 +1173,72 @@ SET @QuestionId := @QuestionId +1;
 -- SUBGROUP 2 Ends --
 
 -- Diagnosis: Generalized and focal seizure
+
+SET @DiagnosisId =1;
 INSERT INTO QuestionnaireDiagnosis VALUES(
                                              @DiagnosisId,
-                                             'Probably generalized seizure'
+                                             'None'
                                          );
 
 SET @DiagnosisId := @DiagnosisId+1;
 
 INSERT INTO QuestionnaireDiagnosis VALUES(
                                              @DiagnosisId,
-                                             'Probably focal seizure'
+                                             'Uncertain for seizure'
                                          );
 
+SET @DiagnosisId := @DiagnosisId+1;
 
+
+
+INSERT INTO QuestionnaireDiagnosis VALUES(
+                                             @DiagnosisId,
+                                             'Uncertain for Epilepsy'
+                                         );
+
+SET @DiagnosisId := @DiagnosisId+1;
+
+INSERT INTO QuestionnaireDiagnosis VALUES(
+                                             @DiagnosisId,
+                                             'Epilepsy Diagnosis'
+                                         );
+
+SET @DiagnosisId := @DiagnosisId+1;
+
+INSERT INTO QuestionnaireDiagnosis VALUES(
+                                             @DiagnosisId,
+                                             'Typical absence seizures'
+                                         );
+
+SET @DiagnosisId := @DiagnosisId+1;
+
+INSERT INTO QuestionnaireDiagnosis VALUES(
+                                             @DiagnosisId,
+                                             'Probably absence seizures'
+                                         );
+
+SET @DiagnosisId := @DiagnosisId+1;
+
+INSERT INTO QuestionnaireDiagnosis VALUES(
+                                             @DiagnosisId,
+                                             'Generalised seizures'
+                                         );
+
+SET @DiagnosisId := @DiagnosisId+1;
+
+INSERT INTO QuestionnaireDiagnosis VALUES(
+                                             @DiagnosisId,
+                                             'Typical febrile seizure'
+                                         );
+
+SET @DiagnosisId := @DiagnosisId+1;
+
+
+INSERT INTO QuestionnaireDiagnosis VALUES(
+                                             @DiagnosisId,
+                                             'Atypical febrile seizure'
+                                         );
+
+SET @DiagnosisId := @DiagnosisId+1;
 
 COMMIT

@@ -8,8 +8,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "PatientQuestionnaire", schema = "BrainHealthInitiative", catalog = "")
 public class PatientQuestionnaireEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Long id;
     @Basic

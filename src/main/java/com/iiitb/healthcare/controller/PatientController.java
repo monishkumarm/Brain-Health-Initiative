@@ -22,16 +22,17 @@ public class PatientController {
 
     @RequestMapping("/getAllPatients")
     public ResponseEntity<?> getAllPatients() {
-        List<PatientEntity> patients = patientEntityService.getAllPatients();
+        var loggedInUserId = getLoggedInUserId();
+        List<List<PatientEntity>> patients = patientEntityService.getAllPatients(loggedInUserId);
         return ResponseEntity.ok(patients);
     }
 
-    @RequestMapping("/getAllPatientByUser")
-    public ResponseEntity<?> getAllPatientByUser() {
-        var loggedInUserId = getLoggedInUserId();
-        List<PatientEntity> patients = patientEntityService.getAllPatientByUser(loggedInUserId);
-        return ResponseEntity.ok(patients);
-    }
+//    @RequestMapping("/getAllPatientByUser")
+//    public ResponseEntity<?> getAllPatientByUser() {
+//        var loggedInUserId = getLoggedInUserId();
+//        List<PatientEntity> patients = patientEntityService.getAllPatientByUser(loggedInUserId);
+//        return ResponseEntity.ok(patients);
+//    }
 
     @RequestMapping(value = "/addPatient", method = RequestMethod.POST)
     public ResponseEntity<?> addPatient(@RequestBody Map<String, Object> payload) {

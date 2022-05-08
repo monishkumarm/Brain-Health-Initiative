@@ -1,9 +1,14 @@
 package com.iiitb.healthcare.services;
 
-import com.iiitb.healthcare.model.entities.QuestionnaireEntity;
+import com.iiitb.healthcare.model.entities.*;
+import com.iiitb.healthcare.repo.PatientQuestionnaireAnswerRepository;
+import com.iiitb.healthcare.repo.PatientQuestionnaireRepository;
+import com.iiitb.healthcare.repo.QuestionnaireDiagnosisRepository;
 import com.iiitb.healthcare.repo.QuestionnaireRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +17,14 @@ import java.util.Map;
 public class QuestionnaireService {
 
     private final QuestionnaireRepository questionnaireRepository;
-
-    public QuestionnaireService(QuestionnaireRepository questionnaireRepository) {
+    private final QuestionnaireDiagnosisRepository questionnaireDiagnosisRepository;
+    private final PatientQuestionnaireRepository patientQuestionnaireRepository;
+    private final PatientQuestionnaireAnswerRepository patientQuestionnaireAnswerRepository;
+    public QuestionnaireService(QuestionnaireRepository questionnaireRepository, QuestionnaireDiagnosisRepository questionnaireDiagnosisRepository, PatientQuestionnaireRepository patientQuestionnaireRepository, PatientQuestionnaireAnswerRepository patientQuestionnaireAnswerRepository) {
         this.questionnaireRepository = questionnaireRepository;
+        this.questionnaireDiagnosisRepository = questionnaireDiagnosisRepository;
+        this.patientQuestionnaireRepository = patientQuestionnaireRepository;
+        this.patientQuestionnaireAnswerRepository = patientQuestionnaireAnswerRepository;
     }
 
     public Map<String, Object> getCommonQuestions() {
@@ -54,6 +64,36 @@ public class QuestionnaireService {
         return res;
     }
 
+    public PatientQuestionnaireEntity saveAnswers(Map<String,Object> payload,Long loggedInUserId)
+    {
+        PatientQuestionnaireEntity questionnaire = new PatientQuestionnaireEntity();
+        questionnaire.setPatientId((long)((Integer)payload.get("patientId")));
+        System.out.println(questionnaire.getPatientId());
+        System.out.println("get patient id");
+        questionnaire.setReachedDiagnosisId((long)((Integer)payload.get("Result")));
+        Date date = new Date();
+        questionnaire.setPerformedOn(new Timestamp(date.getTime()));
+        questionnaire.setPerformedByUserId(loggedInUserId);
+        System.out.println(questionnaire.toString());
+        PatientQuestionnaireEntity questionnaire1 = this.patientQuestionnaireRepository.save(questionnaire);
+        System.out.println(payload.get("Answers").toString());
+        List<Map<String,Object>> answers = (List<Map<String,Object>>) payload.get("Answers");
+        for(Map<String,Object> answer : answers)
+        {
+            Map<String,Integer> qa = (Map<String,Integer>)answer.get("questionsAnswers");
+            for(Map.Entry<String ,Integer> entry : qa.entrySet())
+            {
+                PatientQuestionnaireAnswerEntity row = new PatientQuestionnaireAnswerEntity();
+                row.setPatientQuestionnaireId(questionnaire1.getId());
+                row.setQuestionId(Long.parseLong(entry.getKey()));
+                row.setSelectedOptionId((long)(entry.getValue()));
+                patientQuestionnaireAnswerRepository.save(row);
+            }
+
+        }
+        return questionnaire1;
+    }
+
     Map<String, Object> epilepsyProtocol(Map<String, Object> payload) {
         Map<String, Object> res = new HashMap<>();
         Map<String, Object> answer = (Map) payload.get("questionsAnswers");
@@ -76,6 +116,7 @@ public class QuestionnaireService {
                 }
                 trueAns = trueAns + 2;
             }
+            System.out.println(yes);
             if (yes >= 4) {
                 List<QuestionnaireEntity> questions = this.questionnaireRepository.findByGroupId(2, 2);
                 res.put("message", "Epilepsy check");
@@ -91,7 +132,8 @@ public class QuestionnaireService {
                 res.put("groupId", 2);
                 res.put("subGroupId", 3);
             } else if (yes < 3) {
-                res.put("message", "Uncertain for Seizure");
+                QuestionnaireDiagnosisEntity result = questionnaireDiagnosisRepository.getById((long)2);
+                res.put("result", result);
                 res.put("questionSetName", null);
                 res.put("questionSet", null);
                 res.put("groupId", null);
@@ -123,7 +165,8 @@ public class QuestionnaireService {
                 res.put("groupId", 2);
                 res.put("subGroupId", 4);
             } else {
-                res.put("message", "Uncertain for Seizure");
+                QuestionnaireDiagnosisEntity result = questionnaireDiagnosisRepository.getById((long)2);
+                res.put("result", result);
                 res.put("questionSetName", null);
                 res.put("questionSet", null);
                 res.put("groupId", null);
