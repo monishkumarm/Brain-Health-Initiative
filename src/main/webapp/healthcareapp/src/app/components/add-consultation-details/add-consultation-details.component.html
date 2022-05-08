@@ -1,11 +1,8 @@
 <body >
 <div class="card m-auto">
   <div class="card-header">
-    <span class="fs-4 p-2 fw-bold">
+    <span class="fs-4 p-2">
       {{'newConsultationRecord' | translate}}
-    </span>
-    <span  style="text-align: right;">
-      <button type="button" class="btn-sm float-right"   routerLink="/performQuestionnary" [queryParams]="{id : patientDetails.Id}"  mat-raised-button color="primary" >{{'performQuestionnary' | translate}}</button>
     </span>
   </div>
 
@@ -16,45 +13,53 @@
 
 
       <div class="container bg-white mt-3">
-        <p class="fw-bold" style="color:  #673ab7;">Questionnaire conclusion : {{conclusion}}</p>
-
+        <span  style="text-align:left;">
+          <p class="fw-bold" style="color:  #673ab7;display: inline-block;">Questionnaire conclusion : {{conclusion}} &nbsp;&nbsp;</p>
+          <button type="button" class="btn-sm float-right " matTooltip="Screening of diagnosis protocol "   routerLink="/performQuestionnary" [queryParams]="{id : patientDetails.Id}"  mat-raised-button color="primary" >{{'performQuestionnary' | translate}}</button>&nbsp;&nbsp;
+          <button type="button" mat-raised-button  matTooltip="Patient old Consultation Report" class="cursor-pointer" routerLink="/consultationDetails" color="primary" [queryParams]="{id : patientDetails.Id}" aria-hidden="false" aria-label="Consultation Details"> 
+            Patient History
+          </button>
+        </span>
         <p class="fw-bold" style="color:  #673ab7;">Consultation Form</p>
         <div >
           <mat-stepper  animationDuration="1000ms"[linear]="isLinear" #stepper >
             <mat-step>
               <ng-template matStepLabel>{{'chiefComplaints' | translate}}</ng-template>
-            <div class="bg-light">
-            <div class="row m-2" >
-              <div class="col-sm-6 form-group ">
-                <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label >{{'complaint' | translate}}</mat-label>
-                  <textarea [(ngModel)]="consultationDetails.complaint" name="complaint" id="complaint" class="md-textarea form-control" rows="2" required matInput></textarea>
-                </mat-form-field>
-              </div>
-              <div class="col-sm-6 form-group">
-                <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label >{{'examination' | translate}}</mat-label>
-                  <textarea [(ngModel)]="consultationDetails.examination" name="examination" id="examination" type="text" class="form-control" required matInput></textarea>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row m-2">
-              <div class="col-sm-6 form-group ">
-                <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label>{{'historyOfIllness' | translate}} </mat-label>
-                  <textarea [(ngModel)]="consultationDetails.history" name="history" id="history" class="md-textarea form-control" rows="2" matInput required></textarea>
-                </mat-form-field>
-              </div>
-              <div class="col-sm-6 form-group ">
-                <mat-form-field style="width: 100%;" appearance="outline">
-                  <mat-label >{{'illnessSummary'|translate}} </mat-label>
-                  <textarea [(ngModel)]="consultationDetails.illnessSummary" name="illnessSummary" id="illnessSummary" class="md-textarea form-control" rows="2" required matInput></textarea>
-                </mat-form-field>
+              <div class="bg-light">
+                <div class="row m-2" >
+                  <div class="col-sm-6 form-group ">
+                    <mat-form-field style="width: 100%;" appearance="outline">
+                      <mat-label >{{'complaint' | translate}}</mat-label>
+                      <textarea [(ngModel)]="consultationDetails.complaint" name="complaint" id="complaint" class="md-textarea form-control" rows="2" required matInput></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6 form-group">
+                    <mat-form-field style="width: 100%;" appearance="outline">
+                      <mat-label >{{'examination' | translate}}</mat-label>
+                      <textarea [(ngModel)]="consultationDetails.examination" name="examination" id="examination" type="text" class="form-control" required matInput></textarea>
+                    </mat-form-field>
+                  </div>
                 </div>
-            </div>
-            </div>
-            <div class="col-sm-6 form-group">
-            </div>
+                <div class="row m-2">
+                  <div class="col-sm-6 form-group ">
+                    <mat-form-field style="width: 100%;" appearance="outline">
+                      <mat-label>{{'historyOfIllness' | translate}} </mat-label>
+                      <textarea [(ngModel)]="consultationDetails.history" name="history" id="history" class="md-textarea form-control" rows="2" matInput required></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6 form-group ">
+                    <mat-form-field style="width: 100%;" appearance="outline">
+                      <mat-label >{{'illnessSummary'|translate}} </mat-label>
+                      <textarea [(ngModel)]="consultationDetails.illnessSummary" name="illnessSummary" id="illnessSummary" class="md-textarea form-control" rows="2" required matInput></textarea>
+                    </mat-form-field>
+                    </div>
+                </div>
+              </div>
+            <!-- <div class="col-sm-6 form-group">
+            </div> -->
+              <div class="col-12 text-center">
+                <button style="width: 10%;" type="button" mat-raised-button matStepperNext color="primary">Next</button>
+              </div>
             </mat-step>
             <mat-step >
               <ng-template matStepLabel>{{'diagnosis' | translate}}</ng-template>
@@ -90,6 +95,10 @@
                 </div>
 
               </div>
+              </div>
+              <div class="col-12 text-center">
+                <button style="width: 10%;" class="mx-2" type="button" mat-raised-button matStepperPrevious color="accent">Back</button>
+                <button style="width: 10%;" type="button" mat-raised-button matStepperNext color="primary">Next</button>
               </div>
             </mat-step>
             <mat-step>
@@ -162,6 +171,10 @@
               </div>
             </div>
             </div>
+            <div class="col-12 text-center">
+              <button style="width: 10%;" class="mx-2" type="button" mat-raised-button matStepperPrevious color="accent">Back</button>
+              <button style="width: 10%;" type="button" mat-raised-button matStepperNext color="primary">Next</button>
+            </div>
           </mat-step>
           <mat-step>
             <ng-template matStepLabel>{{'followUpRecommendations' | translate}}</ng-template>
@@ -206,7 +219,8 @@
 
             <div class="row pb-3 m-2">
               <div class="col-sm-12 text-center" >
-                <button type="submit"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
+                <button style="width: 10%;" class="mx-2" type="button" mat-raised-button matStepperPrevious color="accent">Back</button>
+                <button type="submit"   style="align-content: center;width: 10%" mat-raised-button color="primary" >
                   {{'Submit' | translate}}
                 </button>
               </div>

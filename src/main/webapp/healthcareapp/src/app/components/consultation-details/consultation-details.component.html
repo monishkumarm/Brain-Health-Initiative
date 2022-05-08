@@ -1,18 +1,22 @@
 <div class="bg  pb-5">
 <div class="card m-auto">
   <div class="card-header">
-    <span class="fs-4 p-2 fw-bold">
+    <span class="fs-4 p-2">
       {{'patientHistory' | translate}}
     </span>
-    <span  style="text-align: right;">
-    <button type="button" class="btn-sm float-right" routerLink="/addConsultation" [queryParams]="{id : patientDetails.Id}" mat-raised-button color="primary" >{{'newConsultationRecord' | translate}}</button>
-    </span>
+    
   </div>
   <!-- {{dataSource.data | json}} -->
 
 
   <div class="card-body">
-  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+  <span style="text-align: right;">
+    <button type="button" class="btn-sm float-right" routerLink="/addConsultation" [queryParams]="{id : patientDetails.Id}" mat-raised-button color="primary" > 
+      <mat-icon>add</mat-icon>
+      Consultation Record
+    </button>
+  </span>
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8 mt-2">
    <ng-container matColumnDef="complaint">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
           {{'complaint' | translate}}
@@ -49,7 +53,8 @@
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row  *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+    ></tr>
 
     </table>
 
@@ -198,7 +203,7 @@
 
 <div class="card m-auto" *ngIf="isExpand">
   <div class="card-header">
-    <div class="fs-4 p-2 fw-bold">
+    <div class="fs-5 p-2">
       {{'consultationReport' | translate}}
     </div>
 

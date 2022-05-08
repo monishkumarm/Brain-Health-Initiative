@@ -1,8 +1,5 @@
 
 
-.card {
-  width: 90%;
-}
 
 
 .card-header {
@@ -47,3 +44,8 @@
   .alert {
     border: solid red;
   }
+
+  /* .card-body{
+    background: linear-gradient(90deg, #CBC3E3 0%, #CF9FFF 100%);
+  }
+   */

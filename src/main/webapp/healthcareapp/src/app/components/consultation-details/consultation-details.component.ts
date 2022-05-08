@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PatientService } from 'src/app/services/patient.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -53,8 +53,10 @@ export class ConsultationDetailsComponent implements OnInit {
   displayRecord:any
  options = {
     page: 1,
-    size: 3
+    size: 5
   };
+
+ 
 
   ELEMENT_DATA!: Consulatation[];
   displayedColumns: string[] = ['complaint','diagnosisType','improvementStatus','createdOn'];
@@ -123,6 +125,20 @@ export class ConsultationDetailsComponent implements OnInit {
     // this.dataSource=this.displayRecord;
 
   }
+  
+  
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
+
+  // announceSortChange(sortState: Sort) {
+  //   if (sortState.direction) {
+  //     this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+  //   } else {
+  //     this._liveAnnouncer.announce('Sorting cleared');
+  //   }
+  // }
 
   display(element:any)
   {
