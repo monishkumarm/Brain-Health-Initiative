@@ -48,7 +48,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {DataService} from "./services/data.service";
 import {MatStepperModule} from '@angular/material/stepper';
 export function HttpLoaderFactory(http: HttpClient){
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.txt');
 }
 
 @NgModule({
