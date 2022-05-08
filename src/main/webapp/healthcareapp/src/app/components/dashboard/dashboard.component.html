@@ -77,12 +77,17 @@
 <div class="grid-container" *ngIf="isAdmin">
   <h1 class="mat-h1">Dashboard</h1>
   <mat-grid-list cols="{{ ( cards | async )?.columns }}" rowHeight="350px">
-    <mat-grid-tile *ngFor="let i of [1, 2, 3, 4]" [colspan]="( cards| async )?.miniCardCols" [rowspan]="( cards| async )?.miniCardRows">
-      <app-card title="Card {{i}}"><div>Mini Card Content Here</div></app-card>
+    <mat-grid-tile *ngFor="let cd of miniCardData" [colspan]="( cards| async )?.miniCardCols" [rowspan]="( cards| async )?.miniCardRows">
+      <app-mini-card [title]="cd.title" [icon]="cd.icon" [isCurrency]="cd.isCurrency" [percentValue]="cd.percentValue"
+      [value]="cd.value" [isIncrease]="cd.isIncrease" [color]="cd.color" ><div>Mini Card Content Here</div></app-mini-card>
     </mat-grid-tile>
-    <mat-grid-tile *ngFor="let i of [5, 6, 7, 8]" [colspan]="( cards | async )?.chartCardCols"
+    <mat-grid-tile [colspan]="( cards | async )?.chartCardCols"
                    [rowspan]="( cards | async )?.chartCardRows">
-      <app-card title="Sales Chart {{i}}"><app-barchart></app-barchart></app-card>
+      <app-card title="Diagnosis"><app-barchart></app-barchart></app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cards | async )?.chartCardCols"
+                   [rowspan]="( cards | async )?.chartCardRows">
+      <app-card title="Hospitals By Region"><app-pie-chart></app-pie-chart></app-card>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

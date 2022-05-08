@@ -78,11 +78,53 @@ export class DashboardComponent implements OnInit, AfterViewInit {
        return {
          columns: 4,
          miniCardCols :1,
-         miniCardRows:1,
+         miniCardRows:0.5,
          chartCardRows: 2,
          chartCardCols :2
        };
      })
    );
+
+
+   //mini card data
+
+   miniCardData=[
+     {
+       icon:"domain",
+       title: "Hospitals",
+       value:"93",
+       color:"red",
+       isIncrease:true,
+       isCurrency:false,
+       percentValue:'0.09'
+     },
+     {
+       icon:"account_circle",
+       title: "Users",
+       value:"231",
+       color:"yellow",
+       isIncrease:true,
+       isCurrency:false,
+       percentValue:'0.05'
+     },
+     {
+       icon:"local_hospital",
+       title: "Patients",
+       value:"23561",
+       color:"blue",
+       isIncrease:true,
+       isCurrency:false,
+       percentValue:'0.08'
+     },
+     {
+       icon:"library_books",
+       title: "Consultations",
+       value:"1991",
+       color:"black",
+       isIncrease:true,
+       isCurrency:false,
+       percentValue:'0.05'
+     }
+   ];
 }
 

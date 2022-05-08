@@ -56,6 +56,8 @@ import { MatCardModule } from '@angular/material/card';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CardComponent } from './components/card/card.component';
 import { BarchartComponent } from './components/barchart/barchart.component';
+import { MiniCardComponent } from './components/mini-card/mini-card.component';
+import {PieChartComponent} from "./components/piechart/piechart.component";
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -75,7 +77,9 @@ export function HttpLoaderFactory(http: HttpClient){
     AddUserComponent,
     AddHospitalComponent,
     CardComponent,
-    BarchartComponent
+    BarchartComponent,
+    MiniCardComponent,
+    PieChartComponent
   ],
     imports: [
         MatDialogModule,

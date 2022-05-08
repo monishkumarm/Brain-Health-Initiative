@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-import DatalabelsPlugin from "chartjs-plugin-datalabels";
+
 @Component({
-  selector: 'app-barchart',
-  templateUrl: './barchart.component.html',
-  styleUrls: ['./barchart.component.css']
+  selector: 'app-pie-chart',
+  templateUrl: './pieChart.component.html',
+  styleUrls: [ './pieChart.component.css' ]
 })
-export class BarchartComponent{
+export class PieChartComponent {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   // Pie
@@ -29,9 +29,9 @@ export class BarchartComponent{
     }
   };
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: [  'Eplipsey', 'Stroke', 'Others' ],
+    labels: [  'Karnataka', 'Telangana', 'Others' ],
     datasets: [ {
-      data: [ 2, 3, 5 ]
+      data: [ 231, 123, 100 ]
     } ]
   };
   public pieChartType: ChartType = 'pie';
