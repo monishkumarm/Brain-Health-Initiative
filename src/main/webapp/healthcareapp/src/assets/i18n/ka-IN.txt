@@ -28,10 +28,9 @@
   "historyOfIllness": "ಅನಾರೋಗ್ಯದ ಇತಿಹಾಸ",
   "illnessSummary": "ರೋಗದ ಸಾರಾಂಶ",
   "diagnosisType":"ರೋಗನಿರ್ಣಯ ಪ್ರಕಾರ",
-  "improvementStatus": "ಸುಧಾರಣೆ ಸ್ಥಿತಿ",
   "performQuestionnary": "ಪ್ರಶ್ನಾವಳಿಯನ್ನು ನಿರ್ವಹಿಸಿ",
   "newPatientRecord": "ಹೊಸ ರೋಗಿಯ ದಾಖಲೆ",
-  "identityInformation": "पहचान की जानकारी",
+  "identityInformation": "ಗುರುತಿನ ಮಾಹಿತಿ",
   "basicInformation": "ಗುರುತಿನ ಮಾಹಿತಿ",
   "contactInformation": "ಸಂಪರ್ಕ ಮಾಹಿತಿ",
   "caregiverInformation": "ಆರೈಕೆದಾರರ ಮಾಹಿತಿ",
@@ -57,7 +56,7 @@
   "Final": "ಅಂತಿಮ",
   "Improvement status": "ಸುಧಾರಣೆ ಸ್ಥಿತಿ",
   "Condition Improved": "ಸ್ಥಿತಿ ಸುಧಾರಿಸಿದೆ",
-  "Condition Worsened": "हालत खराब",
+  "Condition Worsened": "ಸ್ಥಿತಿ ಹದಗೆಟ್ಟಿದೆ",
   "Condition unchanged": "ಸ್ಥಿತಿ ಬದಲಾಗಿಲ್ಲ",
   "Medicine": "ಔಷಧಿ",
   "Add": "ಸೇರಿಸಿ",
@@ -116,6 +115,6 @@
   "Patients Records": "ರೋಗಿಗಳ ದಾಖಲೆಗಳು",
   "Edit Details":"ವಿವರಗಳನ್ನು ಸಂಪಾದಿಸಿ",
   "Career Information":"ವೃತ್ತಿ ಮಾಹಿತಿ",
-  "Career informants Name": "ವೃತ್ತಿ ಮಾಹಿತಿದಾರರ ಹೆಸರು"
-
+  "Career informants Name": "ವೃತ್ತಿ ಮಾಹಿತಿದಾರರ ಹೆಸರು",
+  "Kannada": "ಕನ್ನಡ"
 }
