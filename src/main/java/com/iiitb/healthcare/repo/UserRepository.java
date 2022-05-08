@@ -10,7 +10,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     UserEntity findByUsername(String username);
 
-    @Query(value = "SELECT * FROM user U WHERE U.RoleTypeId = 2 ", nativeQuery = true)
+    @Query(value = "SELECT * FROM User U WHERE U.RoleTypeId = 2 ", nativeQuery = true)
     List<UserEntity> getAllSpecialists();
 
 }
