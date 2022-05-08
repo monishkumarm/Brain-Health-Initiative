@@ -1,11 +1,9 @@
 package com.iiitb.healthcare.services;
 
-import com.iiitb.healthcare.helper.JwtUtil;
 import com.iiitb.healthcare.model.entities.PatientEntity;
 import com.iiitb.healthcare.model.entities.UserPermissionPatientEntity;
 import com.iiitb.healthcare.repo.PatientRepository;
 import com.iiitb.healthcare.repo.UserPermissionPatientEntityRepository;
-import com.iiitb.healthcare.repo.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -19,16 +17,11 @@ public class PatientEntityService {
 
     private final PatientRepository patientRepository;
 
-    private final UserRepository userRepository;
-
     private final UserPermissionPatientEntityRepository userPermissionPatientEntityRepository;
-    private final JwtUtil jwtUtil;
 
-    public PatientEntityService(PatientRepository patientRepository, UserRepository userRepository, UserPermissionPatientEntityRepository userPermissionPatientEntityRepository, JwtUtil jwtUtil) {
+    public PatientEntityService(PatientRepository patientRepository, UserPermissionPatientEntityRepository userPermissionPatientEntityRepository) {
         this.patientRepository = patientRepository;
-        this.userRepository = userRepository;
         this.userPermissionPatientEntityRepository = userPermissionPatientEntityRepository;
-        this.jwtUtil = jwtUtil;
     }
 
     public List<PatientEntity> getAllPatients() {

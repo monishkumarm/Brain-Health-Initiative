@@ -1,6 +1,5 @@
 package com.iiitb.healthcare.services;
 
-import com.iiitb.healthcare.helper.JwtUtil;
 import com.iiitb.healthcare.model.entities.PatientConsultationEntity;
 import com.iiitb.healthcare.model.entities.PatientEntity;
 import com.iiitb.healthcare.model.entities.UserEntity;
@@ -24,14 +23,12 @@ public class ConsultationService {
     private final UserRepository userRepository;
 
     private final UserPermissionPatientEntityRepository userPermissionPatientEntityRepository;
-    private final JwtUtil jwtUtil;
 
-    public ConsultationService(ConsultationRepository consultationRepository, PatientRepository patientRepository, UserRepository userRepository, UserPermissionPatientEntityRepository userPermissionPatientEntityRepository, JwtUtil jwtUtil) {
+    public ConsultationService(ConsultationRepository consultationRepository, PatientRepository patientRepository, UserRepository userRepository, UserPermissionPatientEntityRepository userPermissionPatientEntityRepository) {
         this.consultationRepository = consultationRepository;
         this.patientRepository = patientRepository;
         this.userRepository = userRepository;
         this.userPermissionPatientEntityRepository = userPermissionPatientEntityRepository;
-        this.jwtUtil = jwtUtil;
     }
 
 
