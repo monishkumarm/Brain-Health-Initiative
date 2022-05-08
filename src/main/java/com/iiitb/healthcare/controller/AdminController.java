@@ -1,11 +1,12 @@
 package com.iiitb.healthcare.controller;
 
+import com.iiitb.healthcare.model.CustomUserDetails;
 import com.iiitb.healthcare.model.entities.OrganizationEntity;
-import com.iiitb.healthcare.model.entities.UserEntity;
 import com.iiitb.healthcare.services.OrganizationEntityService;
 import com.iiitb.healthcare.services.UserEntityService;
 import com.iiitb.healthcare.services.UserOrganizationService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -48,9 +49,15 @@ public class AdminController {
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public ResponseEntity<?> addUser(@RequestBody Map<String, Object> payload) {
-        UserEntity user = userEntityService.getDetails();
-        String id = userEntityService.addUser(payload, user);
+        var loggedInUserId = getLoggedInUserId();
+        String id = userEntityService.addUser(payload, loggedInUserId);
         userOrganizationService.addUserOrganization((ArrayList<Integer>) payload.get("orgs"), id);
         return ResponseEntity.ok(payload);
+    }
+
+    private Long getLoggedInUserId() {
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        var loggedInUser = (CustomUserDetails) auth.getPrincipal();
+        return loggedInUser.getUserId();
     }
 }
