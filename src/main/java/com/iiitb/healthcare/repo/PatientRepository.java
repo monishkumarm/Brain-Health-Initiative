@@ -19,4 +19,7 @@ public interface PatientRepository extends JpaRepository<PatientEntity,Integer> 
     List<PatientEntity> findByFirstName(String firstName);
 
     List<PatientEntity> findByPhoneNumber(String phoneNumber);
+
+    @Query(value="SELECT COUNT(*) FROM Patient",nativeQuery = true)
+    public long getPatientCount();
 }

@@ -6,6 +6,7 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {LoginService} from "../../services/login.service";
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import {AdminService} from "../../services/admin.service";
 export interface Patient {
   firstName: string;
   phoneNumber: string;
@@ -22,7 +23,7 @@ export interface Patient {
 
 export class DashboardComponent implements OnInit, AfterViewInit {
   isAdmin = false;
-  constructor(private breakpointObserver: BreakpointObserver,private loginService:LoginService, private service: PatientService, private _liveAnnouncer: LiveAnnouncer){
+  constructor(private adminService:AdminService, private breakpointObserver: BreakpointObserver,private loginService:LoginService, private service: PatientService, private _liveAnnouncer: LiveAnnouncer){
     this.isAdmin = this.loginService.isAdmin();
   }
 
@@ -33,7 +34,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    }
 
   ngOnInit(): void {
-    this.getAllPatients();
+
+    if(this.isAdmin) {
+      this.getSummary();
+    }
+    else{
+      this.getAllPatients();
+    }
   }
 
   ELEMENT_DATA!: Patient[];
@@ -126,5 +133,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
        percentValue:'0.05'
      }
    ];
+
+   getSummary(){
+     this.adminService.getSummary().subscribe(
+       (response:any) =>{
+
+        for(let i=0;i<4;i++){
+          this.miniCardData[i].value =  (response[i]+113).toString();
+        }
+       },
+       (error:any) => {
+         console.log(error);
+       }
+     );
+   }
 }
 

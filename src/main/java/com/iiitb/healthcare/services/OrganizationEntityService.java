@@ -4,7 +4,7 @@ import com.iiitb.healthcare.model.entities.OrganizationEntity;
 import com.iiitb.healthcare.repo.OrganizationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.iiitb.healthcare.model.dtos.PieChartDto;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -35,5 +35,13 @@ public class OrganizationEntityService {
         return e.getMessage();
         }
 
+    }
+    public long getOrganizationCount(){
+        long ans = organizationRepo.getOrganizationCount();
+        return ans;
+    }
+    public PieChartDto getDiagnosisCountChart() {
+        var stats = organizationRepo.findDiagnosisCountChart();
+        return new PieChartDto(stats);
     }
 }

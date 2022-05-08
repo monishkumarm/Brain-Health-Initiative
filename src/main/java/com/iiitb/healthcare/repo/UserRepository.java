@@ -12,5 +12,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     @Query(value="SELECT * FROM user U WHERE U.RoleTypeId = 2 ",nativeQuery = true)
     public List<UserEntity> getAllSpecilists();
-
+    @Query(value="SELECT COUNT(*) FROM User",nativeQuery = true)
+    public long getUserCount();
 }

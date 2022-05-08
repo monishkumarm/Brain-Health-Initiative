@@ -3,6 +3,7 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import DatalabelsPlugin from "chartjs-plugin-datalabels";
+import {AdminService} from "../../services/admin.service";
 @Component({
   selector: 'app-barchart',
   templateUrl: './barchart.component.html',
@@ -10,7 +11,9 @@ import DatalabelsPlugin from "chartjs-plugin-datalabels";
 })
 export class BarchartComponent{
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
-
+  constructor(private adminService : AdminService) {
+    this.getDiagnosisChartData();
+  }
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -37,6 +40,16 @@ export class BarchartComponent{
   public pieChartType: ChartType = 'pie';
   public pieChartPlugins = [ DatalabelsPlugin ];
 
+  getDiagnosisChartData(){
+    this.adminService.getDiagnosisChartData().subscribe(
+      (response:any) =>{
 
+
+      },
+      (error:any) => {
+        console.log(error);
+      }
+    );
+  }
 
 }

@@ -128,4 +128,9 @@ public class ConsultationService {
 
         return "Consultaion Record Added";
     }
+
+    public long getConsultationCount(){
+        long ans  = consultationRepository.getConsultationCount();
+        return ans;
+    }
 }

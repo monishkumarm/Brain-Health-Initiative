@@ -2,10 +2,7 @@ package com.iiitb.healthcare.controller;
 
 import com.iiitb.healthcare.model.entities.OrganizationEntity;
 import com.iiitb.healthcare.model.entities.UserEntity;
-import com.iiitb.healthcare.services.CustomUserDetailsService;
-import com.iiitb.healthcare.services.OrganizationEntityService;
-import com.iiitb.healthcare.services.UserEntityService;
-import com.iiitb.healthcare.services.UserOrganizationService;
+import com.iiitb.healthcare.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +26,26 @@ public class AdminController {
     private UserEntityService userEntityService;
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+    @Autowired
+    private PatientEntityService patientEntityService;
+
+    @Autowired
+    private ConsultationService consultationService;
+    @RequestMapping(value = "/getDiagnosisChartData")
+    public ResponseEntity<?> getDiagnosisChartData() {
+        var diagnosisCountChart = organizationEntityService.getDiagnosisCountChart();
+        return ResponseEntity.ok(diagnosisCountChart);
+    }
+    @RequestMapping(value = "/getSummary")
+    public ResponseEntity<?> getSummary(@RequestHeader Map<String,String> headers){
+        long arraySummary [] = new long[4];
+        arraySummary[0] = organizationEntityService.getOrganizationCount();
+        arraySummary[1] = userEntityService.getUserCount();
+        arraySummary[2] = patientEntityService.getPatientCount();
+        arraySummary[3] = consultationService.getConsultationCount();
+
+        return ResponseEntity.ok(arraySummary);
+    }
 
     @RequestMapping(value = "/addHospital",method = RequestMethod.POST)
     public ResponseEntity<?> addHospital(@RequestBody Map<String,Object> payload, @RequestHeader Map<String,String> headers) throws Exception{
@@ -47,4 +64,6 @@ public class AdminController {
         userOrganizationService.addUserOrganization((ArrayList<Integer>) payload.get("orgs"),id);
         return ResponseEntity.ok(payload);
     }
+
+
 }

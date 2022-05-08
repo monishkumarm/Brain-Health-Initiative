@@ -38,4 +38,22 @@ export class AdminService {
     )
     return this.httpCLient.get(`${this.url}/admin/getAllOrganizations`,{'headers':header});
   }
+  getSummary(){
+    let token = localStorage.getItem("token");
+    let header = new HttpHeaders(
+      {
+        Authorization  : "Bearer " + token
+      }
+    )
+    return this.httpCLient.get(`${this.url}/admin/getSummary`,{'headers':header});
+  }
+  getDiagnosisChartData(){
+    let token = localStorage.getItem("token");
+    let header = new HttpHeaders(
+      {
+        Authorization  : "Bearer " + token
+      }
+    )
+    return this.httpCLient.get(`${this.url}/admin/getDiagnosisChartData`,{'headers':header});
+  }
 }

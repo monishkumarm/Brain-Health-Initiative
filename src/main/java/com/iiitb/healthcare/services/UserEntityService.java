@@ -67,4 +67,9 @@ public class UserEntityService {
         }
 
     }
+
+    public long getUserCount(){
+        long ans= userRepository.getUserCount();
+        return ans;
+    }
 }

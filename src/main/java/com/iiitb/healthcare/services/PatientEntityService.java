@@ -167,4 +167,9 @@ public class PatientEntityService {
 
 
     }
+
+    public long getPatientCount(){
+        long ans = patientRepository.getPatientCount();
+        return ans;
+    }
 }
