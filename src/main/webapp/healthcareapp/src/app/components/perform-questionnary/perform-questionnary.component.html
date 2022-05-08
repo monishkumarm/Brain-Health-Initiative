@@ -1,12 +1,12 @@
-<div class="bg  pb-5">
+<div class="bg pb-5">
     <div class="card m-auto">
-      <div class="card-header p-3">
-        <span  class="fs-4  fw-bold">
+      <div class="card-header">
+        <span  class="fs-4 ">
           Perform Questionnaire
         </span>
       </div>
       <div class="card-body">
-        <div class="container bg-white mt-3">
+        <div class="bg-white mt-3">
             <div>
               <span  class="fw-bold" style="color: #673ab7; margin-right: 10px; display: inline-block;">
                 <p>Questionnaire Set</p>
@@ -18,40 +18,34 @@
 
             <div >
               <mat-tab-group   [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" animationDuration="1000ms">
-                <mat-tab  *ngFor="let tab of tabs; let index = index" [label]="tab">
+                <mat-tab  *ngFor="let tab of tabs; let index = index" [label]="tab +  - (index+1)">
                   <div *ngIf="isResult[index]" class="p-4 bg-light">
                     <div>
-                      <p> Conclusion : {{Result}}</p>
+                      <p> Conclusion : {{Result.diagnosisInfo}}</p>
                     </div>
                     <div class="text-center">
-                      <button  class="mx-2" type="button" (click)="saveAnswer()" routerLink="/addConsultation" [queryParams]="{id : patientDetails.Id}"   style="align-content: center;width: 30%" mat-raised-button color="primary" >
+                      <button  class="mx-2" type="button" (click)="saveAnswer()"    style="align-content: center;width: 30%" mat-raised-button color="primary" >
                         Save and Conform
                       </button>
                     </div>
                   </div>
                   <div *ngIf="!isResult[index]" class="p-4 bg-light">
-                    <div class="row text-center">
-                        <div class="fw-bold col-3">
-                            <p style="color: #673ab7;">Option </p>
-                        </div>
-                        <div class="fw-bold col-9">
-                          <p style="color: hsl(262, 52%, 47%);">Question</p>
-                        </div>
-                    </div>
+                    
 
-                    <div class="row" *ngFor="let questions of Questions[index][tab],let idx=index">
-                      <div class="col-3">
-                      <mat-form-field style="width: 100%;" appearance="outline">
-                        <mat-label style="color: black;">Select Option</mat-label>
-                        <mat-select [(ngModel)]="Answers[index]['questionsAnswers'][questions.id]" class="browser-default custom-select" style="width: 100%;" [disabled]="isSave[index]"  >
-                          <mat-option *ngFor="let option of questions.questionnaireOptionsById" [value]="option.id">{{option.option}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
+                    <div  *ngFor="let questions of Questions[index][tab],let idx=index">
+                      <div style="display: inline-block;" class="pt-3">
+                        <p class="fw-bold">{{idx+1}}. {{questions.question}} :</p>
+                      </div>
+                      <div style="display: inline-block;">
+                      <!-- <mat-form-field style="width: 100%;" appearance="outline"> -->
+                        <!-- <mat-label style="color: black;">Select Option</mat-label> -->
+                        <mat-radio-group [(ngModel)]="Answers[index]['questionsAnswers'][questions.id]" class="browser-default custom-select" style="width: 100%;" [disabled]="isSave[index]"  >
+                          <mat-radio-button *ngFor="let option of questions.questionnaireOptionsById" class="mx-3" [value]="option.id">{{option.option}}</mat-radio-button>
+                        </mat-radio-group>
+                      <!-- </mat-form-field> -->
 
                       </div>
-                      <div class="col-9 pt-3">
-                        <p>{{questions.question}}</p>
-                      </div>
+                     
 
                     </div>
                   </div>

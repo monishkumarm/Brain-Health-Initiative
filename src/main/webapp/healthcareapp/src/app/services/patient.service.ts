@@ -21,8 +21,10 @@ export class PatientService {
         Authorization  : "Bearer " + token
       }
     )
-    return this.httpCLient.get(`${this.url}/getAllPatientByUser`,{'headers':header});
+    return this.httpCLient.get(`${this.url}/getAllPatients`,{'headers':header});
   }
+
+
 
   addPatient(patientDetails:any){
     let token = localStorage.getItem("token");
@@ -55,10 +57,12 @@ export class PatientService {
     return this.httpCLient.post(`${this.url}/updatePatient`,patientDetails,{'headers':header})
   }
 
-  addConsultion(consulatationDetails:any,ABHAID:any){
+  addConsultion(consulatationDetails:any,ABHAID:any,reachedDiagnosisId:any){
     let token = localStorage.getItem("token");
     let params = new HttpParams();
     params = params.append('abhaId',ABHAID);
+    params = params.append('reachedDiagnosisId',reachedDiagnosisId);
+    
     let header = new HttpHeaders(
       {
         Authorization  : "Bearer " + token

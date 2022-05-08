@@ -48,6 +48,8 @@ import { ToastrModule } from 'ngx-toastr';
 import {MatDialogModule} from "@angular/material/dialog";
 import {DataService} from "./services/data.service";
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -98,6 +100,7 @@ export function HttpLoaderFactory(http: HttpClient){
         MatTabsModule,
         MatSnackBarModule,
         MatStepperModule,
+        MatPaginatorModule,
         TranslateModule.forRoot({
             defaultLanguage: localStorage.getItem('language') ?? 'en-US',
             loader: {

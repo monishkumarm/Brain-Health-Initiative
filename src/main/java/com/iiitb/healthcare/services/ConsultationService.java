@@ -40,7 +40,7 @@ public class ConsultationService {
         return consultationRepository.getById(id);
     }
 
-    public String addConsultationRecord(Map<String, Object> payload, Long loggedInUserId, String abhaId) {
+    public String addConsultationRecord(Map<String, Object> payload, Long loggedInUserId, String abhaId,String diagnosisId) {
         List<PatientEntity> patients = this.patientRepository.findByAbhaId(abhaId);
         PatientConsultationEntity consultationEntity = new PatientConsultationEntity();
         Date date = new Date();
@@ -106,6 +106,7 @@ public class ConsultationService {
         consultationEntity.setReferredBy(loggedInUserId);
         consultationEntity.setReferredOn(new Timestamp(date.getTime()));
         consultationEntity.setTreatmentInstruction((String) payload.get("treatmentInstructions"));
+        consultationEntity.setReachedDiagnosisId(Long.parseLong(diagnosisId));
         PatientConsultationEntity patientConsultationEntity = consultationRepository.save(consultationEntity);
         System.out.println(patientConsultationEntity);
 

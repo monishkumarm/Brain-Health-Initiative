@@ -5,12 +5,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
 
-  private dataSourse = new BehaviorSubject("None");
+  private dataSourse = new BehaviorSubject({id: 1, diagnosisInfo: 'None'});
   currentData = this.dataSourse.asObservable();
 
   constructor() { }
 
-  changeData(data:string){
+  changeData(data:any){
     console.log('data changed');
     console.log(data);
     this.dataSourse.next(data);
