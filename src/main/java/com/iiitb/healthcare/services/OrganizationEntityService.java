@@ -20,7 +20,7 @@ public class OrganizationEntityService {
         return organizationRepo.findAll();
     }
 
-    public String addHospital(Map<String, Object> payload, String token) {
+    public String addHospital(Map<String, Object> payload) {
         try {
             OrganizationEntity hospital = new OrganizationEntity();
             hospital.setActive(true);
