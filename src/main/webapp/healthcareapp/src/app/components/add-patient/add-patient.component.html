@@ -17,7 +17,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="abhaID">{{
                         "ABHA ID" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.ABHAID"
                         name="abhaID"
@@ -51,7 +51,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="fname">{{
                         "First Name" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.fname"
                         name="fname"
@@ -68,7 +68,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="lname">{{
                         "Last Name" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.lname"
                         name="lname"
@@ -85,9 +85,8 @@
                 <div class="row m-2">
                   <div class="col-sm-6 form-group">
                     <mat-form-field style="width: 100%" appearance="outline">
-                      <mat-label style="color: black"
-                        >{{'Gender' | translate}</mat-label
-                      >
+                      <mat-label>{{'Gender' | translate}}
+                      </mat-label>
                       <mat-select
                         class="browser-default custom-select form-control"
                         style="width: 100%"
@@ -97,13 +96,13 @@
                       >
                         <mat-option value="1">{{
                           "Male" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="2">{{
                           "Female" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="3">{{
                           "Other" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
@@ -128,7 +127,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="language">{{
                         "Language" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <mat-select
                         [(ngModel)]="patientDetails.lan"
                         name="language"
@@ -138,13 +137,16 @@
                       >
                         <mat-option value="English">{{
                           "English" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="Hindi">{{
                           "Hindi" | translate
-                        }}</mat-option>
+                          }}</mat-option>
+                        <mat-option value="Hindi">{{
+                          "Kannada" | translate
+                          }}</mat-option>
                         <mat-option value="Other">{{
                           "Other" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
@@ -153,7 +155,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="education">{{
                         "Education" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <mat-select
                         class="browser-default custom-select form-control"
                         style="width: 100%"
@@ -163,16 +165,16 @@
                       >
                         <mat-option value="None">{{
                           "None" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="10th">{{
                           "10th" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="12th">{{
                           "12th" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="Graduate">{{
                           "Graduate" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
@@ -182,7 +184,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="occupation">{{
                         "Occupation" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.occ"
                         name="occupation"
@@ -205,7 +207,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="email">{{
                         "Email" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.email"
                         name="email"
@@ -221,7 +223,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="phone">{{
                         "Phone number" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.phone"
                         name="phone"
@@ -239,7 +241,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="addLine1">{{
                         "Address line 1" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.addLine1"
                         name="addLine1"
@@ -255,7 +257,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="addLine2">{{
                         "Address line 2" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.addLine2"
                         name="addLine2"
@@ -272,7 +274,8 @@
                   <div class="col-sm-4 form-group">
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="district"
-                        >{{'District' | translate}</mat-label
+                      >{{'District' | translate}}
+                      </mat-label
                       >
                       <input
                         [(ngModel)]="patientDetails.district"
@@ -289,7 +292,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="state">{{
                         "State" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.state"
                         name="state"
@@ -305,7 +308,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="pin">{{
                         "Pin code" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.pin"
                         name="pin"
@@ -330,7 +333,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="ciname">{{
                         "Caregiver name" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <input
                         [(ngModel)]="patientDetails.carer_name"
                         name="ciname"
@@ -346,7 +349,7 @@
                     <mat-form-field style="width: 100%" appearance="outline">
                       <mat-label for="relationship">{{
                         "Relationship" | translate
-                      }}</mat-label>
+                        }}</mat-label>
                       <mat-select
                         [(ngModel)]="patientDetails.carer_rel"
                         name="relationship"
@@ -356,25 +359,25 @@
                       >
                         <mat-option value="Father">{{
                           "Father" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="Mother">{{
                           "Mother" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="Brother">{{
                           "Brother" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="Sister">{{
                           "Sister" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="Husband">{{
                           "Husband" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="Wife">{{
                           "Wife" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                         <mat-option value="Other">{{
                           "Other" | translate
-                        }}</mat-option>
+                          }}</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
