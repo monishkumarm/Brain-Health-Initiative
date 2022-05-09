@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @CrossOrigin("*")
@@ -24,7 +25,7 @@ public class PatientController {
     @RequestMapping("/getAllPatients")
     public ResponseEntity<?> getAllPatients() {
         var loggedInUserId = getLoggedInUserId();
-        List<List<PatientEntity>> patients = patientEntityService.getAllPatients(loggedInUserId);
+        List<Set<PatientEntity>> patients = patientEntityService.getAllPatients(loggedInUserId);
         return ResponseEntity.ok(patients);
     }
 

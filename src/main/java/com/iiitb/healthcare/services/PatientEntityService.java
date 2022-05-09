@@ -8,10 +8,7 @@ import com.iiitb.healthcare.repo.UserPermissionPatientEntityRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class PatientEntityService {
@@ -27,10 +24,10 @@ public class PatientEntityService {
         this.consultationService = consultationService;
     }
 
-    public List<List<PatientEntity>> getAllPatients(Long loggedInUserId) {
+    public List<Set<PatientEntity>> getAllPatients(Long loggedInUserId) {
 
-        List<PatientEntity> consultedPatient = new ArrayList<>();
-        List<PatientEntity> unconsultedPatient = new ArrayList<>();
+        Set<PatientEntity> consultedPatient = new HashSet<>();
+        Set<PatientEntity> unconsultedPatient = new HashSet<>();
         List<PatientEntity> patientsList = patientRepository.findAllPatientByUser(loggedInUserId);
         for(int i=0;i<patientsList.size();i++){
             List<PatientConsultationEntity> consultation = this.consultationService.getPatientConsultations(patientsList.get(i).getId());
@@ -54,7 +51,7 @@ public class PatientEntityService {
 //                unconsultedPatient.add(patientsList.get(i));
 //            }
         }
-        List<List<PatientEntity>> patients = new ArrayList<>();
+        List<Set<PatientEntity>> patients = new ArrayList<>();
         patients.add(consultedPatient);
         patients.add(unconsultedPatient);
         return patients;
