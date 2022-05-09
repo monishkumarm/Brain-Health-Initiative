@@ -61,8 +61,7 @@ public class ConsultationService {
         consultationEntity.setFollowUpDetail(followUpDetails);
         System.out.println(followUpDetails);
 
-        String icdDetails = "{ \"icd10\": \"" + payload.get("icd10") + "\" ,";
-        icdDetails = icdDetails + "\"icdDescription\": \"" + payload.get("icdDescription") + "\" }";
+        String icdDetails = "{ \"icd10\": \"" + payload.get("icd10") + "\" }";
         consultationEntity.setIcdDetail(icdDetails);
         System.out.println(icdDetails);
 

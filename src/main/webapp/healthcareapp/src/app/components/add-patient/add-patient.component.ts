@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientService } from 'src/app/services/patient.service';
+import { ActivatedRoute , Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-patient',
@@ -28,7 +29,7 @@ export class AddPatientComponent implements OnInit {
     carer_rel:'',
   }
 
-  constructor(private patientService:PatientService) { }
+  constructor(private patientService:PatientService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -39,7 +40,7 @@ export class AddPatientComponent implements OnInit {
     this.patientService.addPatient(this.patientDetails).subscribe(
       (response:any) => {
         console.log(response);
-        window.location.href="/dashboard";
+        this.router.navigateByUrl("/dashboard");
       },
       error => {
         console.log(error);

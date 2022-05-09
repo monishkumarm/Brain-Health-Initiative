@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,9 @@ public class PatientController {
     @RequestMapping(value = "/addPatient", method = RequestMethod.POST)
     public ResponseEntity<?> addPatient(@RequestBody Map<String, Object> payload) {
         var loggedInUserId = getLoggedInUserId();
-        String res = patientEntityService.addPatient(payload, loggedInUserId);
+        String s = patientEntityService.addPatient(payload, loggedInUserId);
+        Map<String,String> res = new HashMap<>();
+        res.put("msg",s);
         return ResponseEntity.ok(res);
     }
 

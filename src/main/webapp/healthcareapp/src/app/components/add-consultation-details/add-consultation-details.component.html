@@ -101,13 +101,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-sm-6 form-group">
-                  <mat-form-field style="width: 100%;" appearance="outline">
-                    <mat-label >{{'ICD Description' | translate}}</mat-label>
-                    <textarea [(ngModel)]="consultationDetails.icdDescription" name="icdDescription" id="icdDescription" type="text" class="form-control" required matInput></textarea>
-                  </mat-form-field>
-                </div>
-
+                
               </div>
               </div>
               <div class="col-12 text-center">
@@ -123,7 +117,7 @@
                 <mat-form-field style="width: 100%;" appearance="outline">
                   <mat-label style="color: black;">{{'Improvement status' | translate}}</mat-label>
                   <mat-select class="browser-default custom-select form-control" style="width: 100%;" [(ngModel)]="consultationDetails.improvementStatus" name="improvementStatus" id="improvementStatus">
-                    <mat-option value="1">{{'Condition Improved' | translate}</mat-option>
+                    <mat-option value="1">{{'Condition Improved' | translate}}</mat-option>
                     <mat-option value="2">{{'Condition Worsened' | translate}}</mat-option>
                     <mat-option value="3">{{'Condition unchanged' | translate}}</mat-option>
                   </mat-select>
