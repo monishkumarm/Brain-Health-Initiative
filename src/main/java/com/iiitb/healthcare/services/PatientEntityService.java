@@ -1,5 +1,6 @@
 package com.iiitb.healthcare.services;
 
+import com.iiitb.healthcare.model.entities.PatientConsultationEntity;
 import com.iiitb.healthcare.model.entities.PatientEntity;
 import com.iiitb.healthcare.model.entities.UserPermissionPatientEntity;
 import com.iiitb.healthcare.repo.PatientRepository;
@@ -32,14 +33,26 @@ public class PatientEntityService {
         List<PatientEntity> unconsultedPatient = new ArrayList<>();
         List<PatientEntity> patientsList = patientRepository.findAllPatientByUser(loggedInUserId);
         for(int i=0;i<patientsList.size();i++){
-            if(this.consultationService.getPatientConsultations(patientsList.get(i).getId()).size()>0)
+            List<PatientConsultationEntity> consultation = this.consultationService.getPatientConsultations(patientsList.get(i).getId());
+            for(int j=0;j<consultation.size();j++)
             {
-                consultedPatient.add(patientsList.get(i));
+                if(consultation.get(j).getReferredBy()==loggedInUserId)
+                {
+                    consultedPatient.add(patientsList.get(i));
+                }
+                else
+                {
+                    unconsultedPatient.add(patientsList.get(i));
+                }
             }
-            else
-            {
-                unconsultedPatient.add(patientsList.get(i));
-            }
+//            if(this.consultationService.getPatientConsultations(patientsList.get(i).getId()).size()>0)
+//            {
+//                consultedPatient.add(patientsList.get(i));
+//            }
+//            else
+//            {
+//                unconsultedPatient.add(patientsList.get(i));
+//            }
         }
         List<List<PatientEntity>> patients = new ArrayList<>();
         patients.add(consultedPatient);
