@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { setOptions  } from '@mobiscroll/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute , Router} from '@angular/router';
 import { PatientService } from 'src/app/services/patient.service';
 import { UserService } from 'src/app/services/user.service';
 // import {MatTabsModule} from '@angular/material/tabs';
@@ -29,7 +29,6 @@ export class AddConsultationDetailsComponent implements OnInit {
     examination:'',
     illnessSummary:'',
     type:'',
-    icdDescription:'',
     icd10:'',
     improvementStatus:'',
     medicine:'',
@@ -98,7 +97,8 @@ export class AddConsultationDetailsComponent implements OnInit {
   constructor(private activatedroute: ActivatedRoute,
               private patientService:PatientService,
               private userService:UserService,
-              private dataService:DataService
+              private dataService:DataService,
+              private router:Router
               ) { }
 
   ngOnInit(): void {
@@ -171,9 +171,12 @@ export class AddConsultationDetailsComponent implements OnInit {
     this.patientService.addConsultion(this.consultationDetails,this.patientDetails.ABHAID,this.conclusion.id).subscribe(
       (response:any)=>{
         console.log(response);
+        console.log("nevigate");
+        this.router.navigateByUrl("/consultationDetails?id="+this.patientDetails.Id);
       },
       (error:any)=>{
         console.log(error);
+        alert("error in adding consultation")
       }
     )
   }

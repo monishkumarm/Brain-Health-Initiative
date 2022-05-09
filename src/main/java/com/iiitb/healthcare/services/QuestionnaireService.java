@@ -105,7 +105,7 @@ public class QuestionnaireService {
             res.put("questionSet", questions);
             res.put("groupId", 2);
             res.put("subGroupId", 1);
-
+    
         } else if ((int) payload.get("subGroupId") == 1) {
             System.out.println(answer.toString());
             int yes = 0;
