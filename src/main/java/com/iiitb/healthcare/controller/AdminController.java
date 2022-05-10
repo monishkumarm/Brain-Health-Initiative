@@ -1,5 +1,6 @@
 package com.iiitb.healthcare.controller;
 
+import com.iiitb.healthcare.model.dtos.PieChartDto;
 import com.iiitb.healthcare.model.entities.OrganizationEntity;
 import com.iiitb.healthcare.model.entities.UserEntity;
 import com.iiitb.healthcare.services.*;
@@ -8,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RequestMapping("/admin")
 @RestController
@@ -34,7 +33,10 @@ public class AdminController {
     @RequestMapping(value = "/getDiagnosisChartData")
     public ResponseEntity<?> getDiagnosisChartData() {
         var diagnosisCountChart = organizationEntityService.getDiagnosisCountChart();
-        return ResponseEntity.ok(diagnosisCountChart);
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("answer",diagnosisCountChart);
+        return ResponseEntity.ok(map);
     }
     @RequestMapping(value = "/getSummary")
     public ResponseEntity<?> getSummary(@RequestHeader Map<String,String> headers){

@@ -12,7 +12,7 @@ import {AdminService} from "../../services/admin.service";
 export class BarchartComponent{
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   constructor(private adminService : AdminService) {
-    this.getDiagnosisChartData();
+    //this.getDiagnosisChartData();
   }
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
@@ -43,10 +43,11 @@ export class BarchartComponent{
   getDiagnosisChartData(){
     this.adminService.getDiagnosisChartData().subscribe(
       (response:any) =>{
-
+       console.log(response);
 
       },
       (error:any) => {
+        console.log("here");
         console.log(error);
       }
     );
